@@ -12,7 +12,8 @@ BRFImporter::DataContainer->filepath("filepath") ; //motor tar minnet, DataCOnta
 
 BRFImporter::DataContainer Datastorage = "filepath"
 
-DataStorage.Fetch->Meshdata();
+DataStorage.Fetch->Meshdata().getIndexData();
+
 
 
 
