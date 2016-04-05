@@ -28,10 +28,10 @@
   </ItemGroup>
 
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{de7b707e-bf06-4676-9dab-e57c912a113b}</ProjectGuid>
+    <ProjectGuid>{c05d6d0b-d09b-4ca6-b704-b44fe45b34ac}</ProjectGuid>
     <Keyword>StaticLibrary</Keyword>
-    <ProjectName>BRFImporterLib</ProjectName>
-    <RootNamespace>BRFImporterLib</RootNamespace>
+    <ProjectName>BRFImporter</ProjectName>
+    <RootNamespace>BRFImporter</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
@@ -217,12 +217,12 @@
 
 
   <ItemGroup>
-    <ClInclude Include="BRFImporterLib.h" />
+    <ClInclude Include="BRFImporter.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BRFImporterLib.cpp" />
+    <ClCompile Include="BRFImporter.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
