@@ -16,6 +16,9 @@
     <ClInclude Include="BRFImporterClass.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="BRFImporterStructs.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BRFImporter.cpp">
