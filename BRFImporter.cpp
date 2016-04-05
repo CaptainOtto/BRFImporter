@@ -1,2 +1,4 @@
-﻿#include "pch.h"
-#include "BRFImporter.h"
+﻿#include "BRFImporterClass.h"
+#include "targetver.h"
+
+
