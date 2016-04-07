@@ -4,14 +4,14 @@
 #include "targetver.h"
 #include <stdio.h>
 
-void BRFImporter::BRFImporterClass::setFilePath(std::string newFilePath)
-{
-	this->filePath = newFilePath;	
-}
-std::string BRFImporter::BRFImporterClass::getFileName()
-{
-	return this->fileName;
-}
+//void BRFImporter::BRFImporterClass::setFilePath(std::string newFilePath)
+//{
+//	this->filePath = newFilePath;	
+//}
+//std::string BRFImporter::BRFImporterClass::getFileName()
+//{
+//	return this->fileName;
+//}
 
 
 
@@ -19,7 +19,7 @@ std::string BRFImporter::BRFImporterClass::getFileName()
 //CON Assign BRF file here
 BRFImporter::BRFImporterClass::BRFImporterClass(std::string newFileName)
 {
-	this->fileName = newFileName;
+	
 }
 BRFImporter::BRFImporterClass::BRFImporterClass()
 {
