@@ -6,8 +6,9 @@ namespace BRFImporter
 {
 	class Fetch : BRFImporterClass
 	{
+	protected:
+		std::ifstream file;
 	private:
-
 
 	public:
 		void MeshData();
