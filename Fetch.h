@@ -19,6 +19,8 @@ namespace BRFImporter
 		void MorphAnimData();
 		void AnimationData();
 
+		void LoadFile(std::string fileName);
+
 		Fetch(std::string fileName);
 		Fetch();
 		~Fetch();
