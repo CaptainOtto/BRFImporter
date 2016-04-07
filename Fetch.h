@@ -1,5 +1,6 @@
 #pragma once
 #include "BRFImporterClass.h"
+#include "BRFImporterStructs.h"
 
 namespace BRFImporter
 {

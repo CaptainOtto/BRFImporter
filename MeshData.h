@@ -1,6 +1,5 @@
 #pragma once
 #include "Fetch.h"
-#include "BRFImporterStructs.h"
 
 namespace BRFImporter
 {
