@@ -4,14 +4,17 @@ namespace BRFImporter
 {
 	class BRFImporterClass
 	{
-	private:
-		
-
+	protected:
+		char filePath[256];
+		char fileName[256];
 	public:
-
+		void setFilePath(char filePath[]);
+		char getFileName();
 		
-		// LoadFile func; loads specific binary file/s.
-		// Fetch functions for engine to use to get data from the binary files.
-
+		//CON
+		BRFImporterClass(char fileName[]);
+		BRFImporterClass();
+		//DECON
+		~BRFImporterClass();
 	};
 }

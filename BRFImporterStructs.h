@@ -203,7 +203,7 @@ namespace BRFImporter
 		unsigned int vertIndex;
 	};
 	#pragma endregion
-#pragma region AttributeHeader
+#pragma region AttributesHeader
 	struct AttributesHeader
 	{
 
@@ -214,7 +214,7 @@ namespace BRFImporter
 		unsigned int vectorAmount;
 	};
 #pragma endregion
-	#pragma region AttributeHeader Dynamics
+	#pragma region AttributesHeader Dynamics
 	struct VectorAttrHeader
 	{
 		char attrName[256];
