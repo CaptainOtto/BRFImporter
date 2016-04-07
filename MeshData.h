@@ -5,15 +5,19 @@ namespace BRFImporter
 {
 	class MeshData : Fetch
 	{
+	protected:
+		BRFImporter::OOBBHeader oobbData;
+		BRFImporter::IndexHeader indexData;
+		BRFImporter::VertexHeader vertexData;
 	private:
-
-
-	public:
-		void OOBBData();
-		void IndexData();
-		void VertexData();
-
 		MeshData();
+	public:
+		BRFImporter::OOBBHeader oobbData();
+		BRFImporter::IndexHeader indexData();
+		BRFImporter::VertexHeader vertexData();
+
+		MeshData(OOBBHeader OOBBData, IndexHeader IndexData, VertexHeader VertexData);
+		
 		~MeshData();
 
 	};

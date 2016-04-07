@@ -8,9 +8,9 @@ namespace BRFImporter
 	protected:
 		//std::string filePath;
 		//std::string fileName;
-	private:
-		//CON
 		BRFImporterClass();
+	private:
+
 	public:
 		//void setFilePath(std::string filePath);
 		//std::string getFileName();
