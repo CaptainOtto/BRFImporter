@@ -1,22 +1,33 @@
-#ifndef LIGHTDATA_H
-#define LIGHTDATA_H
+#pragma once
+#include "Fetch.h"
 
-class LightData
+namespace BRFImporter
 {
-private:
+	class LightData : Fetch
+	{
+	protected:
+		BRFImporter::SpotLightHeader spotLightData;
+		BRFImporter::AreaLightHeader areaLightData;
+		BRFImporter::PointLightHeader pointLightData;
+		BRFImporter::DirLightHeader dirLightData;
+	private:
+		LightData();
+	public:
+		BRFImporter::SpotLightHeader SpotLightData();
 
-public:
-	void SpotlightData();
 
-	void PointlightData();
+		BRFImporter::AreaLightHeader AreaLightData();
 
-	void DirectionallightData();
+		BRFImporter::PointLightHeader PointLightData();
 
-	void ArealightData();
+		BRFImporter::DirLightHeader DirLightData();
 
-	LightData();
+		LightData(
+			SpotLightHeader spotLightData,
+			AreaLightHeader areaLightData,
+			PointLightHeader pointLightData,
+			DirLightHeader dirLightData);
 
-	~LightData();
-};
-
-#endif
+		~LightData();
+	};
+}

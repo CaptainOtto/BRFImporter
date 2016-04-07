@@ -3,14 +3,19 @@
 #include <fstream>
 #include <iostream>
 #include "BRFImporterStructs.h"
+#include "MeshData.h"
+#include "LightData.h"
 
 namespace BRFImporter
 {
 	class Fetch : BRFImporterClass
 	{
-	private:
+	protected:
 		std::ifstream file;
-		BRFImporter::MeshHeader meshStruct;
+
+	private:
+
+		~Fetch();
 
 	public:
 
@@ -30,12 +35,11 @@ namespace BRFImporter
 
 		void AnimationData();
 
+		void MeshData();
+
 		void LoadFile(std::string fileName);
 
-		Fetch(std::string fileName);
-		~Fetch();
-
-		void MeshData(char * fileInfo, char length);
+		Fetch();
 
 	};
 }
