@@ -115,9 +115,9 @@ namespace BRFImporter
 		unsigned int objectID;
 		unsigned int parentID;		// 0 = Default
 
-		double translation[3];
-		double rotation[3];
-		double viewDir[3];
+		double position[3];
+		double roll;
+		double intrest[3];
 	};
 #pragma endregion
 #pragma region LightHeader
@@ -204,7 +204,7 @@ namespace BRFImporter
 	};
 	#pragma endregion
 #pragma region AttributeHeader
-	struct AtributeHeader
+	struct AttributesHeader
 	{
 
 		unsigned int floatAmount;
@@ -257,3 +257,4 @@ namespace BRFImporter
 	};
 	#pragma endregion
 }
+
