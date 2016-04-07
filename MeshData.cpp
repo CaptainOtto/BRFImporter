@@ -6,9 +6,9 @@ BRFImporter::MeshData::MeshData(OOBBHeader OBBData, IndexHeader IndexData, Verte
 	
 }
 
-void BRFImporter::MeshData::OOBBData();
+OOBBHeader BRFImporter::MeshData::OOBBData();
 {
-
+	return this->OOBBData;
 }
 
 

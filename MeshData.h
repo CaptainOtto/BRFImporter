@@ -14,7 +14,7 @@ namespace BRFImporter
 	private:
 		MeshData();
 	public:
-		void OOBBData();
+		OOBBHeader OOBBData();
 		void IndexData();
 		void VertexData();
 
