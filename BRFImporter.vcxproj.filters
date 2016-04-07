@@ -17,6 +17,21 @@
     <Filter Include="Resource Files\Fetch\MeshData">
       <UniqueIdentifier>{f5021be9-63d6-402d-b48d-e9caa4c8a5a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Fetch\LightData">
+      <UniqueIdentifier>{c7499554-b435-4928-87b4-b1679494ff30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Fetch\MaterialData">
+      <UniqueIdentifier>{d4e613ae-c004-43d4-9823-65bc23826d71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Fetch\CameraData">
+      <UniqueIdentifier>{6d2fe2c4-c2d1-42a2-8d22-0ece76ebb6ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Fetch\GroupData">
+      <UniqueIdentifier>{c5856310-9b9e-403c-8eec-b98a29bf7350}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Fetch\SkeletonData">
+      <UniqueIdentifier>{91e63ce2-aa4f-433c-ae18-0cf04770a252}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -34,6 +49,21 @@
     <ClInclude Include="MeshData.h">
       <Filter>Resource Files\Fetch\MeshData</Filter>
     </ClInclude>
+    <ClInclude Include="LightData.h">
+      <Filter>Resource Files\Fetch\LightData</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialData.h">
+      <Filter>Resource Files\Fetch\MaterialData</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraData.h">
+      <Filter>Resource Files\Fetch\CameraData</Filter>
+    </ClInclude>
+    <ClInclude Include="GroupData.h">
+      <Filter>Resource Files\Fetch\GroupData</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletonData.h">
+      <Filter>Resource Files\Fetch\SkeletonData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BRFImporterClass.cpp">
@@ -44,6 +74,21 @@
     </ClCompile>
     <ClCompile Include="MeshData.cpp">
       <Filter>Resource Files\Fetch\MeshData</Filter>
+    </ClCompile>
+    <ClCompile Include="LightData.cpp">
+      <Filter>Resource Files\Fetch\LightData</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialData.cpp">
+      <Filter>Resource Files\Fetch\MaterialData</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraData.cpp">
+      <Filter>Resource Files\Fetch\CameraData</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupData.cpp">
+      <Filter>Resource Files\Fetch\GroupData</Filter>
+    </ClCompile>
+    <ClCompile Include="SkeletonData.cpp">
+      <Filter>Resource Files\Fetch\SkeletonData</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

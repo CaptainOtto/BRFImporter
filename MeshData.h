@@ -10,10 +10,13 @@ namespace BRFImporter
 
 	public:
 		void OOBBData();
+
 		void IndexData();
+
 		void VertexData();
 
 		MeshData();
+
 		~MeshData();
 
 	};

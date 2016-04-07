@@ -1,5 +1,7 @@
 #pragma once
 #include "BRFImporterClass.h"
+#include <fstream>
+#include <iostream>
 
 namespace BRFImporter
 {
@@ -18,6 +20,7 @@ namespace BRFImporter
 		void CameraData();
 		void MorphAnimData();
 		void AnimationData();
+		void LoadFile(std::string fileName);
 
 		Fetch(std::string fileName);
 		Fetch();
