@@ -23,7 +23,7 @@ BRFImporter::MeshData::MeshData(OOBBHeader OOBBData, IndexHeader IndexData, Vert
 //DECON
 BRFImporter::MeshData::~MeshData()
 {
-
+	//test
 }
 
 
