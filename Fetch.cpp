@@ -1,9 +1,14 @@
 #include "Fetch.h"
 
 //CON
+BRFImporter::Fetch::Fetch(std::string fileName)
+{
+	//do file stuff here
+}
+
 BRFImporter::Fetch::Fetch()
 {
-	char fileName[256] = 
+
 }
 //DECON
 BRFImporter::Fetch::~Fetch()

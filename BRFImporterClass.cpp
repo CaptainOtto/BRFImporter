@@ -3,26 +3,23 @@
 #include "BRFImporterStructs.h"
 #include "targetver.h"
 #include <stdio.h>
-#include <string.h>
 
-
-void BRFImporter::BRFImporterClass::setFilePath(char newFilePath[])
+void BRFImporter::BRFImporterClass::setFilePath(std::string newFilePath)
 {
-	memcpy(this->filePath, newFilePath, sizeof(char) * 256);
-		
+	this->filePath = newFilePath;	
 }
-char BRFImporter::BRFImporterClass::getFileName()
+std::string BRFImporter::BRFImporterClass::getFileName()
 {
-	return this->fileName[256];
+	return this->fileName;
 }
 
 
 
 
-//CON
-BRFImporter::BRFImporterClass::BRFImporterClass(char fileName[])
+//CON Assign BRF file here
+BRFImporter::BRFImporterClass::BRFImporterClass(std::string newFileName)
 {
-	memcpy(this->fileName, fileName, sizeof(char) * 256);
+	this->fileName = newFileName;
 }
 BRFImporter::BRFImporterClass::BRFImporterClass()
 {
@@ -38,12 +35,12 @@ BRFImporter::BRFImporterClass::~BRFImporterClass()
 
 
 
-
-BRFImporter::BRFImporterClass DataStorage
+std::string test = "hej";
+BRFImporter::BRFImporterClass DataStorage(test);
 
 BRFImporter::DataContainer->filepath("filepath") ; //motor tar minnet, DataCOntainer är en constructor som läser in filen i fråga och "dynamiskt fyller DataStorage med data från filen
 
-BRFImporter::DataContainer Datastorage = "filepath"
+BRFImporter::DataContainer Datastorage = "filepath";
 
 DataStorage.Fetch->Meshdata().getIndexData();
 

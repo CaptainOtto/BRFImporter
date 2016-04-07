@@ -1,19 +1,23 @@
 ﻿#pragma once
+#include <string>
 
 namespace BRFImporter
 {
 	class BRFImporterClass
 	{
 	protected:
-		char filePath[256];
-		char fileName[256];
+		std::string filePath;
+		std::string fileName;
+	private:
+		//CON
+		BRFImporterClass();
 	public:
-		void setFilePath(char filePath[]);
-		char getFileName();
+		void setFilePath(std::string filePath);
+		std::string getFileName();
 		
 		//CON
-		BRFImporterClass(char fileName[]);
-		BRFImporterClass();
+		BRFImporterClass(std::string fileName);
+		
 		//DECON
 		~BRFImporterClass();
 	};
