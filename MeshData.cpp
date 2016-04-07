@@ -15,8 +15,10 @@ void BRFImporter::MeshData::VertexData()
 
 BRFImporter::MeshData::MeshData()
 {
+
 }
 
 BRFImporter::MeshData::~MeshData()
 {
+
 }

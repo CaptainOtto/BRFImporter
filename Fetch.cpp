@@ -3,9 +3,11 @@
 
 void BRFImporter::Fetch::LoadFile(std::string fileName)
 {
+	char* fileInfo;
 	char lenght = 0;
-	std::ifstream file;
-	file.open("source.pdf", std::ios::binary | std::ios::in);
+
+
+	file.open("test.bin", std::ios::binary);
 
 	if (!file.is_open())
 	{
@@ -13,9 +15,9 @@ void BRFImporter::Fetch::LoadFile(std::string fileName)
 	}
 	else
 	{
-		std::string meshInfo;
-		file.read((char*)&meshInfo, lenght);
+		MeshData(fileInfo, lenght);
 	}
+
 	
 	file.close();
 
@@ -30,18 +32,50 @@ void BRFImporter::Fetch::LoadFile(std::string fileName)
 //CON
 BRFImporter::Fetch::Fetch(std::string fileName)
 {
-	FILE *fopen(const char * filename, const char * mode); // opens file and controlling stream withfopen
-
 	//do file stuff here
 }
 
-BRFImporter::Fetch::Fetch()
-{
-
-}
 //DECON
 BRFImporter::Fetch::~Fetch()
 {
 
 }
 
+void BRFImporter::Fetch::MeshData(char * fileInfo, char length)
+{
+	file.read((char*)&meshStruct, sizeof(meshStruct));
+
+
+}
+
+void BRFImporter::Fetch::MaterialData()
+{
+}
+
+void BRFImporter::Fetch::SkeletonData()
+{
+}
+
+void BRFImporter::Fetch::GroupData()
+{
+}
+
+void BRFImporter::Fetch::LightData()
+{
+}
+
+void BRFImporter::Fetch::AttrData()
+{
+}
+
+void BRFImporter::Fetch::CameraData()
+{
+}
+
+void BRFImporter::Fetch::MorphAnimData()
+{
+}
+
+void BRFImporter::Fetch::AnimationData()
+{
+}
