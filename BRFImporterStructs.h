@@ -124,7 +124,7 @@ namespace BRFImporter
 	struct LightHeader
 	{
 		unsigned int spotCount;
-		unsigned int ambientCount;
+		//unsigned int ambientCount;
 		unsigned int directionalCount;
 		unsigned int areaCount;
 		unsigned int pointCount;
@@ -141,13 +141,13 @@ namespace BRFImporter
 		float color[3];
 		float intensity;
 	};
-	struct AmbLightHeader
-	{
-		unsigned int objectID;
-		unsigned int parentID;		// 0 = Default
-		float color[3];
-		float intensity;
-	};
+	//struct AmbLightHeader
+	//{
+	//	unsigned int objectID;
+	//	unsigned int parentID;		// 0 = Default
+	//	float color[3];
+	//	float intensity;
+	//};
 	struct AreaLightHeader
 	{
 		unsigned int objectID;
