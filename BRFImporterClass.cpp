@@ -31,11 +31,6 @@ BRFImporter::BRFImporterClass::~BRFImporterClass()
 
 }
 
-
-
-
-
-std::string test = "hej";
 BRFImporter::BRFImporterClass DataStorage(test);
 
 BRFImporter::DataContainer->filepath("filepath") ; //motor tar minnet, DataCOntainer är en constructor som läser in filen i fråga och "dynamiskt fyller DataStorage med data från filen

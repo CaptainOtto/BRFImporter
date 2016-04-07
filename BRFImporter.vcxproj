@@ -191,14 +191,24 @@
   <ItemGroup>
     <ClInclude Include="BRFImporterClass.h" />
     <ClInclude Include="BRFImporterStructs.h" />
+    <ClInclude Include="CameraData.h" />
     <ClInclude Include="Fetch.h" />
+    <ClInclude Include="GroupData.h" />
+    <ClInclude Include="LightData.h" />
+    <ClInclude Include="MaterialData.h" />
     <ClInclude Include="MeshData.h" />
+    <ClInclude Include="SkeletonData.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BRFImporterClass.cpp" />
+    <ClCompile Include="CameraData.cpp" />
     <ClCompile Include="Fetch.cpp" />
+    <ClCompile Include="GroupData.cpp" />
+    <ClCompile Include="LightData.cpp" />
+    <ClCompile Include="MaterialData.cpp" />
     <ClCompile Include="MeshData.cpp" />
+    <ClCompile Include="SkeletonData.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
