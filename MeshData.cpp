@@ -1,14 +1,23 @@
 #include "MeshData.h"
 #include "BRFImporterStructs.h"
 
-BRFImporter::MeshData::MeshData(OOBBHeader OBBData, IndexHeader IndexData, VertexHeader VertexData)
+BRFImporter::MeshData::MeshData(OOBBHeader OOBBData, IndexHeader IndexData, VertexHeader VertexData)
 {
-	
+	this->oobbData = OOBBData;
+	this->indexData = IndexData;
+	this->vertexData = VertexData;
 }
-
-OOBBHeader BRFImporter::MeshData::OOBBData();
+BRFImporter::OOBBHeader BRFImporter::MeshData::oobbData()
 {
-	return this->OOBBData;
+	return this->oobbData;
+}
+BRFImporter::IndexHeader BRFImporter::MeshData::indexData()
+{
+	return this->indexData;
+}
+BRFImporter::VertexHeader BRFImporter::MeshData::vertexData()
+{
+	return this->vertexData;
 }
 
 
