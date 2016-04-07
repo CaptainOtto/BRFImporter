@@ -1,4 +1,6 @@
 #include "Fetch.h"
+#include <fstream>
+#include <iostream>
 
 
 void BRFImporter::Fetch::LoadFile(std::string fileName)
