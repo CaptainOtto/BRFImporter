@@ -134,6 +134,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BRFImporterStructs.h" />
     <ClInclude Include="Fetch.h" />
     <ClInclude Include="FileData.h" />
   </ItemGroup>
