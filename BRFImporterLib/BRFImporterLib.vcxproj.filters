@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\BRFImporterLib">
+      <UniqueIdentifier>{383426b4-abbc-4e81-bcf1-f4ad9d537cb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\BRFImporterLib\Fetch">
+      <UniqueIdentifier>{7ce88662-fc89-4e63-b02b-3e5f7ea34ebc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\BRFImporterStructs">
+      <UniqueIdentifier>{0a344d04-884f-48d2-92d8-0b685727ff95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\BRFImporterLib\MeshData">
+      <UniqueIdentifier>{063ee035-55fb-4ef1-beff-cb6101860692}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Fetch.h">
+      <Filter>Resource Files\BRFImporterLib\Fetch</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshData.h">
+      <Filter>Resource Files\BRFImporterLib\MeshData</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Fetch.cpp">
+      <Filter>Resource Files\BRFImporterLib\Fetch</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshData.cpp">
+      <Filter>Resource Files\BRFImporterLib\MeshData</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
