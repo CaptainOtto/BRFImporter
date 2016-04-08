@@ -7,8 +7,7 @@ namespace BRFImporterLib
 	{
 	protected:
 	public:
-
-		//GETDATA FUNCS HERE, WILL BE ABLE TO ACCESS FILEDATA PROTECTEDS
+		//get what mesh/respektive funcs!!!
 
 		//CON DECON
 		Fetch();
