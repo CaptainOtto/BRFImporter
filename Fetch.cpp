@@ -1,32 +1,11 @@
 #include "Fetch.h"
-#include <fstream>
-#include <iostream>
-
 
 void BRFImporter::Fetch::LoadFile(std::string fileName)
 {
-	//read file
-	// read meshdata
-	//fill structs for meshdata with data
-	// create isntance of right subclass (like meshdata); call meshdata constructor; fill meshdatas structs weith data; (skicka in structarna)
-	// remove the temp structs;
-	
-	
-
-}
-
-
-
-
-
-
-void BRFImporter::Fetch::LoadFile(std::string fileName)
-{
-	char* fileInfo;
-	char lenght = 0;
-
 
 	file.open("test.bin", std::ios::binary);
+
+
 
 	if (!file.is_open())
 	{

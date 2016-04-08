@@ -31,13 +31,6 @@ BRFImporter::BRFImporterClass::~BRFImporterClass()
 
 }
 
-BRFImporter::BRFImporterClass DataStorage(test);
-
-BRFImporter::DataContainer->filepath("filepath") ; //motor tar minnet, DataCOntainer är en constructor som läser in filen i fråga och "dynamiskt fyller DataStorage med data från filen
-
-BRFImporter::DataContainer Datastorage = "filepath";
-
-DataStorage.Fetch->Meshdata().getIndexData();
 
 
 

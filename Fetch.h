@@ -3,6 +3,8 @@
 #include "BRFImporterStructs.h"
 #include "MeshData.h"
 #include "LightData.h"
+#include <fstream>
+#include <iostream>
 
 namespace BRFImporter
 {
@@ -10,15 +12,9 @@ namespace BRFImporter
 	{
 	protected:
 		std::ifstream file;
-<<<<<<< HEAD
+		Fetch();
 	private:
-=======
-
-	private:
-
-		~Fetch();
->>>>>>> refs/remotes/origin/Otto-branch
-
+		
 	public:
 		void MeshData();
 		void MaterialData();
@@ -30,18 +26,8 @@ namespace BRFImporter
 		void MorphAnimData();
 		void AnimationData();
 
-		void MeshData();
-
-<<<<<<< HEAD
-		Fetch(std::string fileName);
-		Fetch();
-		~Fetch();
-
-=======
 		void LoadFile(std::string fileName);
 
-		Fetch();
-
->>>>>>> refs/remotes/origin/Otto-branch
+		~Fetch();
 	};
 }
