@@ -1,26 +1,24 @@
 #pragma once
-#include <string>
-#include <vector>
-#include "BRFImporterStructs.h"
+#include "FileData.h"
 
 namespace BRFImporterLib
 {
-	class FileData
+	class MeshData : FileData
 	{
 	protected:
 		MeshHeader meshContent;
 		OOBBHeader oobbContent;
 		std::vector<IndexHeader> indexContent;
 		std::vector<VertexHeader> vertexContent;
-
-		//all headers here
-		//as pointers?
-	
 	public:
-		void LoadFile(std::string fileName);
+
 
 		//CON DECON
-		FileData();
-		~FileData();
+		MeshData();
+		~MeshData();
 	};
+
+
+
+
 }
