@@ -1,13 +1,14 @@
 #pragma once
+#include "FileData"
 
 namespace BRFImporterLib
 {
-	class Fetch
+	class Fetch : FileData
 	{
 	protected:
 		int A;
-		Fetch();
 	public:
+		Fetch();
 		~Fetch();
 	};
 

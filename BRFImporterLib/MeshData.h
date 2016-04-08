@@ -7,8 +7,10 @@ namespace BRFImporterLib
 	{
 	protected:
 		int B;
-		MeshData();
 	public:
+		int getA();
+		int getB();
+		MeshData();
 		~MeshData();
 	};
 }
