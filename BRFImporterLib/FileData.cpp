@@ -1,9 +1,11 @@
 #include "FileData.h"
 using namespace BRFImporterLib;
 //FUNCTION DEFINITIONS FOR MESHDATA
-void FileData::LoadFile()
-{
 
+//ALL FILE LOADING AND DISTRIBUTING OF DATA
+void FileData::LoadFile(std::string fileName)
+{
+	
 }
 FileData::FileData()
 {

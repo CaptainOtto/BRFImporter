@@ -6,8 +6,11 @@ namespace BRFImporterLib
 	class Fetch : FileData
 	{
 	protected:
-		int A;
 	public:
+
+		//GETDATA FUNCS HERE, WILL BE ABLE TO ACCESS FILEDATA PROTECTEDS
+
+		//CON DECON
 		Fetch();
 		~Fetch();
 	};
