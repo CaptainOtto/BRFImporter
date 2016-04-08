@@ -16,8 +16,8 @@ BRFImporter::VertexHeader BRFImporter::MeshData::VertexData()
 //CON
 BRFImporter::MeshData::MeshData(
 	OOBBHeader OOBBData,
-	IndexHeader IndexData,
-	VertexHeader VertexData
+	IndexHeader *IndexData,
+	VertexHeader *VertexData
 	)
 {
 	this->oobbData = OOBBData;

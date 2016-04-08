@@ -7,8 +7,8 @@ namespace BRFImporter
 	{
 	protected:
 		BRFImporter::OOBBHeader oobbData;
-		BRFImporter::IndexHeader indexData;
-		BRFImporter::VertexHeader vertexData;
+		BRFImporter::IndexHeader *indexData;
+		BRFImporter::VertexHeader *vertexData;
 	private:
 		MeshData();
 	public:
@@ -18,8 +18,8 @@ namespace BRFImporter
 
 		MeshData(
 			OOBBHeader OOBBData,
-			IndexHeader IndexData,
-			VertexHeader VertexData
+			IndexHeader *IndexData,
+			VertexHeader *VertexData
 			);
 		~MeshData();
 	};
