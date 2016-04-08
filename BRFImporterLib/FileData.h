@@ -2,16 +2,13 @@
 #include <string>
 #include <vector>
 #include "BRFImporterStructs.h"
-
+class MeshData;
 namespace BRFImporterLib
 {
 	class FileData
 	{
 	protected:
-		MeshHeader meshContent;
-		OOBBHeader oobbContent;
-		std::vector<IndexHeader> indexContent;
-		std::vector<VertexHeader> vertexContent;
+		std::vector<MeshData> meshContainer;
 
 		//all headers here
 		//as pointers?

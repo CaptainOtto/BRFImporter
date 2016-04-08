@@ -12,7 +12,6 @@ namespace BRFImporterLib
 		std::vector<VertexHeader> vertexContent;
 	public:
 
-
 		//CON DECON
 		MeshData();
 		~MeshData();
