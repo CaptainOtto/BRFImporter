@@ -13,7 +13,7 @@ void BRFImporter::Fetch::LoadFile(std::string fileName)
 	}
 	else
 	{
-		MeshData();
+		MeshDataContainer();
 		LightData();
 		SkeletonData();
 	}
@@ -43,7 +43,7 @@ BRFImporter::Fetch::~Fetch()
 }
 
 #pragma region Datapassthrough
-void BRFImporter::Fetch::MeshData()
+void BRFImporter::Fetch::MeshDataContainer()
 {
 
 	BRFImporter::MeshHeader meshStruct; // Meshheader struct
@@ -52,7 +52,6 @@ void BRFImporter::Fetch::MeshData()
 	file.read((char*)&meshStruct.vertexCount, sizeof(meshStruct.vertexCount));
 	file.read((char*)&meshStruct.indexCount, sizeof(meshStruct.indexCount));
 	file.read((char*)&meshStruct.boundingBox, sizeof(meshStruct.boundingBox));
-
 
 	//Calls the default constructor of vertexheader
 	BRFImporter::VertexHeader *vertices = new BRFImporter::VertexHeader[meshStruct.vertexCount];

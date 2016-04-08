@@ -64,6 +64,9 @@
     <ClInclude Include="SkeletonData.h">
       <Filter>Resource Files\Fetch\SkeletonData</Filter>
     </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BRFImporterClass.cpp">
@@ -89,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="SkeletonData.cpp">
       <Filter>Resource Files\Fetch\SkeletonData</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Resource Files\BRFImporterClass</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

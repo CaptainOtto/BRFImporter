@@ -1,33 +1,28 @@
 #include "MeshData.h"
 
-BRFImporter::OOBBHeader BRFImporter::MeshData::oobbData()
+BRFImporter::OOBBHeader BRFImporter::MeshData::OOBBData()
 {
 	return this->oobbData;
 }
-BRFImporter::IndexHeader BRFImporter::MeshData::indexData()
+BRFImporter::IndexHeader BRFImporter::MeshData::IndexData()
 {
 	return this->indexData;
 }
-BRFImporter::VertexHeader BRFImporter::MeshData::vertexData()
+BRFImporter::VertexHeader BRFImporter::MeshData::VertexData()
 {
 	return this->vertexData;
 }
-//BRFImporter::WeigthsHeader BRFImporter::MeshData::weightsData()
-//{
-//	return this->weightData;
-//}
 
 //CON
 BRFImporter::MeshData::MeshData(
 	OOBBHeader OOBBData,
 	IndexHeader IndexData,
 	VertexHeader VertexData
-	/*WeigthsHeader weightData*/)
+	)
 {
 	this->oobbData = OOBBData;
 	this->indexData = IndexData;
 	this->vertexData = VertexData;
-	//this->weightData = weightData;
 }
 //DECON
 BRFImporter::MeshData::~MeshData()

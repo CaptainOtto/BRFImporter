@@ -9,20 +9,18 @@ namespace BRFImporter
 		BRFImporter::OOBBHeader oobbData;
 		BRFImporter::IndexHeader indexData;
 		BRFImporter::VertexHeader vertexData;
-		BRFImporter::WeigthsHeader weightData;
 	private:
 		MeshData();
 	public:
-		BRFImporter::OOBBHeader oobbData();
-		BRFImporter::IndexHeader indexData();
-		BRFImporter::VertexHeader vertexData();
-		//BRFImporter::WeigthsHeader weightsData();
+		BRFImporter::OOBBHeader OOBBData();
+		BRFImporter::IndexHeader IndexData();
+		BRFImporter::VertexHeader VertexData();
 
 		MeshData(
 			OOBBHeader OOBBData,
 			IndexHeader IndexData,
-			VertexHeader VertexData/*,
-			WeigthsHeader weightData*/);
+			VertexHeader VertexData
+			);
 		~MeshData();
 	};
 }

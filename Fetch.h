@@ -13,10 +13,8 @@ namespace BRFImporter
 	protected:
 		std::ifstream file;
 		Fetch();
-	private:
-		
 	public:
-		void MeshData();
+		void MeshDataContainer();
 		void MaterialData();
 		void SkeletonData();
 		void GroupData();
