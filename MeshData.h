@@ -1,23 +1,23 @@
 #pragma once
 #include "Fetch.h"
 
-namespace BRFImporter
+namespace BRFImporterLib
 {
 	class MeshData : Fetch
 	{
 	protected:
-		BRFImporter::OOBBHeader oobbData;
-		BRFImporter::IndexHeader *indexData;
-		BRFImporter::VertexHeader *vertexData;
+		BRFImporterLib::OOBBHeader *oobbData;
+		BRFImporterLib::IndexHeader *indexData;
+		BRFImporterLib::VertexHeader *vertexData;
 	private:
 		MeshData();
 	public:
-		BRFImporter::OOBBHeader OOBBData();
-		BRFImporter::IndexHeader IndexData();
-		BRFImporter::VertexHeader VertexData();
+		BRFImporterLib::OOBBHeader OOBBData();
+		BRFImporterLib::IndexHeader IndexData();
+		BRFImporterLib::VertexHeader VertexData();
 
 		MeshData(
-			OOBBHeader OOBBData,
+			OOBBHeader *OOBBData,
 			IndexHeader *IndexData,
 			VertexHeader *VertexData
 			);

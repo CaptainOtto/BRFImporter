@@ -1,6 +1,6 @@
 #include "Fetch.h"
 
-void BRFImporter::Fetch::LoadFile(std::string fileName)
+void BRFImporterLib::Fetch::LoadFile(std::string fileName)
 {
 
 	file.open("test.bin", std::ios::binary);
@@ -31,22 +31,22 @@ void BRFImporter::Fetch::LoadFile(std::string fileName)
 
 //CON
 
-BRFImporter::Fetch::Fetch()
+BRFImporterLib::Fetch::Fetch()
 {
 
 }
 
 //DECON
-BRFImporter::Fetch::~Fetch()
+BRFImporterLib::Fetch::~Fetch()
 {
 
 }
 
 #pragma region Datapassthrough
-void BRFImporter::Fetch::MeshDataContainer()
+void BRFImporterLib::Fetch::MeshDataContainer()
 {
 
-	BRFImporter::MeshHeader meshStruct; // Meshheader struct
+	BRFImporterLib::MeshHeader meshStruct; // Meshheader struct
 
 	//reads file according to the vertexcount.
 	file.read((char*)&meshStruct.vertexCount, sizeof(meshStruct.vertexCount));
@@ -54,31 +54,31 @@ void BRFImporter::Fetch::MeshDataContainer()
 	file.read((char*)&meshStruct.boundingBox, sizeof(meshStruct.boundingBox));
 
 	//Calls the default constructor of vertexheader
-	BRFImporter::VertexHeader *vertices = new BRFImporter::VertexHeader[meshStruct.vertexCount];
-	BRFImporter::IndexHeader *indices = new BRFImporter::IndexHeader[meshStruct.indexCount];
-	BRFImporter::OOBBHeader *boundingBox = new BRFImporter::OOBBHeader[meshStruct.boundingBox];
+	BRFImporterLib::VertexHeader *vertices = new BRFImporterLib::VertexHeader[meshStruct.vertexCount];
+	BRFImporterLib::IndexHeader *indices = new BRFImporterLib::IndexHeader[meshStruct.indexCount];
+	BRFImporterLib::OOBBHeader *boundingBox = new BRFImporterLib::OOBBHeader[meshStruct.boundingBox];
 
 	//Read all vertices in one go
 	file.read((char*)vertices, meshStruct.vertexCount *sizeof(VertexHeader));
 	file.read((char*)indices, meshStruct.indexCount*sizeof(IndexHeader));
 	file.read((char*)boundingBox, meshStruct.boundingBox*sizeof(OOBBHeader));
 
-	BRFImporter::MeshData::MeshData(*boundingBox, *indices, *vertices);
+	BRFImporterLib::MeshData::MeshData(*boundingBox, *indices, *vertices);
 
 	delete boundingBox;
 	delete indices;
 	delete vertices;
 }
 
-void BRFImporter::Fetch::SkeletonData()
+void BRFImporterLib::Fetch::SkeletonData()
 {
-	BRFImporter::SkeletonHeader skeletonStruct;
+	BRFImporterLib::SkeletonHeader skeletonStruct;
 
 	file.read((char*)&skeletonStruct.jointCount, sizeof(skeletonStruct.jointCount));
 	file.read((char*)&skeletonStruct.animationCount, sizeof(skeletonStruct.animationCount));
 
-	BRFImporter::SkeletonHeader *joints = new BRFImporter::SkeletonHeader[skeletonStruct.jointCount];
-	BRFImporter::SkeletonHeader *animations = new BRFImporter::SkeletonHeader[skeletonStruct.animationCount];
+	BRFImporterLib::SkeletonHeader *joints = new BRFImporterLib::SkeletonHeader[skeletonStruct.jointCount];
+	BRFImporterLib::SkeletonHeader *animations = new BRFImporterLib::SkeletonHeader[skeletonStruct.animationCount];
 
 
 	file.read((char*)joints, skeletonStruct.jointCount * sizeof(SkeletonHeader));
@@ -89,19 +89,19 @@ void BRFImporter::Fetch::SkeletonData()
 
 }
 
-void BRFImporter::Fetch::LightData()
+void BRFImporterLib::Fetch::LightData()
 {
-	BRFImporter::LightHeader lightStruct;
+	BRFImporterLib::LightHeader lightStruct;
 
 	file.read((char*)&lightStruct.spotCount, sizeof(lightStruct.spotCount));
 	file.read((char*)&lightStruct.directionalCount, sizeof(lightStruct.directionalCount));
 	file.read((char*)&lightStruct.areaCount, sizeof(lightStruct.areaCount));
 	file.read((char*)&lightStruct.pointCount, sizeof(lightStruct.pointCount));
 
-	BRFImporter::SpotLightHeader *spotLight = new BRFImporter::SpotLightHeader[lightStruct.spotCount];
-	BRFImporter::DirLightHeader *directionalLight = new BRFImporter::DirLightHeader[lightStruct.directionalCount];
-	BRFImporter::AreaLightHeader *areaLight = new BRFImporter::AreaLightHeader[lightStruct.areaCount];
-	BRFImporter::PointLightHeader *pointLight = new BRFImporter::PointLightHeader[lightStruct.pointCount];
+	BRFImporterLib::SpotLightHeader *spotLight = new BRFImporterLib::SpotLightHeader[lightStruct.spotCount];
+	BRFImporterLib::DirLightHeader *directionalLight = new BRFImporterLib::DirLightHeader[lightStruct.directionalCount];
+	BRFImporterLib::AreaLightHeader *areaLight = new BRFImporterLib::AreaLightHeader[lightStruct.areaCount];
+	BRFImporterLib::PointLightHeader *pointLight = new BRFImporterLib::PointLightHeader[lightStruct.pointCount];
 
 	file.read((char*)spotLight, lightStruct.spotCount * sizeof(SpotLightHeader));
 	file.read((char*)directionalLight, lightStruct.directionalCount * sizeof(DirLightHeader));
@@ -109,7 +109,7 @@ void BRFImporter::Fetch::LightData()
 	file.read((char*)pointLight, lightStruct.pointCount * sizeof(PointLightHeader));
 
 
-	BRFImporter::LightData::LightData(
+	BRFImporterLib::LightData::LightData(
 	*spotLight,
 	*areaLight,
 	*pointLight,
@@ -122,28 +122,28 @@ void BRFImporter::Fetch::LightData()
 
 }
 
-void BRFImporter::Fetch::MaterialData()
+void BRFImporterLib::Fetch::MaterialData()
 {
 
 }
 
-void BRFImporter::Fetch::GroupData()
+void BRFImporterLib::Fetch::GroupData()
 {
 }
 
-void BRFImporter::Fetch::AttrData()
+void BRFImporterLib::Fetch::AttrData()
 {
 }
 
-void BRFImporter::Fetch::CameraData()
+void BRFImporterLib::Fetch::CameraData()
 {
 }
 
-void BRFImporter::Fetch::MorphAnimData()
+void BRFImporterLib::Fetch::MorphAnimData()
 {
 }
 
-void BRFImporter::Fetch::AnimationData()
+void BRFImporterLib::Fetch::AnimationData()
 {
 }
 #pragma endregion

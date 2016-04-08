@@ -6,7 +6,7 @@
 #include <fstream>
 #include <iostream>
 
-namespace BRFImporter
+namespace BRFImporterLib
 {
 	class Fetch : BRFImporterClass
 	{
