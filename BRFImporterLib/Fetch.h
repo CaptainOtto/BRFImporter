@@ -1,14 +1,14 @@
 #pragma once
-#include "FileData.h"
+#include "MeshData.h"
 
 namespace BRFImporterLib
 {
 	class Fetch
 	{
 	protected:
+		std::vector<MeshData> meshAmount;
 	public:
-		//get what mesh/respektive funcs!!!
-
+		MeshData getMesh(unsigned meshID);
 		//CON DECON
 		Fetch();
 		~Fetch();
@@ -18,3 +18,5 @@ namespace BRFImporterLib
 
 
 }
+
+//meshammount.resize (meshcount från mainheader)

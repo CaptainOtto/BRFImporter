@@ -12,12 +12,14 @@ namespace BRFImporterLib
 		std::vector<IndexHeader> indexContent;
 		std::vector<VertexHeader> vertexContent;
 	public:
-		//get data funcs!!!
-		//returns all idices:
-		MeshHeader meshContent();
-		OOBBHeader oobbContent();
-		std::vector<IndexHeader>* indexContent();
-		std::vector<VertexHeader>* vertexContent();
+		//returns mesh data
+		MeshHeader getMeshData();
+		//Returns bBox data
+		OOBBHeader getOOBBData();
+		//Returns index data
+		std::vector<IndexHeader>* getIndexData();
+		//Returns vertex data
+		std::vector<VertexHeader>* getVertexData();
 		//CON DECON
 		MeshData();
 		~MeshData();
