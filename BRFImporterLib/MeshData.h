@@ -1,9 +1,10 @@
 #pragma once
-#include "FileData.h"
+#include <vector>
+#include "BRFImporterStructs.h"
 
 namespace BRFImporterLib
 {
-	class MeshData : FileData
+	class MeshData
 	{
 	protected:
 		MeshHeader meshContent;

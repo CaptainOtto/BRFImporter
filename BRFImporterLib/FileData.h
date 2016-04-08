@@ -1,12 +1,14 @@
 #pragma once
 #include <string>
-#include <vector>
-#include "BRFImporterStructs.h"
-class MeshData;
+#include "MeshData.h"
+
+
 namespace BRFImporterLib
 {
+	class MeshData;
 	class FileData
 	{
+
 	protected:
 		std::vector<MeshData> meshContainer;
 

@@ -3,7 +3,7 @@
 
 namespace BRFImporterLib
 {
-	class Fetch : FileData
+	class Fetch
 	{
 	protected:
 	public:
