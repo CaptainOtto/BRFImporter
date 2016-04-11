@@ -11,6 +11,7 @@ namespace BRFImporterLib
 		OOBBHeader oobbContent;
 		std::vector<IndexHeader> indexContent;
 		std::vector<VertexHeader> vertexContent;
+		std::vector<AniVertexHeader> aniVertexContent;
 	public:
 		//returns mesh data
 		MeshHeader getMeshData();
@@ -20,6 +21,7 @@ namespace BRFImporterLib
 		std::vector<IndexHeader>* getIndexData();
 		//Returns vertex data
 		std::vector<VertexHeader>* getVertexData();
+		std::vector<AniVertexHeader>* getAniVertexData();
 		//CON DECON
 		MeshData();
 		~MeshData();

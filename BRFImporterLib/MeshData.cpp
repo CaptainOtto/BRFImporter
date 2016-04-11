@@ -24,6 +24,11 @@ std::vector<VertexHeader>* MeshData::getVertexData()
 {
 	return &this->vertexContent;
 }
+// ---II--- with animation
+std::vector<AniVertexHeader>* MeshData::getAniVertexData()
+{
+	return &this->aniVertexContent;
+}
 
 //CON DECON
 MeshData::MeshData()
