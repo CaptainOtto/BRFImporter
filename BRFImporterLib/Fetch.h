@@ -7,8 +7,10 @@ namespace BRFImporterLib
 	{
 	protected:
 		std::vector<MeshData> meshAmount;
+		std::vector<LightHeader> lightAmount;
 	public:
 		MeshData getMesh(unsigned meshID);
+		LightData getLight(unsigned lightID);
 		//CON DECON
 		Fetch();
 		~Fetch();

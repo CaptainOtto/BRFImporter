@@ -8,13 +8,7 @@ namespace BRFImporterLib
 	class MeshData;
 	class FileData
 	{
-
 	protected:
-		std::vector<MeshData> meshContainer;
-
-		//all headers here
-		//as pointers?
-	
 	public:
 		void LoadFile(std::string fileName);
 
