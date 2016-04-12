@@ -1,5 +1,5 @@
 #pragma once
-namespace BRFImporter
+namespace BRFImporterLib
 {
 	//STRUCTS WITH #PRAGMA REGION IN ORDER: 1. STATIC 2. DYNAMICS OF THAT STATIC, REPEAT
 #pragma region Mainheader
