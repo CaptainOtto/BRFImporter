@@ -20,6 +20,43 @@ MeshData* Fetch::getMesh(unsigned int meshID)
 		return nullptr;
 	}
 }
+LightData* Fetch::getLight(unsigned int lightID)
+{
+
+	unsigned int lightAmt = 0;
+	lightAmt += lights->getLightData().areaCount;
+	lightAmt += lights->getLightData().directionalCount;
+	lightAmt += lights->getLightData().pointCount;
+	lightAmt += lights->getLightData().spotCount;
+
+	if (lightID > lightAmt)
+	{
+		return nullptr;
+	}
+	else
+	{
+		for (unsigned int i = 0; i <= lightAmt; i++)
+		{
+			if (lightID == lights->getAreaLightData()->objectID)
+			{
+				return &lights[i];
+			}
+			if (lightID == lights->getDirLightData()->objectID)
+			{
+				return &lights[i];
+			}
+			if (lightID == lights->getPointLightData()->objectID)
+			{
+				return &lights[i];
+			}
+			if (lightID == lights->getSpotLightData()->objectID)
+			{
+				return &lights[i];
+			}
+		}
+		return nullptr;
+	}
+}
 Fetch::Fetch()
 {
 

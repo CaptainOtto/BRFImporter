@@ -1,5 +1,4 @@
 #pragma once
-#include <vector>
 #include "BRFImporterStructs.h"
 
 namespace BRFImporterLib
@@ -10,21 +9,19 @@ namespace BRFImporterLib
 		MeshHeader meshData;
 		OOBBHeader oobbData;
 		IndexHeader* indexData;
-		VertexHeader* vertexData;
 		VertexHeaderNoSkeleton* VertexNoSkeletonData;
+		VertexHeader* vertexData;
+		WeigthsHeader* weightData;
 	public:
 		MeshHeader getMeshData();
 		OOBBHeader getOOBBData();
 		IndexHeader* getIndexData();
-		VertexHeader* getVertexData();
 		VertexHeaderNoSkeleton* getVertexNoSkeletonData();
+		VertexHeader* getVertexData();
+		WeigthsHeader* getWeightData();
 
 		//CON DECON
 		MeshData();
 		~MeshData();
 	};
-
-
-
-
 }
