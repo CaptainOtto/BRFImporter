@@ -1,5 +1,5 @@
 #pragma once
-namespace BRFImporterLib
+namespace BRFImporter
 {
 	//STRUCTS WITH #PRAGMA REGION IN ORDER: 1. STATIC 2. DYNAMICS OF THAT STATIC, REPEAT
 #pragma region Mainheader
@@ -29,8 +29,8 @@ namespace BRFImporterLib
 
 		unsigned int attrCount = 0;		// 0 = Default
 
-		bool boundingBox;
-		bool hasSkeleton;
+		bool boundingBox = false;
+		bool hasSkeleton = false;
 
 		double translation[3];
 		double rotation[3];
@@ -48,14 +48,13 @@ namespace BRFImporterLib
 	{
 		unsigned int vertIndex;
 	};
-	struct AniVertexHeader
+	struct VertexHeaderNoSkeleton
 	{
 		double pos[3];
 		double normal[3];
 		double uv[2];
 		double tangent[2];
 		double biTangent[2];
-		unsigned int weightAmmount[4];
 	};
 	struct VertexHeader
 	{
@@ -64,6 +63,7 @@ namespace BRFImporterLib
 		double uv[2];
 		double tangent[2];
 		double biTangent[2];
+		unsigned int weightAmmount;
 	};
 	struct WeigthsHeader
 	{
@@ -82,9 +82,10 @@ namespace BRFImporterLib
 		double diffuseVal[3];
 		double specularVal[3];
 
-		char diffMap[256]; //trans in alpha
-		char specMap[256]; //reflect in alpha
-		char normalMap[256]; 
+		char diffMap[256];
+		char specMap[256];
+		char normalMap[256];
+		char reflectMap[256]; //Was Gloss
 		char glowMap[256];
 	};
 #pragma endregion
@@ -101,27 +102,25 @@ namespace BRFImporterLib
 		char jointName[256];
 		unsigned int jointID;
 		unsigned int ParentJointID;		// 0 = Default;
-
+		double bindPoseMatrix[4][4];
 		double pos[3];
 		double rotation[3];
 	};
 	struct AnimationHeader
 	{
 		char animationName[256];
-		unsigned int frameCount;
+		unsigned int jointCount;
 	};
 	struct JointCountHeader
 	{
-		unsigned int jointCount;
+		unsigned int frameCount;
+		unsigned int jointID;
 	};
 	struct FrameHeader
 	{
-		unsigned int jointID;
 		unsigned int frameID;
-
 		double time;
-		double pos[3];
-		double rotation[3];
+		double frameMatrix[4][4];
 	};
 #pragma endregion
 #pragma region CameraHeader
