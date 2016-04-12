@@ -7,7 +7,6 @@ namespace BRFImporterLib
 {
 	class FileData
 	{
-	protected:
 	public:
 		void LoadFile(std::string fileName);
 
