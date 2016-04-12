@@ -24,7 +24,7 @@ VertexHeader* MeshData::getVertexData()
 {
 	return this->vertexData;
 }
-// ---II--- with animation
+// returns the meshes vertices with skeleton data
 VertexHeaderNoSkeleton* MeshData::getVertexNoSkeletonData()
 {
 	return this->VertexNoSkeletonData;
