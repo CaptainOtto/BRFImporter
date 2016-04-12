@@ -1,7 +1,7 @@
 #include "Fetch.h"
 using namespace BRFImporterLib;
 
-//returns a whole mesh from an array using its position as ID
+//returns a whole mesh from an array using its ID
 MeshData* Fetch::getMesh(unsigned int meshID)
 {
 	if (meshID > mainheader->meshAmount)
@@ -20,6 +20,7 @@ MeshData* Fetch::getMesh(unsigned int meshID)
 		return nullptr;
 	}
 }
+//returns a light from an array using its ID
 LightData* Fetch::getLight(unsigned int lightID)
 {
 
