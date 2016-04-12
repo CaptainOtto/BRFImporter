@@ -39,11 +39,11 @@
     <ClInclude Include="FileData.h">
       <Filter>Resource Files\BRFImporterLib\FileData</Filter>
     </ClInclude>
-    <ClInclude Include="BRFImporterStructs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MeshData.h">
       <Filter>Resource Files\BRFImporterLib\MeshData</Filter>
+    </ClInclude>
+    <ClInclude Include="BRFImporterStructs.h">
+      <Filter>Resource Files\BRFImporterStructs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
