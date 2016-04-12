@@ -25,6 +25,9 @@
     <Filter Include="Resource Files\BRFImporterLib\FileData">
       <UniqueIdentifier>{792d41de-5ae0-4f16-ac18-e928d0497a97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\BRFImporterLib\MeshData">
+      <UniqueIdentifier>{e52bebd6-9ce6-4e72-8639-ab89c9db0b52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -36,6 +39,12 @@
     <ClInclude Include="FileData.h">
       <Filter>Resource Files\BRFImporterLib\FileData</Filter>
     </ClInclude>
+    <ClInclude Include="MeshData.h">
+      <Filter>Resource Files\BRFImporterLib\MeshData</Filter>
+    </ClInclude>
+    <ClInclude Include="BRFImporterStructs.h">
+      <Filter>Resource Files\BRFImporterStructs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fetch.cpp">
@@ -43,6 +52,9 @@
     </ClCompile>
     <ClCompile Include="FileData.cpp">
       <Filter>Resource Files\BRFImporterLib\FileData</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshData.cpp">
+      <Filter>Resource Files\BRFImporterLib\MeshData</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

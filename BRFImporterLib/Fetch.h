@@ -1,14 +1,15 @@
 #pragma once
-#include "FileData.h"
+#include "MeshData.h"
 
 namespace BRFImporterLib
 {
-	class Fetch : FileData
+	class Fetch
 	{
 	protected:
+		MainHeader* mainheader;
+		MeshData* meshes;
 	public:
-
-		//GETDATA FUNCS HERE, WILL BE ABLE TO ACCESS FILEDATA PROTECTEDS
+		MeshData* getMesh(unsigned int meshID);
 
 		//CON DECON
 		Fetch();
@@ -19,3 +20,5 @@ namespace BRFImporterLib
 
 
 }
+
+//meshammount.resize (meshcount från mainheader)
