@@ -1,6 +1,35 @@
 #include "MeshData.h"
 using namespace BRFImporterLib;
 
+//SETS
+void MeshData::setMeshData(MeshHeader a)
+{
+	this->meshData = a;
+}
+void MeshData::setOOBBData(OOBBHeader b)
+{
+	this->oobbData = b;
+}
+void MeshData::setIndexData(IndexHeader* c)
+{
+	this->indexData = c;
+}
+void MeshData::setVertexNoSkeletonData(VertexHeaderNoSkeleton* d)
+{
+	this->VertexNoSkeletonData = d;
+}
+void MeshData::setVertexData(VertexHeader* e)
+{
+	this->vertexData = e;
+}
+
+void MeshData::setWeightData(WeigthsHeader* g)
+{
+	this->weightData = g;
+}
+//ENDSETS
+
+
 //returns the meshes data.
 MeshHeader MeshData::getMeshData()
 {
