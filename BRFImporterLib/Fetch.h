@@ -6,11 +6,12 @@ namespace BRFImporterLib
 	class Fetch
 	{
 	protected:
-		std::vector<MeshData> meshAmount;
-		std::vector<LightData> lightAmount;
+		MainHeader mainheader;
+		MeshData* meshes;
+		//LightData* lights;
 	public:
-		MeshData getMesh(unsigned meshID);
-		LightData getLight(unsigned lightID);
+		MeshData* getMesh(unsigned int meshID);
+		//LightData* getLight(unsigned lightID);
 		//CON DECON
 		Fetch();
 		~Fetch();

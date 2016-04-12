@@ -4,30 +4,30 @@ using namespace BRFImporterLib;
 //returns the meshes data.
 MeshHeader MeshData::getMeshData()
 {
-	return this->meshContent;
+	return this->meshData;
 }
 
 //returns the meshes boundingbox.
 OOBBHeader MeshData::getOOBBData()
 {
-	return this->oobbContent;
+	return this->oobbData;
 }
 
 //returns the meshes indices.
-std::vector<IndexHeader>* MeshData::getIndexData()
+IndexHeader* MeshData::getIndexData()
 {
-	return &this->indexContent;
+	return this->indexData;
 }
 
 //returns the meshes vertices.
-std::vector<VertexHeader>* MeshData::getVertexData()
+VertexHeader* MeshData::getVertexData()
 {
-	return &this->vertexContent;
+	return this->vertexData;
 }
 // ---II--- with animation
-std::vector<AniVertexHeader>* MeshData::getAniVertexData()
+AniVertexHeader* MeshData::getAniVertexData()
 {
-	return &this->aniVertexContent;
+	return this->aniVertexData;
 }
 
 //CON DECON

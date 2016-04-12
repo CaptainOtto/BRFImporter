@@ -5,7 +5,6 @@
 
 namespace BRFImporterLib
 {
-	class MeshData;
 	class FileData
 	{
 	protected:

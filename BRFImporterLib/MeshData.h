@@ -7,21 +7,18 @@ namespace BRFImporterLib
 	class MeshData
 	{
 	protected:
-		MeshHeader meshContent;
-		OOBBHeader oobbContent;
-		std::vector<IndexHeader> indexContent;
-		std::vector<VertexHeader> vertexContent;
-		std::vector<AniVertexHeader> aniVertexContent;
+		MeshHeader meshData;
+		OOBBHeader oobbData;
+		IndexHeader* indexData;
+		VertexHeader* vertexData;
+		AniVertexHeader* aniVertexData;
 	public:
-		//returns mesh data
 		MeshHeader getMeshData();
-		//Returns bBox data
 		OOBBHeader getOOBBData();
-		//Returns index data
-		std::vector<IndexHeader>* getIndexData();
-		//Returns vertex data
-		std::vector<VertexHeader>* getVertexData();
-		std::vector<AniVertexHeader>* getAniVertexData();
+		IndexHeader* getIndexData();
+		VertexHeader* getVertexData();
+		AniVertexHeader* getAniVertexData();
+
 		//CON DECON
 		MeshData();
 		~MeshData();
