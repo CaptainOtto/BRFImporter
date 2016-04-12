@@ -30,6 +30,7 @@ namespace BRFImporterLib
 		unsigned int attrCount = 0;		// 0 = Default
 
 		bool boundingBox;
+		bool hasSkeleton;
 
 		double translation[3];
 		double rotation[3];
@@ -47,6 +48,15 @@ namespace BRFImporterLib
 	{
 		unsigned int vertIndex;
 	};
+	struct AniVertexHeader
+	{
+		double pos[3];
+		double normal[3];
+		double uv[2];
+		double tangent[2];
+		double biTangent[2];
+		unsigned int weightAmmount[4];
+	};
 	struct VertexHeader
 	{
 		double pos[3];
@@ -54,7 +64,6 @@ namespace BRFImporterLib
 		double uv[2];
 		double tangent[2];
 		double biTangent[2];
-		unsigned int weightAmmount;
 	};
 	struct WeigthsHeader
 	{
@@ -73,10 +82,9 @@ namespace BRFImporterLib
 		double diffuseVal[3];
 		double specularVal[3];
 
-		char diffMap[256];
-		char specMap[256];
-		char normalMap[256];
-		char reflectMap[256]; //Was Gloss
+		char diffMap[256]; //trans in alpha
+		char specMap[256]; //reflect in alpha
+		char normalMap[256]; 
 		char glowMap[256];
 	};
 #pragma endregion
