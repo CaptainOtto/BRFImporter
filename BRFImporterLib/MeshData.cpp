@@ -25,9 +25,9 @@ VertexHeader* MeshData::getVertexData()
 	return this->vertexData;
 }
 // ---II--- with animation
-AniVertexHeader* MeshData::getAniVertexData()
+VertexHeaderNoSkeleton* MeshData::getVertexNoSkeletonData()
 {
-	return this->aniVertexData;
+	return this->VertexNoSkeletonData;
 }
 
 //CON DECON

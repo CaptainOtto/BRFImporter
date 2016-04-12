@@ -11,13 +11,13 @@ namespace BRFImporterLib
 		OOBBHeader oobbData;
 		IndexHeader* indexData;
 		VertexHeader* vertexData;
-		AniVertexHeader* aniVertexData;
+		VertexHeaderNoSkeleton* VertexNoSkeletonData;
 	public:
 		MeshHeader getMeshData();
 		OOBBHeader getOOBBData();
 		IndexHeader* getIndexData();
 		VertexHeader* getVertexData();
-		AniVertexHeader* getAniVertexData();
+		VertexHeaderNoSkeleton* getVertexNoSkeletonData();
 
 		//CON DECON
 		MeshData();
