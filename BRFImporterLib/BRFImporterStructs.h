@@ -157,7 +157,7 @@ namespace BRFImporterLib
 		double color[3];
 		double intensity;
 	};
-	struct AmbLightHeader
+	struct AmbLightHeader //POSSIBLY DEFUNCT
 	{
 		unsigned int objectID;
 		unsigned int parentID;		// 0 = Default

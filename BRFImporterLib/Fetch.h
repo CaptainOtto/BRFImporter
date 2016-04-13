@@ -1,5 +1,6 @@
 #pragma once
 #include "MeshData.h"
+#include "LightData.h"
 
 namespace BRFImporterLib
 {
@@ -8,17 +9,17 @@ namespace BRFImporterLib
 	protected:
 		MainHeader* mainheader;
 		MeshData* meshes;
+		LightData* lights;
 	public:
+		void setMain(MainHeader* mainDataptr);
+		void setMeshes(MeshData* meshDataptr);
+		void setLights(LightData* lightDataptr);
+		MainHeader* getMain();
 		MeshData* getMesh(unsigned int meshID);
+		LightData* getLight(unsigned int lightID);
 
 		//CON DECON
 		Fetch();
 		~Fetch();
 	};
-
-
-
-
 }
-
-//meshammount.resize (meshcount från mainheader)
