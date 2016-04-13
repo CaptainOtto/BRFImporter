@@ -16,6 +16,11 @@ void Fetch::setLights(LightData* lightDataptr)
 	this->lights = lightDataptr;
 }
 
+//returns the mainheader info
+MainHeader * BRFImporterLib::Fetch::getMain()
+{
+	return this->mainheader;
+}
 //returns a whole mesh from an array using its ID
 MeshData* Fetch::getMesh(unsigned int meshID)
 {
@@ -86,12 +91,10 @@ Fetch::~Fetch()
 int main()
 {
 	//FUNC TESTS
-	Fetch data;
-	FileData filehandler;
-	std::string filename = "test.brf";
-	filehandler.LoadFile(data, filename, true, false);
-	MeshData* player = data.getMesh(1);
-	float z = player->getVertexData()->pos[2];
+	FileData fileHandling;
+	std::string filename = "filename.brf";
+	fileHandling.LoadFile(filename, true, false);
+	float x = fileHandling.fetch.getMesh()->getVertexData()->pos[3];
 
 	
 }

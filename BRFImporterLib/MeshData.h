@@ -6,21 +6,21 @@ namespace BRFImporterLib
 	class MeshData
 	{
 	protected:
-		MeshHeader meshData;
+		MeshHeader* meshData;
 		OOBBHeader oobbData;
 		IndexHeader* indexData;
 		VertexHeaderNoSkeleton* VertexNoSkeletonData;
 		VertexHeader* vertexData;
 		WeigthsHeader* weightData;
 	public:
-		void setMeshData(MeshHeader a);
+		void setMeshData(MeshHeader* a);
 		void setOOBBData(OOBBHeader b);
 		void setIndexData(IndexHeader* c);
 		void setVertexNoSkeletonData(VertexHeaderNoSkeleton* d);
 		void setVertexData(VertexHeader* e);
 		void setWeightData(WeigthsHeader* g);
 
-		MeshHeader getMeshData();
+		MeshHeader* getMeshData();
 		OOBBHeader getOOBBData();
 		IndexHeader* getIndexData();
 		VertexHeaderNoSkeleton* getVertexNoSkeletonData();

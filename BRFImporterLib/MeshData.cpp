@@ -2,7 +2,7 @@
 using namespace BRFImporterLib;
 
 //SETS
-void MeshData::setMeshData(MeshHeader a)
+void MeshData::setMeshData(MeshHeader* a)
 {
 	this->meshData = a;
 }
@@ -31,7 +31,7 @@ void MeshData::setWeightData(WeigthsHeader* g)
 
 
 //returns the meshes data.
-MeshHeader MeshData::getMeshData()
+MeshHeader* MeshData::getMeshData()
 {
 	return this->meshData;
 }

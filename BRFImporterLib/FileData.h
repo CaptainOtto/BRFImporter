@@ -10,12 +10,14 @@ namespace BRFImporterLib
 	class FileData
 	{
 	protected:
-		void LoadMain(Fetch Fetch, std::ifstream *inFile);
-		void LoadMesh(Fetch Fetch, std::ifstream *inFile);
-		void LoadLight(Fetch Fetch, std::ifstream *inFile);
+		
+		void LoadMain(std::ifstream *inFile);
+		void LoadMesh(std::ifstream *inFile);
+		void LoadLight(std::ifstream *inFile);
 	public:
+		Fetch fetch;
 		//MORE BOOLS, -50 DKP!
-		void LoadFile(Fetch Fetch, std::string fileName, bool mesh, bool light);
+		void LoadFile(std::string fileName, bool mesh, bool light);
 
 
 		
