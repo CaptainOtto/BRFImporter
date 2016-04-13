@@ -32,7 +32,7 @@ MeshData* Fetch::getMesh(unsigned int meshID)
 	{
 		for (unsigned int i = 0; i <= mainheader->meshAmount; i++)
 		{
-			if (meshID == meshes[i].getMeshData().objectID)
+			if (meshID == meshes[i].getMeshData()->objectID)
 			{
 				return &meshes[i];
 			}
@@ -88,13 +88,13 @@ Fetch::~Fetch()
 }
 
 
-int main()
-{
-	//FUNC TESTS
-	FileData fileHandling;
-	std::string filename = "filename.brf";
-	fileHandling.LoadFile(filename, true, false);
-	float x = fileHandling.fetch.getMesh()->getVertexData()->pos[3];
-
-	
-}
+//int main()
+//{
+//	//FUNC TESTS
+//	FileData player;
+//	std::string filename = "filename.brf";
+//	player.LoadFile(filename, true, false);
+//	float x = player.fetch.getMesh(3)->getVertexData()->pos[1];
+//
+//	
+//}

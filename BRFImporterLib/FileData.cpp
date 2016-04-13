@@ -37,7 +37,6 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool light)
 //adds the mainheader info to the sent in fetch.
 void FileData::LoadMain(std::ifstream *inFile)
 {
-	MainHeader mainStruct;
 	inFile->read((char*)&mainStruct, sizeof(MainHeader));
 	this->fetch.setMain(&mainStruct);
 }
@@ -45,19 +44,19 @@ void FileData::LoadMain(std::ifstream *inFile)
 //adds the meshheader and subsequents to the sent in fetch.
 void FileData::LoadMesh(std::ifstream *inFile)
 {
-	MeshData thisMesh;
+	
 
-	MeshHeader* meshStruct;
+	meshStruct = new MeshHeader[this->fetch.getMain()->meshAmount];
 	inFile->read((char*)meshStruct, sizeof(MeshHeader) * this->fetch.getMain()->meshAmount);
 
 	thisMesh.setMeshData(meshStruct);
 
-	VertexHeader* vertices = new VertexHeader[meshStruct->vertexCount];
+	vertices = new VertexHeader[meshStruct->vertexCount];
 	inFile->read((char*)vertices, sizeof(VertexHeader) * meshStruct->vertexCount);
 
 	thisMesh.setVertexData(vertices);
 
-	IndexHeader* indices = new IndexHeader[meshStruct->indexCount];
+	indices = new IndexHeader[meshStruct->indexCount];
 	inFile->read((char*)indices, sizeof(IndexHeader) * meshStruct->indexCount);
 
 	thisMesh.setIndexData(indices);
@@ -78,6 +77,10 @@ FileData::FileData()
 
 FileData::~FileData()
 {
-
+	delete meshStruct;
+	delete vertices;
+	delete indices;
+	thisMesh.~MeshData();
+	fetch.~Fetch();
 }
 

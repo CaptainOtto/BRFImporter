@@ -14,6 +14,13 @@ namespace BRFImporterLib
 		void LoadMain(std::ifstream *inFile);
 		void LoadMesh(std::ifstream *inFile);
 		void LoadLight(std::ifstream *inFile);
+
+		//MeshBlock
+		MainHeader mainStruct;
+		MeshData thisMesh;
+		MeshHeader* meshStruct;
+		VertexHeader* vertices;
+		IndexHeader* indices;
 	public:
 		Fetch fetch;
 		//MORE BOOLS, -50 DKP!
