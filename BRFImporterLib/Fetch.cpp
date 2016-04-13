@@ -1,5 +1,20 @@
 #include "Fetch.h"
+#include "FileData.h"
 using namespace BRFImporterLib;
+
+//SETS
+void Fetch::setMain(MainHeader* mainDataptr)
+{
+	this->mainheader = mainDataptr;
+}
+void Fetch::setMeshes(MeshData* meshDataptr)
+{
+	this->meshes = meshDataptr;
+}
+void Fetch::setLights(LightData* lightDataptr)
+{
+	this->lights = lightDataptr;
+}
 
 //returns a whole mesh from an array using its ID
 MeshData* Fetch::getMesh(unsigned int meshID)
@@ -64,20 +79,19 @@ Fetch::Fetch()
 }
 Fetch::~Fetch()
 {
-
+	
 }
 
 
-//int main()
-//{
-//	//FUNC TESTS
-//	Fetch data;
-//	VertexHeader*	 test1 = data.getMesh(3)->getVertexData();
-//	IndexHeader*	 test2 = data.getMesh(3)->getIndexData();
-//	MeshData*		 test3 = data.getMesh(2);
-//
-//	VertexHeader	 test4;
-//	VertexHeader*	 test5;
-//	double pos_test1 = test4.pos[1];
-//	double pos_test2 = test5->pos[1];
-//}
+int main()
+{
+	//FUNC TESTS
+	Fetch data;
+	FileData filehandler;
+	std::string filename = "test.brf";
+	filehandler.LoadFile(data, filename, true, false);
+	MeshData* player = data.getMesh(1);
+	float z = player->getVertexData()->pos[2];
+
+	
+}

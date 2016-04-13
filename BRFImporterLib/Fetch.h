@@ -11,6 +11,9 @@ namespace BRFImporterLib
 		MeshData* meshes;
 		LightData* lights;
 	public:
+		void setMain(MainHeader* mainDataptr);
+		void setMeshes(MeshData* meshDataptr);
+		void setLights(LightData* lightDataptr);
 		MeshData* getMesh(unsigned int meshID);
 		LightData* getLight(unsigned int lightID);
 
