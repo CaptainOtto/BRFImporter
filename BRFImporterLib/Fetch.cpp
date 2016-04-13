@@ -3,7 +3,7 @@
 using namespace BRFImporterLib;
 
 //returns the mainheader info
-MainHeader * BRFImporterLib::Fetch::Main()
+MainHeader*  BRFImporterLib::Fetch::Main()
 {
 	return this->mainheader;
 }
@@ -66,11 +66,17 @@ LightData* Fetch::Light(unsigned int lightID)
 }
 
 //CON DECON
+Fetch::Fetch(MainHeader* a, MeshData* b, LightData* c)
+{
+	this->mainheader = a;
+	this->meshes = b;
+	this->lights = c;
+}
 Fetch::Fetch()
 {
 
 }
 Fetch::~Fetch()
 {
-	delete mainheader;
+
 }

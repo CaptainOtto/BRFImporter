@@ -25,9 +25,7 @@ namespace BRFImporterLib
 		void LoadMesh(std::ifstream *inFile);
 		void LoadLight(std::ifstream *inFile);
 
-		MainHeader Mainreturner() { return this->mainStruct; };
-		MeshData* Meshreturner() { return this->thisMesh; };
-		LightData* Lightreturner() { return this->thisLight; };
+
 	public:
 		Fetch* fetch;
 

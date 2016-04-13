@@ -31,12 +31,12 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool light)
 		}
 	}
 	inFile.close();
+	fetch = new Fetch(&mainStruct, thisMesh, thisLight);
 }
 //adds the mainheader info to the sent in fetch.
 void FileData::LoadMain(std::ifstream *inFile)
 {
 	inFile->read((char*)&mainStruct, sizeof(MainHeader));
-	
 }
 
 //adds the meshheader and subsequents to the sent in fetch.
@@ -97,10 +97,11 @@ FileData::FileData()
 }
 FileData::~FileData()
 {
+	delete fetch;
 	delete meshStruct;
 	delete vertices;
 	delete indices;
 	thisMesh->~MeshData();
-	fetch.~Fetch();
+	thisLight->~LightData();
 }
 
