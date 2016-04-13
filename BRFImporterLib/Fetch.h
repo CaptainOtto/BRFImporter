@@ -4,22 +4,22 @@
 
 namespace BRFImporterLib
 {
+	
 	class Fetch
 	{
-	protected:
+	
+	private:
 		MainHeader* mainheader;
 		MeshData* meshes;
 		LightData* lights;
 	public:
-		void setMain(MainHeader* mainDataptr);
-		void setMeshes(MeshData* meshDataptr);
-		void setLights(LightData* lightDataptr);
-		MainHeader* getMain();
-		MeshData* getMesh(unsigned int meshID);
-		LightData* getLight(unsigned int lightID);
+		MainHeader* Main();
+		MeshData* Mesh(unsigned int meshID);
+		LightData* Light(unsigned int lightID);
 
 		//CON DECON
 		Fetch();
 		~Fetch();
+		
 	};
 }

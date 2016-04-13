@@ -1,29 +1,34 @@
 #include "MeshData.h"
+#include <string.h>
+
 using namespace BRFImporterLib;
 
 //SETS
-void MeshData::setMeshData(MeshHeader* a)
+void MeshData::SetMeshData(MeshHeader* a)
 {
-	this->meshData = a;
+	memcpy(this->meshData, a, sizeof(MeshHeader));
 }
-void MeshData::setOOBBData(OOBBHeader b)
+void MeshData::SetOOBBData(OOBBHeader* b)
 {
-	this->oobbData = b;
+	memcpy(this->meshData, b, sizeof(MeshHeader));
 }
-void MeshData::setIndexData(IndexHeader* c)
+void MeshData::SetIndexData(IndexHeader* c)
 {
-	this->indexData = c;
+	this->indexData = new IndexHeader[this->meshData->indexCount];
+	memcpy(this->indexData, c,sizeof(IndexHeader) * this->meshData->indexCount);
 }
-void MeshData::setVertexNoSkeletonData(VertexHeaderNoSkeleton* d)
+void MeshData::SetVertexNoSkeletonData(VertexHeaderNoSkeleton* d)
 {
-	this->VertexNoSkeletonData = d;
+	this->vertexNoSkeletonData = new VertexHeaderNoSkeleton[this->meshData->vertexCount];
+	memcpy(this->vertexNoSkeletonData, d, sizeof(VertexHeaderNoSkeleton) * this->meshData->vertexCount);
 }
-void MeshData::setVertexData(VertexHeader* e)
+void MeshData::SetVertexData(VertexHeader* e)
 {
-	this->vertexData = e;
+	this->vertexData = new VertexHeader[this->meshData->vertexCount];
+	memcpy(this->vertexData, e, sizeof(VertexHeader) * this->meshData->vertexCount);
 }
 
-void MeshData::setWeightData(WeigthsHeader* g)
+void MeshData::SetWeightData(WeigthsHeader* g)
 {
 	this->weightData = g;
 }
@@ -31,36 +36,36 @@ void MeshData::setWeightData(WeigthsHeader* g)
 
 
 //returns the meshes data.
-MeshHeader* MeshData::getMeshData()
+MeshHeader* MeshData::GetMeshData()
 {
 	return this->meshData;
 }
 
 //returns the meshes boundingbox.
-OOBBHeader MeshData::getOOBBData()
+OOBBHeader* MeshData::GetOOBBData()
 {
 	return this->oobbData;
 }
 
 //returns the meshes indices.
-IndexHeader* MeshData::getIndexData()
+IndexHeader* MeshData::GetIndexData()
 {
 	return this->indexData;
 }
 
 // returns the meshes vertices without skeleton data
-VertexHeaderNoSkeleton* MeshData::getVertexNoSkeletonData()
+VertexHeaderNoSkeleton* MeshData::GetVertexNoSkeletonData()
 {
-	return this->VertexNoSkeletonData;
+	return this->vertexNoSkeletonData;
 }
 
 //returns the meshes vertices.
-VertexHeader* MeshData::getVertexData()
+VertexHeader* MeshData::GetVertexData()
 {
 	return this->vertexData;
 }
 
-WeigthsHeader* MeshData::getWeightData()
+WeigthsHeader* MeshData::GetWeightData()
 {
 	return this->weightData;
 }
@@ -74,5 +79,10 @@ MeshData::MeshData()
 }
 MeshData::~MeshData()
 {
-
+	delete meshData;
+	delete oobbData;
+	delete indexData;
+	delete vertexNoSkeletonData;
+	delete vertexData;
+	delete weightData;
 }

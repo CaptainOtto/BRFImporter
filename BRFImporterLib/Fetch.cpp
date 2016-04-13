@@ -2,27 +2,13 @@
 #include "FileData.h"
 using namespace BRFImporterLib;
 
-//SETS
-void Fetch::setMain(MainHeader* mainDataptr)
-{
-	this->mainheader = mainDataptr;
-}
-void Fetch::setMeshes(MeshData* meshDataptr)
-{
-	this->meshes = meshDataptr;
-}
-void Fetch::setLights(LightData* lightDataptr)
-{
-	this->lights = lightDataptr;
-}
-
 //returns the mainheader info
-MainHeader * BRFImporterLib::Fetch::getMain()
+MainHeader * BRFImporterLib::Fetch::Main()
 {
 	return this->mainheader;
 }
 //returns a whole mesh from an array using its ID
-MeshData* Fetch::getMesh(unsigned int meshID)
+MeshData* Fetch::Mesh(unsigned int meshID)
 {
 	if (meshID > mainheader->meshAmount)
 	{
@@ -32,7 +18,7 @@ MeshData* Fetch::getMesh(unsigned int meshID)
 	{
 		for (unsigned int i = 0; i <= mainheader->meshAmount; i++)
 		{
-			if (meshID == meshes[i].getMeshData()->objectID)
+			if (meshID == meshes[i].GetMeshData()->objectID)
 			{
 				return &meshes[i];
 			}
@@ -41,14 +27,14 @@ MeshData* Fetch::getMesh(unsigned int meshID)
 	}
 }
 //returns a light from an array using its ID
-LightData* Fetch::getLight(unsigned int lightID)
+LightData* Fetch::Light(unsigned int lightID)
 {
 
 	unsigned int lightAmt = 0;
-	lightAmt += lights->getLightData().areaCount;
-	lightAmt += lights->getLightData().directionalCount;
-	lightAmt += lights->getLightData().pointCount;
-	lightAmt += lights->getLightData().spotCount;
+	lightAmt += lights->GetLightData().areaCount;
+	lightAmt += lights->GetLightData().directionalCount;
+	lightAmt += lights->GetLightData().pointCount;
+	lightAmt += lights->GetLightData().spotCount;
 
 	if (lightID > lightAmt)
 	{
@@ -58,19 +44,19 @@ LightData* Fetch::getLight(unsigned int lightID)
 	{
 		for (unsigned int i = 0; i <= lightAmt; i++)
 		{
-			if (lightID == lights->getAreaLightData()->objectID)
+			if (lightID == lights->GetAreaLightData()->objectID)
 			{
 				return &lights[i];
 			}
-			if (lightID == lights->getDirLightData()->objectID)
+			if (lightID == lights->GetDirLightData()->objectID)
 			{
 				return &lights[i];
 			}
-			if (lightID == lights->getPointLightData()->objectID)
+			if (lightID == lights->GetPointLightData()->objectID)
 			{
 				return &lights[i];
 			}
-			if (lightID == lights->getSpotLightData()->objectID)
+			if (lightID == lights->GetSpotLightData()->objectID)
 			{
 				return &lights[i];
 			}
@@ -78,23 +64,13 @@ LightData* Fetch::getLight(unsigned int lightID)
 		return nullptr;
 	}
 }
+
+//CON DECON
 Fetch::Fetch()
 {
 
 }
 Fetch::~Fetch()
 {
-	
+	delete mainheader;
 }
-
-
-//int main()
-//{
-//	//FUNC TESTS
-//	FileData player;
-//	std::string filename = "filename.brf";
-//	player.LoadFile(filename, true, false);
-//	float x = player.fetch.getMesh(3)->getVertexData()->pos[1];
-//
-//	
-//}

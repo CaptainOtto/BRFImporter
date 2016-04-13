@@ -30,38 +30,57 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool light)
 			
 		}
 	}
-	//right?
 	inFile.close();
-	
 }
 //adds the mainheader info to the sent in fetch.
 void FileData::LoadMain(std::ifstream *inFile)
 {
 	inFile->read((char*)&mainStruct, sizeof(MainHeader));
-	this->fetch.setMain(&mainStruct);
+	
 }
 
 //adds the meshheader and subsequents to the sent in fetch.
 void FileData::LoadMesh(std::ifstream *inFile)
 {
-	
 
-	meshStruct = new MeshHeader[this->fetch.getMain()->meshAmount];
-	inFile->read((char*)meshStruct, sizeof(MeshHeader) * this->fetch.getMain()->meshAmount);
+	thisMesh = new MeshData[mainStruct.meshAmount];
 
-	thisMesh.setMeshData(meshStruct);
+	for (unsigned int i = 0; i <= (mainStruct.meshAmount - 1); i++)
+	{
+		//MESHHEADER
+		inFile->read((char*)meshStruct, sizeof(MeshHeader));
 
-	vertices = new VertexHeader[meshStruct->vertexCount];
-	inFile->read((char*)vertices, sizeof(VertexHeader) * meshStruct->vertexCount);
+		thisMesh[i].SetMeshData(meshStruct);
 
-	thisMesh.setVertexData(vertices);
+		//BBOX
+		if (meshStruct->boundingBox == true)
+		{
+			//do the BBOX READ
+		}
 
-	indices = new IndexHeader[meshStruct->indexCount];
-	inFile->read((char*)indices, sizeof(IndexHeader) * meshStruct->indexCount);
+		//VERTICES SKEL/NOSKEL
+		if (meshStruct->hasSkeleton == true)
+		{
+			vertices = new VertexHeader[meshStruct->vertexCount];
+			inFile->read((char*)vertices, sizeof(VertexHeader) * meshStruct->vertexCount);
+			
+			thisMesh[i].SetVertexData(vertices);
+		}
+		else 
+		{
+			verticesNoSkeleton = new VertexHeaderNoSkeleton[meshStruct->vertexCount];
+			inFile->read((char*)verticesNoSkeleton, sizeof(VertexHeaderNoSkeleton) * meshStruct->vertexCount);
+			
+			thisMesh[i].SetVertexNoSkeletonData(verticesNoSkeleton);
+		}
 
-	thisMesh.setIndexData(indices);
+		//INDICES
+		indices = new IndexHeader[meshStruct->indexCount];
+		inFile->read((char*)indices, sizeof(IndexHeader) * meshStruct->indexCount);
 
-	this->fetch.setMeshes(&thisMesh);
+		thisMesh[i].SetIndexData(indices);
+	}
+
 }
 
 void FileData::LoadLight(std::ifstream *inFile)
@@ -70,17 +89,18 @@ void FileData::LoadLight(std::ifstream *inFile)
 }
 
 
+
+//CON DECON
 FileData::FileData()
 {
 
 }
-
 FileData::~FileData()
 {
 	delete meshStruct;
 	delete vertices;
 	delete indices;
-	thisMesh.~MeshData();
+	thisMesh->~MeshData();
 	fetch.~Fetch();
 }
 

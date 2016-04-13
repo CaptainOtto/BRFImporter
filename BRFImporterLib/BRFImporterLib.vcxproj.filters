@@ -65,5 +65,8 @@
     <ClCompile Include="LightData.cpp">
       <Filter>Resource Files\BRFImporterLib\LightData</Filter>
     </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
