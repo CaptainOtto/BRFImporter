@@ -4,21 +4,23 @@
 
 namespace BRFImporterLib
 {
-	
+	struct FetchContainer
+	{
+		std::shared_ptr<MainHeader> mainData;
+		std::unique_ptr<MeshData[]> meshes;
+	};
 	class Fetch
 	{
 	
 	private:
-		MainHeader* mainheader;
-		MeshData* meshes;
-		LightData* lights;
+		std::shared_ptr<FetchContainer> FetchDataContainer;
 	public:
 		MainHeader* Main();
 		MeshData* Mesh(unsigned int meshID);
 		LightData* Light(unsigned int lightID);
 
 		//CON DECON
-		Fetch(MainHeader* a, MeshData* b);
+		Fetch(std::shared_ptr<FetchContainer> fileFetch);
 
 		Fetch();
 		~Fetch();
