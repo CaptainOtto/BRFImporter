@@ -19,7 +19,6 @@ namespace BRFImporterLib
 
 		//CON DECON
 		Fetch(MainHeader* a, MeshData* b);
-		Fetch(MainHeader* a, MeshData* b, LightData* c);
 		Fetch();
 		~Fetch();
 

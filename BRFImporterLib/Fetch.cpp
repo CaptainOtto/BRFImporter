@@ -75,18 +75,12 @@ Fetch::Fetch(MainHeader* a, MeshData* b)
 	this->meshes = new MeshData[mainheader->meshAmount];
 	memcpy(this->meshes, b, sizeof(MeshData) * this->mainheader->meshAmount);
 }
-Fetch::Fetch(MainHeader* a, MeshData* b, LightData* c)
-{
-	this->mainheader = a;
-	this->meshes = b;
-	this->lights = c;
-}
 Fetch::Fetch()
 {
 
 }
 Fetch::~Fetch()
 {
-	delete mainheader;
-	delete[] meshes;
+	delete[] this->meshes;
+	delete this->mainheader;
 }
