@@ -12,13 +12,13 @@ MainHeader*  BRFImporterLib::Fetch::Main()
 //returns a whole mesh from an array using its ID
 MeshData* Fetch::Mesh(unsigned int meshID)
 {
-	if (meshID > mainheader->meshAmount)
+	if (meshID > this->mainheader->meshAmount)
 	{
 		return nullptr;
 	}
 	else
 	{
-		for (unsigned int i = 0; i < (mainheader->meshAmount); i++)
+		for (unsigned int i = 0; i < (this->mainheader->meshAmount); i++)
 		{
 			if (meshID == this->meshes[i].GetMeshData()->objectID)
 			{
@@ -70,8 +70,6 @@ LightData* Fetch::Light(unsigned int lightID)
 //CON DECON
 Fetch::Fetch(MainHeader* a, MeshData* b)
 {
-	//this->mainheader = a;
-	//this->meshes = b;
 	this->mainheader = new MainHeader;
 	memcpy(this->mainheader, a, sizeof(MainHeader));
 	this->meshes = new MeshData[mainheader->meshAmount];

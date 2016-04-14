@@ -7,30 +7,29 @@ using namespace BRFImporterLib;
 //SETS
 void MeshData::SetMeshData(MeshHeader* a)
 {
-	//this->meshData = a;
 	this->meshData = new MeshHeader;
 	memcpy(this->meshData, a, sizeof(MeshHeader));
 }
+
 void MeshData::SetOOBBData(OOBBHeader* b)
 {
-	//this->oobbData = b;
 	memcpy(this->oobbData, b, sizeof(MeshHeader));
 }
+
 void MeshData::SetIndexData(IndexHeader* c)
 {
-	//this->indexData = c;
 	this->indexData = new IndexHeader[this->meshData->indexCount];
 	memcpy(this->indexData, c,sizeof(IndexHeader) * this->meshData->indexCount);
 }
+
 void MeshData::SetVertexNoSkeletonData(VertexHeaderNoSkeleton* d)
 {
-	//this->vertexNoSkeletonData = d;
 	this->vertexNoSkeletonData = new VertexHeaderNoSkeleton[this->meshData->vertexCount];
 	memcpy(this->vertexNoSkeletonData, d, sizeof(VertexHeaderNoSkeleton) * this->meshData->vertexCount);
 }
+
 void MeshData::SetVertexData(VertexHeader* e)
 {
-	//this->vertexData = e;
 	this->vertexData = new VertexHeader[this->meshData->vertexCount];
 	memcpy(this->vertexData, e, sizeof(VertexHeader) * this->meshData->vertexCount);
 }

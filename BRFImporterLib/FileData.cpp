@@ -36,8 +36,8 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool light)
 	fetch = new Fetch(mainStruct, thisMeshArray);
 	//fetch = new Fetch(mainStruct, thisMesh, thisLight);
 
-	delete[] thisMeshArray;
-	delete mainStruct;
+	//delete[] thisMeshArray;
+	//delete mainStruct;
 }
 //adds the mainheader info to the sent in fetch.
 void FileData::LoadMain(std::ifstream *inFile)
@@ -110,8 +110,7 @@ FileData::FileData()
 FileData::~FileData()
 {
 	delete fetch;
-	//delete[] thisMeshArray;
-	//delete mainStruct;
+	delete mainStruct;
 	
 }
 
