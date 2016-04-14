@@ -68,12 +68,9 @@ LightData* Fetch::Light(unsigned int lightID)
 }
 
 //CON DECON
-Fetch::Fetch(MainHeader* a, MeshData* b)
+Fetch::Fetch(std::shared_ptr<FetchContainer> SrcFetchData)
 {
-	this->mainheader = new MainHeader;
-	memcpy(this->mainheader, a, sizeof(MainHeader));
-	this->meshes = new MeshData[mainheader->meshAmount];
-	memcpy(this->meshes, b, sizeof(MeshData) * this->mainheader->meshAmount);
+	this->FetchDataContainer = SrcFetchData;
 }
 Fetch::Fetch()
 {
@@ -81,6 +78,5 @@ Fetch::Fetch()
 }
 Fetch::~Fetch()
 {
-	delete[] this->meshes;
-	delete this->mainheader;
+
 }

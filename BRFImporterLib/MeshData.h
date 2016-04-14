@@ -1,9 +1,10 @@
 #pragma once
+#include <memory>
 #include "BRFImporterStructs.h"
 
 namespace BRFImporterLib
 {	
-	struct Container
+	struct MeshContainer
 	{
 		std::shared_ptr<MeshHeader> meshData;
 		std::unique_ptr<VertexHeaderNoSkeleton[]> vertexNoSkeletonData;
@@ -13,9 +14,9 @@ namespace BRFImporterLib
 	class MeshData
 	{
 	protected:
-		std::shared_ptr<Container> meshDataContainer;
+		std::shared_ptr<MeshContainer> meshDataContainer;
 	public:
-		void SetData(std::shared_ptr<Container> SrcMeshData);
+		void SetData(std::shared_ptr<MeshContainer> SrcMeshData);
 
 
 		MeshHeader* GetMeshData();

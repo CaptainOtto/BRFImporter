@@ -1,14 +1,12 @@
 #include "MeshData.h"
 #include <crtdbg.h>
-#include <memory>
 #define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
 using namespace BRFImporterLib;
 
 //SETDATA
-void MeshData::SetData(std::shared_ptr<Container> SrcMeshData)
+void MeshData::SetData(std::shared_ptr<MeshContainer> SrcMeshData)
 {
 	this->meshDataContainer = SrcMeshData;
-	SrcMeshData.reset();
 }
 
 //returns the meshes data.
@@ -32,13 +30,13 @@ VertexHeader* MeshData::GetVertexData()
 //returns the meshes indices.
 IndexHeader* MeshData::GetIndexData()
 {
-	return this->meshDataContainer->indexData().get();
+	return this->meshDataContainer->indexData.get();
 }
 
 //CON DECON
 MeshData::MeshData()
 {
-	meshDataContainer(new Container);
+
 }
 MeshData::~MeshData()
 {

@@ -5,7 +5,11 @@ using namespace BRFImporterLib;
 //FUNCTION DEFINITIONS FOR FILEDATA
 
 void FileData::LoadFile(std::string fileName, bool mesh)
-{	
+{
+	std::shared_ptr<FetchContainer> tempFetchData(new FetchContainer);
+	this->SrcFetchData = tempFetchData;
+	tempFetchData.reset();
+
 	std::ifstream inFile(fileName, std::ifstream::binary);
 	if (!inFile.is_open())
 	{
@@ -19,66 +23,71 @@ void FileData::LoadFile(std::string fileName, bool mesh)
 
 		if (goldenNumber[0] == 7 && goldenNumber[1] == 6)
 		{
-			LoadMain(&inFile);
+			std::shared_ptr<MainHeader> tempMain(new MainHeader);  //GET ME INSIDE FETCH
+			
+			//constant loads
+			LoadMain(tempMain, &inFile);
 
+			//dynamic loads here, expand bools as neccesary
 			if (mesh == true)
 			{
-				LoadMesh(&inFile);
-			}	
+				LoadMesh(tempMain, &inFile);
+			}
+
+
+
+
+			tempMain.reset();
 		}
 	}
-	inFile.close();
-	this->fetch = new Fetch(tempMain, meshArray);
-}
 
+	inFile.close();
+
+
+	
+	std::shared_ptr<Fetch> tempFetch(new Fetch(this->SrcFetchData));
+	this->fetch = tempFetch;
+	tempFetch.reset();
+	this->SrcFetchData.reset();
+	
+
+}
 //adds the mainheader info to the sent in fetch.
-void FileData::LoadMain(std::ifstream *inFile)
+void FileData::LoadMain(std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile)
 {
-	tempMain = new MainHeader;
-	inFile->read((char*)tempMain, sizeof(MainHeader));
+	inFile->read((char*)tempMain.get(), sizeof(MainHeader));
+	this->SrcFetchData->mainData = tempMain;
 }
 //adds the meshheader and subsequents to the sent in fetch.
-void FileData::LoadMesh(std::ifstream *inFile)
+void FileData::LoadMesh(std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile)
 {
 	//array with all meshes
-	std::unique_ptr<MeshData[]> meshArray(new MeshData[tempMain->meshAmount]);
+	std::unique_ptr<MeshData[]> meshArray(new MeshData[tempMain->meshAmount]); //GET ME INSIDE FETCH
 
 	for (unsigned int i = 0; i < (tempMain->meshAmount); i++)
 	{
+		//crate SrcMeshData struct
+		std::shared_ptr<MeshContainer> SrcMeshData(new MeshContainer);
 
-		std::shared_ptr<MeshHeader> tempMesh(new MeshHeader);
-		inFile->read((char*)tempMesh.get(), sizeof(MeshHeader));
+		//read meshheader
+		inFile->read((char*)SrcMeshData->meshData.get(), sizeof(MeshHeader));
 
-		meshArray[i].SetData(tempMesh);
-
-		//VERTICES SKEL/NOSKEL
-		if (tempMesh->hasSkeleton == true)
+		//read vertices
+		if (SrcMeshData->meshData.get()->hasSkeleton == true)
 		{
-			std::unique_ptr<VertexHeader> tempVertices(new VertexHeader[tempMesh->vertexCount]);
-			inFile->read((char*)tempVertices.get(), sizeof(VertexHeader) * tempMesh->vertexCount);
-
-			meshArray.get()[i].SetVertexData(tempVertices.get());
-			tempVertices.reset();
+			inFile->read((char*)SrcMeshData->vertexData.get() , sizeof(VertexHeader) * SrcMeshData->meshData.get()->vertexCount);
 		}
 		else 
 		{
-			std::unique_ptr<VertexHeaderNoSkeleton> tempVerticesNoSkel(new VertexHeaderNoSkeleton[tempMesh->vertexCount]);
-			inFile->read((char*)tempVerticesNoSkel.get(), sizeof(VertexHeaderNoSkeleton) * tempMesh->vertexCount);
-			
-			meshArray.get()[i].SetVertexNoSkeletonData(tempVerticesNoSkel.get());
-			tempVerticesNoSkel.reset();
+			inFile->read((char*)SrcMeshData->vertexNoSkeletonData.get(), sizeof(VertexHeaderNoSkeleton) * SrcMeshData->meshData.get()->vertexCount);
 		}
 
-		//INDICES
-		std::unique_ptr<IndexHeader> tempIndices(new IndexHeader[tempMesh->indexCount]);
-		inFile->read((char*)tempIndices.get() , sizeof(IndexHeader) * tempMesh->indexCount);
+		//read indices
+		inFile->read((char*)SrcMeshData->indexData.get() , sizeof(IndexHeader) * SrcMeshData->meshData.get()->indexCount);
 
-		meshArray.get()[i].SetIndexData(tempIndices.get());
-		
-		tempIndices.reset();
-		tempMesh.reset();
+		meshArray[i].SetData(SrcMeshData);
+		SrcMeshData.reset();
 	}
-
 }
 
 //CON DECON
@@ -89,10 +98,5 @@ FileData::FileData()
 FileData::~FileData()
 {
 	
-
-	delete[] meshArray;
-	delete tempMain;
-	delete fetch;
-
 }
 
