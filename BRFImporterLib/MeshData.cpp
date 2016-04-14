@@ -1,92 +1,46 @@
 #include "MeshData.h"
-#include <string.h>
 #include <crtdbg.h>
+#include <memory>
 #define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
 using namespace BRFImporterLib;
 
-//SETS
-void MeshData::SetMeshData(MeshHeader* a)
+//SETDATA
+void MeshData::SetData(std::shared_ptr<Container> SrcMeshData)
 {
-	this->meshData = new MeshHeader;
-	memcpy(this->meshData, a, sizeof(MeshHeader));
+	this->meshDataContainer = SrcMeshData;
+	SrcMeshData.reset();
 }
-
-void MeshData::SetOOBBData(OOBBHeader* b)
-{
-	memcpy(this->oobbData, b, sizeof(MeshHeader));
-}
-
-void MeshData::SetIndexData(IndexHeader* c)
-{
-	this->indexData = new IndexHeader[this->meshData->indexCount];
-	memcpy(this->indexData, c,sizeof(IndexHeader) * this->meshData->indexCount);
-}
-
-void MeshData::SetVertexNoSkeletonData(VertexHeaderNoSkeleton* d)
-{
-	this->vertexNoSkeletonData = new VertexHeaderNoSkeleton[this->meshData->vertexCount];
-	memcpy(this->vertexNoSkeletonData, d, sizeof(VertexHeaderNoSkeleton) * this->meshData->vertexCount);
-}
-
-void MeshData::SetVertexData(VertexHeader* e)
-{
-	this->vertexData = new VertexHeader[this->meshData->vertexCount];
-	memcpy(this->vertexData, e, sizeof(VertexHeader) * this->meshData->vertexCount);
-}
-
-void MeshData::SetWeightData(WeigthsHeader* g)
-{
-	this->weightData = g;
-	//this->weightData = g;
-}
-//ENDSETS
-
 
 //returns the meshes data.
 MeshHeader* MeshData::GetMeshData()
 {
-	return this->meshData;
-}
-
-//returns the meshes boundingbox.
-OOBBHeader* MeshData::GetOOBBData()
-{
-	return this->oobbData;
-}
-
-//returns the meshes indices.
-IndexHeader* MeshData::GetIndexData()
-{
-	return this->indexData;
+	return this->meshDataContainer->meshData.get();
 }
 
 // returns the meshes vertices without skeleton data
 VertexHeaderNoSkeleton* MeshData::GetVertexNoSkeletonData()
 {
-	return this->vertexNoSkeletonData;
+	return this->meshDataContainer->vertexNoSkeletonData.get();
 }
 
-//returns the meshes vertices.
+// returns the meshes vertices without skeleton data
 VertexHeader* MeshData::GetVertexData()
 {
-	return this->vertexData;
+	return this->meshDataContainer->vertexData.get();
 }
 
-WeigthsHeader* MeshData::GetWeightData()
+//returns the meshes indices.
+IndexHeader* MeshData::GetIndexData()
 {
-	return this->weightData;
+	return this->meshDataContainer->indexData().get();
 }
-
-
 
 //CON DECON
 MeshData::MeshData()
 {
-
+	meshDataContainer(new Container);
 }
 MeshData::~MeshData()
 {
-	delete meshData;
-	delete[] indexData;
-	delete[] vertexNoSkeletonData;
+	meshDataContainer.reset();
 }

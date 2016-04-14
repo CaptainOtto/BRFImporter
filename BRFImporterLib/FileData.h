@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <fstream>
+#include <memory>
 #include "Fetch.h"
 #include "BRFImporterStructs.h"
 
@@ -11,26 +12,18 @@ namespace BRFImporterLib
 	{
 	protected:
 		//MeshBlock
-		MainHeader* mainStruct;
-		MeshData* thisMeshArray;
-		LightData* thisLight;
-
-		MeshHeader* meshStruct;
-		VertexHeader* vertices;
-		VertexHeaderNoSkeleton* verticesNoSkeleton;
-		IndexHeader* indices;
+		MainHeader* tempMain;
+		MeshData* meshArray;
 
 		//funcBlock
 		void LoadMain(std::ifstream *inFile);
 		void LoadMesh(std::ifstream *inFile);
-		void LoadLight(std::ifstream *inFile);
-
 
 	public:
 		Fetch* fetch;
 
 		//takes a string filename and what specific parts of the file to read.
-		void LoadFile(std::string fileName, bool mesh, bool light);
+		void LoadFile(std::string fileName, bool mesh);
 
 		//CON DECON
 		FileData();

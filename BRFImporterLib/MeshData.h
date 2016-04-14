@@ -2,32 +2,26 @@
 #include "BRFImporterStructs.h"
 
 namespace BRFImporterLib
-{
-	//per mesh
+{	
+	struct Container
+	{
+		std::shared_ptr<MeshHeader> meshData;
+		std::unique_ptr<VertexHeaderNoSkeleton[]> vertexNoSkeletonData;
+		std::unique_ptr<VertexHeader[]> vertexData;
+		std::unique_ptr<IndexHeader[]> indexData;
+	};
 	class MeshData
 	{
 	protected:
-		MeshHeader* meshData;
-		OOBBHeader* oobbData;
-		IndexHeader* indexData;
-		VertexHeaderNoSkeleton* vertexNoSkeletonData;
-		VertexHeader* vertexData;
-		WeigthsHeader* weightData;
+		std::shared_ptr<Container> meshDataContainer;
 	public:
-		void SetMeshData(MeshHeader* a);
-		void SetOOBBData(OOBBHeader* b);
-		void SetIndexData(IndexHeader* c);
-		void SetVertexNoSkeletonData(VertexHeaderNoSkeleton* d);
-		void SetVertexData(VertexHeader* e);
-		void SetWeightData(WeigthsHeader* g);
+		void SetData(std::shared_ptr<Container> SrcMeshData);
+
 
 		MeshHeader* GetMeshData();
-		OOBBHeader* GetOOBBData();
-		IndexHeader* GetIndexData();
 		VertexHeaderNoSkeleton* GetVertexNoSkeletonData();
 		VertexHeader* GetVertexData();
-		WeigthsHeader* GetWeightData();
-
+		IndexHeader* GetIndexData();
 		//CON DECON
 		MeshData();
 		~MeshData();
