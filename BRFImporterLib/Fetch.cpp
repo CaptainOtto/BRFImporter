@@ -1,5 +1,7 @@
 #include "Fetch.h"
 #include "FileData.h"
+#include <crtdbg.h>
+#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
 using namespace BRFImporterLib;
 
 //returns the mainheader info
@@ -16,9 +18,9 @@ MeshData* Fetch::Mesh(unsigned int meshID)
 	}
 	else
 	{
-		for (unsigned int i = 0; i <= mainheader->meshAmount; i++)
+		for (unsigned int i = 0; i < (mainheader->meshAmount); i++)
 		{
-			if (meshID == meshes[i].GetMeshData()->objectID)
+			if (meshID == this->meshes[i].GetMeshData()->objectID)
 			{
 				return &meshes[i];
 			}
@@ -66,6 +68,15 @@ LightData* Fetch::Light(unsigned int lightID)
 }
 
 //CON DECON
+Fetch::Fetch(MainHeader* a, MeshData* b)
+{
+	//this->mainheader = a;
+	//this->meshes = b;
+	this->mainheader = new MainHeader;
+	memcpy(this->mainheader, a, sizeof(MainHeader));
+	this->meshes = new MeshData[mainheader->meshAmount];
+	memcpy(this->meshes, b, sizeof(MeshData) * this->mainheader->meshAmount);
+}
 Fetch::Fetch(MainHeader* a, MeshData* b, LightData* c)
 {
 	this->mainheader = a;
@@ -78,5 +89,6 @@ Fetch::Fetch()
 }
 Fetch::~Fetch()
 {
-
+	delete mainheader;
+	delete[] meshes;
 }

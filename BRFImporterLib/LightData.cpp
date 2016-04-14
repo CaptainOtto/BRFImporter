@@ -1,5 +1,7 @@
 #include "LightData.h"
+#include <crtdbg.h>
 using namespace BRFImporterLib;
+#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
 
 LightHeader LightData::GetLightData()
 {

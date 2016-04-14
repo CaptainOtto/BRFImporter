@@ -1,29 +1,36 @@
 #include "MeshData.h"
 #include <string.h>
-
+#include <crtdbg.h>
+#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
 using namespace BRFImporterLib;
 
 //SETS
 void MeshData::SetMeshData(MeshHeader* a)
 {
+	//this->meshData = a;
+	this->meshData = new MeshHeader;
 	memcpy(this->meshData, a, sizeof(MeshHeader));
 }
 void MeshData::SetOOBBData(OOBBHeader* b)
 {
-	memcpy(this->meshData, b, sizeof(MeshHeader));
+	//this->oobbData = b;
+	memcpy(this->oobbData, b, sizeof(MeshHeader));
 }
 void MeshData::SetIndexData(IndexHeader* c)
 {
+	//this->indexData = c;
 	this->indexData = new IndexHeader[this->meshData->indexCount];
 	memcpy(this->indexData, c,sizeof(IndexHeader) * this->meshData->indexCount);
 }
 void MeshData::SetVertexNoSkeletonData(VertexHeaderNoSkeleton* d)
 {
+	//this->vertexNoSkeletonData = d;
 	this->vertexNoSkeletonData = new VertexHeaderNoSkeleton[this->meshData->vertexCount];
 	memcpy(this->vertexNoSkeletonData, d, sizeof(VertexHeaderNoSkeleton) * this->meshData->vertexCount);
 }
 void MeshData::SetVertexData(VertexHeader* e)
 {
+	//this->vertexData = e;
 	this->vertexData = new VertexHeader[this->meshData->vertexCount];
 	memcpy(this->vertexData, e, sizeof(VertexHeader) * this->meshData->vertexCount);
 }
@@ -31,6 +38,7 @@ void MeshData::SetVertexData(VertexHeader* e)
 void MeshData::SetWeightData(WeigthsHeader* g)
 {
 	this->weightData = g;
+	//this->weightData = g;
 }
 //ENDSETS
 
@@ -80,9 +88,6 @@ MeshData::MeshData()
 MeshData::~MeshData()
 {
 	delete meshData;
-	delete oobbData;
-	delete indexData;
-	delete vertexNoSkeletonData;
-	delete vertexData;
-	delete weightData;
+	delete[] indexData;
+	delete[] vertexNoSkeletonData;
 }

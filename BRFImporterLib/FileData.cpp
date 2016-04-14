@@ -1,4 +1,6 @@
 #include "FileData.h"
+#include <crtdbg.h>
+#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
 using namespace BRFImporterLib;
 //FUNCTION DEFINITIONS FOR FILEDATA
 
@@ -31,27 +33,32 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool light)
 		}
 	}
 	inFile.close();
-	fetch = new Fetch(&mainStruct, thisMesh, thisLight);
+	fetch = new Fetch(mainStruct, thisMeshArray);
+	//fetch = new Fetch(mainStruct, thisMesh, thisLight);
+
+	delete[] thisMeshArray;
+	delete mainStruct;
 }
 //adds the mainheader info to the sent in fetch.
 void FileData::LoadMain(std::ifstream *inFile)
 {
-	inFile->read((char*)&mainStruct, sizeof(MainHeader));
+	mainStruct = new MainHeader;
+	inFile->read((char*)mainStruct, sizeof(MainHeader));
 }
 
 //adds the meshheader and subsequents to the sent in fetch.
 void FileData::LoadMesh(std::ifstream *inFile)
 {
 
-	thisMesh = new MeshData[mainStruct.meshAmount];
+	thisMeshArray = new MeshData[mainStruct->meshAmount];
 
-	for (unsigned int i = 0; i <= (mainStruct.meshAmount - 1); i++)
+	for (unsigned int i = 0; i < (mainStruct->meshAmount); i++)
 	{
 		//MESHHEADER
 		meshStruct = new MeshHeader;
 		inFile->read((char*)meshStruct, sizeof(MeshHeader));
 
-		thisMesh[i].SetMeshData(meshStruct);
+		thisMeshArray[i].SetMeshData(meshStruct);
 
 		//BBOX
 		if (meshStruct->boundingBox == true)
@@ -65,21 +72,25 @@ void FileData::LoadMesh(std::ifstream *inFile)
 			vertices = new VertexHeader[meshStruct->vertexCount];
 			inFile->read((char*)vertices, sizeof(VertexHeader) * meshStruct->vertexCount);
 			
-			thisMesh[i].SetVertexData(vertices);
+			thisMeshArray[i].SetVertexData(vertices);
+			delete[] vertices;
 		}
 		else 
 		{
 			verticesNoSkeleton = new VertexHeaderNoSkeleton[meshStruct->vertexCount];
 			inFile->read((char*)verticesNoSkeleton, sizeof(VertexHeaderNoSkeleton) * meshStruct->vertexCount);
 			
-			thisMesh[i].SetVertexNoSkeletonData(verticesNoSkeleton);
+			thisMeshArray[i].SetVertexNoSkeletonData(verticesNoSkeleton);
+			delete[] verticesNoSkeleton;
 		}
 
 		//INDICES
 		indices = new IndexHeader[meshStruct->indexCount];
 		inFile->read((char*)indices, sizeof(IndexHeader) * meshStruct->indexCount);
 
-		thisMesh[i].SetIndexData(indices);
+		thisMeshArray[i].SetIndexData(indices);
+		delete[] indices;
+		delete meshStruct;
 	}
 
 }
@@ -99,10 +110,8 @@ FileData::FileData()
 FileData::~FileData()
 {
 	delete fetch;
-	delete meshStruct;
-	delete vertices;
-	delete indices;
-	thisMesh->~MeshData();
-	thisLight->~LightData();
+	//delete[] thisMeshArray;
+	//delete mainStruct;
+	
 }
 

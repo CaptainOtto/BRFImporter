@@ -18,9 +18,10 @@ namespace BRFImporterLib
 		LightData* Light(unsigned int lightID);
 
 		//CON DECON
+		Fetch(MainHeader* a, MeshData* b);
 		Fetch(MainHeader* a, MeshData* b, LightData* c);
 		Fetch();
 		~Fetch();
-		
+
 	};
 }

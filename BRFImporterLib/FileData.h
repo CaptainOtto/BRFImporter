@@ -11,8 +11,8 @@ namespace BRFImporterLib
 	{
 	protected:
 		//MeshBlock
-		MainHeader mainStruct;
-		MeshData* thisMesh;
+		MainHeader* mainStruct;
+		MeshData* thisMeshArray;
 		LightData* thisLight;
 
 		MeshHeader* meshStruct;
