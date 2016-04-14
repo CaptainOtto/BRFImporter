@@ -48,6 +48,7 @@ void FileData::LoadMesh(std::ifstream *inFile)
 	for (unsigned int i = 0; i <= (mainStruct.meshAmount - 1); i++)
 	{
 		//MESHHEADER
+		meshStruct = new MeshHeader;
 		inFile->read((char*)meshStruct, sizeof(MeshHeader));
 
 		thisMesh[i].SetMeshData(meshStruct);

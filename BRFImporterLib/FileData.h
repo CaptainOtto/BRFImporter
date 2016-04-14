@@ -35,6 +35,5 @@ namespace BRFImporterLib
 		//CON DECON
 		FileData();
 		~FileData();
-		friend Fetch;
 	};
 }
