@@ -20,9 +20,9 @@ MeshData* Fetch::Mesh(unsigned int meshID)
 	{
 		for (unsigned int i = 0; i < (this->FetchDataContainer->getMain()->meshAmount); i++)
 		{
-			if (meshID == this->FetchDataContainer->meshes[i].GetMeshData()->objectID)
+			if (meshID ==this->FetchDataContainer->GetMeshHeader(i)->objectID)
 			{
-				return &this->FetchDataContainer->meshes[i];
+				return this->FetchDataContainer->GetMesh(i);
 			}
 		}
 		return nullptr;
@@ -88,6 +88,14 @@ Fetch::~Fetch()
 MainHeader* FetchContainer::getMain()
 {
 	return this->mainData.get();
+}
+MeshHeader* FetchContainer::GetMeshHeader(unsigned int meshID)
+{
+	return this->meshes[meshID]->GetMeshData();
+}
+MeshData* FetchContainer::GetMesh(unsigned int meshID)
+{
+	return this->meshes[meshID].get();
 }
 FetchContainer::FetchContainer(std::shared_ptr<MainHeader> tempMain, std::vector<std::shared_ptr<MeshData>> meshVector)
 {

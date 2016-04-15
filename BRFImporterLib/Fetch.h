@@ -12,6 +12,8 @@ namespace BRFImporterLib
 		std::vector<std::shared_ptr<MeshData>> meshes;
 	public:
 		MainHeader* getMain();
+		MeshHeader* GetMeshHeader(unsigned int meshID);
+		MeshData* GetMesh(unsigned int meshID);
 		//CONDECON
 		FetchContainer(std::shared_ptr<MainHeader> mainData, std::vector<std::shared_ptr<MeshData>> meshVector);
 		~FetchContainer();
