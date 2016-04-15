@@ -8,10 +8,9 @@ namespace BRFImporterLib
 	class FileData
 	{
 	protected:
-		std::shared_ptr<FetchContainer> SrcFetchData;
 		//funcBlock
-		void LoadMain(std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile);
-		void LoadMesh(std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile);
+		void LoadMain(std::shared_ptr<FetchContainer> tempFetchData, std::ifstream *inFile);
+		void LoadMesh(std::shared_ptr<FetchContainer> tempFetchData, std::ifstream *inFile);
 
 	public:
 		std::shared_ptr<Fetch> fetch;
