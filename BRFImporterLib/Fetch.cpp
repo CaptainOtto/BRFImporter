@@ -7,18 +7,18 @@ using namespace BRFImporterLib;
 //returns the mainheader info
 MainHeader*  BRFImporterLib::Fetch::Main()
 {
-	return this->FetchDataContainer->mainData.get();
+	return this->FetchDataContainer->getMain();
 }
 //returns a whole mesh from an array using its ID
 MeshData* Fetch::Mesh(unsigned int meshID)
 {
-	if (meshID > this->FetchDataContainer->mainData->meshAmount)
+	if (meshID > this->FetchDataContainer->getMain()->meshAmount)
 	{
 		return nullptr;
 	}
 	else
 	{
-		for (unsigned int i = 0; i < (this->FetchDataContainer->mainData->meshAmount); i++)
+		for (unsigned int i = 0; i < (this->FetchDataContainer->getMain()->meshAmount); i++)
 		{
 			if (meshID == this->FetchDataContainer->meshes[i].GetMeshData()->objectID)
 			{
@@ -28,6 +28,9 @@ MeshData* Fetch::Mesh(unsigned int meshID)
 		return nullptr;
 	}
 }
+
+//light
+
 //returns a light from an array using its ID
 //LightData* Fetch::Light(unsigned int lightID)
 //{
@@ -77,6 +80,24 @@ Fetch::Fetch()
 
 }
 Fetch::~Fetch()
+{
+
+}
+
+//fetchcontainerstuff
+MainHeader* FetchContainer::getMain()
+{
+	return this->mainData.get();
+}
+FetchContainer::FetchContainer(std::shared_ptr<MainHeader> tempMain, std::vector<std::shared_ptr<MeshData>> meshVector)
+{
+	this->mainData = tempMain;
+	tempMain.reset();
+	this->meshes = meshVector;
+
+	
+}
+FetchContainer::~FetchContainer()
 {
 
 }

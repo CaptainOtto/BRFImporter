@@ -6,7 +6,9 @@ using namespace BRFImporterLib;
 
 void FileData::LoadFile(std::string fileName, bool mesh)
 {
-	std::shared_ptr<FetchContainer> tempFetchData(new FetchContainer);
+
+	std::vector<std::shared_ptr<MeshData>> meshVector;
+	std::shared_ptr<MainHeader> tempMain;
 
 	std::ifstream inFile(fileName, std::ifstream::binary);
 	if (!inFile.is_open())
@@ -22,19 +24,20 @@ void FileData::LoadFile(std::string fileName, bool mesh)
 		if (goldenNumber[0] == 7 && goldenNumber[1] == 6)
 		{
 			//constant loads
-			LoadMain(tempFetchData, &inFile);
+			LoadMain(tempMain, &inFile);
 
 			//dynamic loads here, expand bools as neccesary
 			if (mesh == true)
 			{
-				LoadMesh(tempFetchData, &inFile);
+				LoadMesh(meshVector, tempMain, &inFile);
 			}
 		}
 	}
 
 	inFile.close();
-
+	std::shared_ptr<FetchContainer> tempFetchData(new FetchContainer(tempMain, meshVector));
 	std::shared_ptr<Fetch> tempFetch(new Fetch(tempFetchData));
+	tempFetchData.reset();
 	this->fetch = tempFetch;
 	tempFetch.reset();
 	tempFetchData.reset();
@@ -42,16 +45,20 @@ void FileData::LoadFile(std::string fileName, bool mesh)
 
 }
 //adds the mainheader info to the sent in fetch.
-void FileData::LoadMain(std::shared_ptr<FetchContainer> tempFetchData, std::ifstream *inFile)
+void FileData::LoadMain(std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile)
 {
-	inFile->read((char*)tempFetchData->mainData.get(), sizeof(MainHeader));
+	inFile->read((char*)tempMain.get(), sizeof(MainHeader));
 }
 
 //adds the meshheader and subsequents to the sent in fetch.
-void FileData::LoadMesh(std::shared_ptr<FetchContainer> tempFetchData, std::ifstream *inFile)
+void FileData::LoadMesh(std::vector<std::shared_ptr<MeshData>> meshVector, std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile)
 {
-	for (unsigned int i = 0; i < (tempFetchData->mainData->meshAmount); i++)
+
+	for (unsigned int i = 0; i < (tempMain->meshAmount); i++)
 	{
+		//push me to the meshvector and reset me!
+		std::shared_ptr<MeshData> tempMesh(new MeshData);
+
 		//crate SrcMeshData struct
 		std::shared_ptr<MeshContainer> SrcMeshData(new MeshContainer);
 
@@ -71,8 +78,11 @@ void FileData::LoadMesh(std::shared_ptr<FetchContainer> tempFetchData, std::ifst
 		//read indices
 		inFile->read((char*)SrcMeshData->indexData.get() , sizeof(IndexHeader) * SrcMeshData->meshData.get()->indexCount);
 
-		tempFetchData->meshes[i].SetData(SrcMeshData);
+
+		tempMesh->SetData(SrcMeshData);
 		SrcMeshData.reset();
+		meshVector.push_back(tempMesh);
+		tempMesh.reset();
 	}
 }
 

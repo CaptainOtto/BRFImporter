@@ -9,8 +9,8 @@ namespace BRFImporterLib
 	{
 	protected:
 		//funcBlock
-		void LoadMain(std::shared_ptr<FetchContainer> tempFetchData, std::ifstream *inFile);
-		void LoadMesh(std::shared_ptr<FetchContainer> tempFetchData, std::ifstream *inFile);
+		void LoadMain(std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile);
+		void LoadMesh(std::vector<std::shared_ptr<MeshData>> meshVector, std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile);
 
 	public:
 		std::shared_ptr<Fetch> fetch;

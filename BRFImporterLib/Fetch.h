@@ -1,14 +1,22 @@
 #pragma once
 #include "MeshData.h"
+#include <vector>
 #include "LightData.h"
 
 namespace BRFImporterLib
 {
-	struct FetchContainer
+	class FetchContainer
 	{
+	private:
 		std::shared_ptr<MainHeader> mainData;
-		std::unique_ptr<MeshData[]> meshes;
+		std::vector<std::shared_ptr<MeshData>> meshes;
+	public:
+		MainHeader* getMain();
+		//CONDECON
+		FetchContainer(std::shared_ptr<MainHeader> mainData, std::vector<std::shared_ptr<MeshData>> meshVector);
+		~FetchContainer();
 	};
+
 	class Fetch
 	{
 	
