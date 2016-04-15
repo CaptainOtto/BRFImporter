@@ -17,7 +17,7 @@ namespace BRFImporterLib
 	public:
 		MainHeader* Main();
 		MeshData* Mesh(unsigned int meshID);
-		LightData* Light(unsigned int lightID);
+		//LightData* Light(unsigned int lightID);
 
 		//CON DECON
 		Fetch(std::shared_ptr<FetchContainer> fileFetch);

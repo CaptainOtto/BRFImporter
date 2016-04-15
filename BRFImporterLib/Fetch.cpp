@@ -7,65 +7,65 @@ using namespace BRFImporterLib;
 //returns the mainheader info
 MainHeader*  BRFImporterLib::Fetch::Main()
 {
-	return this->mainheader;
+	return this->FetchDataContainer->mainData.get();
 }
 //returns a whole mesh from an array using its ID
 MeshData* Fetch::Mesh(unsigned int meshID)
 {
-	if (meshID > this->mainheader->meshAmount)
+	if (meshID > this->FetchDataContainer->mainData->meshAmount)
 	{
 		return nullptr;
 	}
 	else
 	{
-		for (unsigned int i = 0; i < (this->mainheader->meshAmount); i++)
+		for (unsigned int i = 0; i < (this->FetchDataContainer->mainData->meshAmount); i++)
 		{
-			if (meshID == this->meshes[i].GetMeshData()->objectID)
+			if (meshID == this->FetchDataContainer->meshes[i].GetMeshData()->objectID)
 			{
-				return &meshes[i];
+				return &this->FetchDataContainer->meshes[i];
 			}
 		}
 		return nullptr;
 	}
 }
 //returns a light from an array using its ID
-LightData* Fetch::Light(unsigned int lightID)
-{
-
-	unsigned int lightAmt = 0;
-	lightAmt += lights->GetLightData().areaCount;
-	lightAmt += lights->GetLightData().directionalCount;
-	lightAmt += lights->GetLightData().pointCount;
-	lightAmt += lights->GetLightData().spotCount;
-
-	if (lightID > lightAmt)
-	{
-		return nullptr;
-	}
-	else
-	{
-		for (unsigned int i = 0; i <= lightAmt; i++)
-		{
-			if (lightID == lights->GetAreaLightData()->objectID)
-			{
-				return &lights[i];
-			}
-			if (lightID == lights->GetDirLightData()->objectID)
-			{
-				return &lights[i];
-			}
-			if (lightID == lights->GetPointLightData()->objectID)
-			{
-				return &lights[i];
-			}
-			if (lightID == lights->GetSpotLightData()->objectID)
-			{
-				return &lights[i];
-			}
-		}
-		return nullptr;
-	}
-}
+//LightData* Fetch::Light(unsigned int lightID)
+//{
+//
+//	unsigned int lightAmt = 0;
+//	lightAmt += lights->GetLightData().areaCount;
+//	lightAmt += lights->GetLightData().directionalCount;
+//	lightAmt += lights->GetLightData().pointCount;
+//	lightAmt += lights->GetLightData().spotCount;
+//
+//	if (lightID > lightAmt)
+//	{
+//		return nullptr;
+//	}
+//	else
+//	{
+//		for (unsigned int i = 0; i <= lightAmt; i++)
+//		{
+//			if (lightID == lights->GetAreaLightData()->objectID)
+//			{
+//				return &lights[i];
+//			}
+//			if (lightID == lights->GetDirLightData()->objectID)
+//			{
+//				return &lights[i];
+//			}
+//			if (lightID == lights->GetPointLightData()->objectID)
+//			{
+//				return &lights[i];
+//			}
+//			if (lightID == lights->GetSpotLightData()->objectID)
+//			{
+//				return &lights[i];
+//			}
+//		}
+//		return nullptr;
+//	}
+//}
 
 //CON DECON
 Fetch::Fetch(std::shared_ptr<FetchContainer> SrcFetchData)
