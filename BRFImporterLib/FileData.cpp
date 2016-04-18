@@ -8,7 +8,7 @@ void FileData::LoadFile(std::string fileName, bool mesh)
 {
 
 	std::vector<std::shared_ptr<MeshData>> meshVector;
-	std::shared_ptr<MainHeader> tempMain;
+	std::shared_ptr<MainHeader> tempMain(new MainHeader);
 
 	std::ifstream inFile(fileName, std::ifstream::binary);
 	if (!inFile.is_open())
@@ -47,7 +47,10 @@ void FileData::LoadFile(std::string fileName, bool mesh)
 //adds the mainheader info to the sent in fetch.
 void FileData::LoadMain(std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile)
 {
-	inFile->read((char*)tempMain.get(), sizeof(MainHeader));
+	std::shared_ptr<MainHeader> temp(new MainHeader);
+	inFile->read((char*)temp.get(), sizeof(MainHeader));
+	tempMain = temp;
+	temp.reset();
 }
 
 //adds the meshheader and subsequents to the sent in fetch.
