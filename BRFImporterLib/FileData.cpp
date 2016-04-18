@@ -32,7 +32,7 @@ void FileData::LoadFile(std::string fileName, bool mesh)
 			//dynamic loads here, expand bools as neccesary
 			if (mesh == true)
 			{
-				LoadMesh(meshVector, tempMain, &inFile);
+				meshVector = LoadMesh(tempMain, &inFile);
 			}
 		}
 	}
@@ -57,8 +57,9 @@ void FileData::LoadMain(std::shared_ptr<MainHeader> tempMain, std::ifstream *inF
 }
 
 //adds the meshheader and subsequents to the sent in fetch.
-void FileData::LoadMesh(std::vector<std::shared_ptr<MeshData>> meshVector, std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile)
+std::vector<std::shared_ptr<MeshData>> FileData::LoadMesh(std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile)
 {
+	std::vector<std::shared_ptr<MeshData>> meshVector;
 
 	for (unsigned int i = 0; i < (tempMain->meshAmount); i++)
 	{
@@ -92,8 +93,8 @@ void FileData::LoadMesh(std::vector<std::shared_ptr<MeshData>> meshVector, std::
 		//SrcMeshData.reset();
 		meshVector.push_back(tempMesh);
 		tempMesh.reset();
-
 	}
+	return meshVector;
 }
 
 //CON DECON
