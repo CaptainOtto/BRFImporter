@@ -65,11 +65,14 @@ void FileData::LoadMesh(std::vector<std::shared_ptr<MeshData>> meshVector, std::
 		//push me to the meshvector and reset me!
 		std::shared_ptr<MeshData> tempMesh(new MeshData);
 
-		//crate SrcMeshData struct
-		std::shared_ptr<MeshContainer> SrcMeshData(new MeshContainer);
-
 		//read meshheader
-		inFile->read((char*)SrcMeshData->meshData.get(), sizeof(MeshHeader));
+		std::shared_ptr<MeshHeader> tempMeshHeader(new MeshHeader);
+		inFile->read((char*)tempMeshHeader.get(), sizeof(MeshHeader));
+
+		//crate SrcMeshData struct
+		std::shared_ptr<MeshContainer> SrcMeshData(new MeshContainer(tempMeshHeader->vertexCount, tempMeshHeader->indexCount));
+
+		SrcMeshData->meshData = tempMeshHeader;
 
 		//read vertices
 		if (SrcMeshData->meshData.get()->hasSkeleton == true)

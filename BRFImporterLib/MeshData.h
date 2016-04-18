@@ -11,7 +11,7 @@ namespace BRFImporterLib
 		std::unique_ptr<VertexHeaderNoSkeleton[]> vertexNoSkeletonData;
 		std::unique_ptr<VertexHeader[]> vertexData;
 		std::unique_ptr<IndexHeader[]> indexData;
-		MeshContainer();
+		MeshContainer(unsigned int vertexCount, unsigned int indexCount);
 		~MeshContainer();
 
 	};
