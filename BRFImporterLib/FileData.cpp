@@ -24,7 +24,10 @@ void FileData::LoadFile(std::string fileName, bool mesh)
 		if (goldenNumber[0] == 7 && goldenNumber[1] == 6)
 		{
 			//constant loads
-			LoadMain(tempMain, &inFile);
+			std::shared_ptr<MainHeader> temp(new MainHeader);
+			inFile.read((char*)temp.get(), sizeof(MainHeader));
+			tempMain = temp;
+			temp.reset();
 
 			//dynamic loads here, expand bools as neccesary
 			if (mesh == true)
@@ -47,9 +50,9 @@ void FileData::LoadFile(std::string fileName, bool mesh)
 //adds the mainheader info to the sent in fetch.
 void FileData::LoadMain(std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile)
 {
-	std::shared_ptr<MainHeader> temp(new MainHeader);
-	inFile->read((char*)temp.get(), sizeof(MainHeader));
-	tempMain = temp;
+	//std::shared_ptr<MainHeader> temp(new MainHeader);
+	//inFile->read((char*)temp.get(), sizeof(MainHeader));
+	//tempMain = temp;
 	//temp.reset();
 }
 
@@ -83,9 +86,10 @@ void FileData::LoadMesh(std::vector<std::shared_ptr<MeshData>> meshVector, std::
 
 
 		tempMesh->SetData(SrcMeshData);
-		SrcMeshData.reset();
+		//SrcMeshData.reset();
 		meshVector.push_back(tempMesh);
-		//tempMesh.reset();
+		tempMesh.reset();
+
 	}
 }
 

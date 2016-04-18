@@ -40,7 +40,7 @@ MeshData::MeshData()
 }
 MeshData::~MeshData()
 {
-	meshDataContainer.reset();
+	//meshDataContainer.reset();
 }
 
 MeshContainer::MeshContainer()
@@ -52,5 +52,8 @@ MeshContainer::MeshContainer()
 }
 MeshContainer::~MeshContainer()
 {
-
+	this->meshData.reset();
+	this->vertexNoSkeletonData.reset();
+	this->vertexData.reset();
+	this->indexData.reset();
 }

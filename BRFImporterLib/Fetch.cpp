@@ -100,7 +100,7 @@ MeshData* FetchContainer::GetMesh(unsigned int meshID)
 FetchContainer::FetchContainer(std::shared_ptr<MainHeader> tempMain, std::vector<std::shared_ptr<MeshData>> meshVector)
 {
 	this->mainData = tempMain;
-	tempMain.reset();
+	//tempMain.reset();
 	this->meshes = meshVector;
 
 	
