@@ -50,7 +50,7 @@ void FileData::LoadMain(std::shared_ptr<MainHeader> tempMain, std::ifstream *inF
 	std::shared_ptr<MainHeader> temp(new MainHeader);
 	inFile->read((char*)temp.get(), sizeof(MainHeader));
 	tempMain = temp;
-	temp.reset();
+	//temp.reset();
 }
 
 //adds the meshheader and subsequents to the sent in fetch.
@@ -85,7 +85,7 @@ void FileData::LoadMesh(std::vector<std::shared_ptr<MeshData>> meshVector, std::
 		tempMesh->SetData(SrcMeshData);
 		SrcMeshData.reset();
 		meshVector.push_back(tempMesh);
-		tempMesh.reset();
+		//tempMesh.reset();
 	}
 }
 

@@ -4,12 +4,16 @@
 
 namespace BRFImporterLib
 {	
-	struct MeshContainer
+	class MeshContainer
 	{
+	public:
 		std::shared_ptr<MeshHeader> meshData;
 		std::unique_ptr<VertexHeaderNoSkeleton[]> vertexNoSkeletonData;
 		std::unique_ptr<VertexHeader[]> vertexData;
 		std::unique_ptr<IndexHeader[]> indexData;
+		MeshContainer();
+		~MeshContainer();
+
 	};
 	class MeshData
 	{

@@ -42,3 +42,15 @@ MeshData::~MeshData()
 {
 	meshDataContainer.reset();
 }
+
+MeshContainer::MeshContainer()
+{
+	this->meshData = std::shared_ptr<MeshHeader>(new MeshHeader);
+	this->vertexNoSkeletonData = std::unique_ptr<VertexHeaderNoSkeleton[]>(new VertexHeaderNoSkeleton);
+	this->vertexData = std::unique_ptr<VertexHeader[]>(new VertexHeader);
+	this->indexData = std::unique_ptr<IndexHeader[]>(new IndexHeader);
+}
+MeshContainer::~MeshContainer()
+{
+
+}
