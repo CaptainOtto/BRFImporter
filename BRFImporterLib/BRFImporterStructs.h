@@ -92,6 +92,7 @@ namespace BRFImporterLib
 #pragma region SkeletonHeader
 	struct SkeletonHeader
 	{
+		unsigned int skeletonID;
 		unsigned int jointCount;
 		unsigned int animationCount;
 	};
@@ -108,6 +109,7 @@ namespace BRFImporterLib
 	};
 	struct AnimationHeader
 	{
+		unsigned int animationID;
 		char animationName[256];
 		unsigned int jointCount;
 	};

@@ -11,6 +11,7 @@ namespace BRFImporterLib
 		//funcBlock
 		std::vector<std::shared_ptr<MeshData>> LoadMesh(std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile);
 		std::shared_ptr<MaterialData> LoadMaterial(std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile);
+		std::vector<std::shared_ptr<SkeletonData>> LoadSkeleton(std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile);
 	public:
 		std::shared_ptr<Fetch> fetch;
 

@@ -9,6 +9,7 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 	std::shared_ptr<MainHeader> tempMain(new MainHeader);
 	std::vector<std::shared_ptr<MeshData>> meshVector;
 	std::shared_ptr<MaterialData> tempMaterialData(new MaterialData);
+	std::vector<std::shared_ptr<SkeletonData>> skeletonVector;
 
 	std::ifstream inFile(fileName, std::ifstream::binary);
 	if (!inFile.is_open())
@@ -34,13 +35,13 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 			{
 				meshVector = LoadMesh(tempMain, &inFile);
 			}
-			if (skeleton == true)
-			{
-				//meshVector = LoadSkeleton(tempMain, &inFile);
-			}
 			if (material == true)
 			{
 				tempMaterialData = LoadMaterial(tempMain, &inFile);
+			}
+			if (skeleton == true)
+			{
+				skeletonVector = LoadSkeleton(tempMain, &inFile);
 			}
 		}
 	}
@@ -48,7 +49,7 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 	inFile.close();
 	
 	
-	std::shared_ptr<FetchContainer> tempFetchData(new FetchContainer(tempMain, meshVector, tempMaterialData));
+	std::shared_ptr<FetchContainer> tempFetchData(new FetchContainer(tempMain, meshVector, tempMaterialData, skeletonVector));
 	std::shared_ptr<Fetch> tempFetch(new Fetch(tempFetchData));
 	tempFetchData.reset();
 	this->fetch = tempFetch;
@@ -154,6 +155,57 @@ std::shared_ptr<MaterialData> BRFImporterLib::FileData::LoadMaterial(std::shared
 	}
 
 	return tempMaterialData;
+}
+
+std::vector<std::shared_ptr<SkeletonData>> BRFImporterLib::FileData::LoadSkeleton(std::shared_ptr<MainHeader> tempMain, std::ifstream * inFile)
+{
+	//THIS IS CLUSTERFUCK SHUCKLESTICKS
+
+	std::vector<std::shared_ptr<SkeletonData>> tempSkeletonVector;
+
+
+	for (unsigned int i = 0; i < tempMain->skeletonAmount; i++)
+	{
+		std::shared_ptr<SkeletonData> tempSkeletonData;
+
+		//skeletondata
+		std::shared_ptr<SkeletonHeader> tempSkeletonHeader(new SkeletonHeader);
+		inFile->read((char*)tempSkeletonHeader.get(), sizeof(SkeletonHeader));
+
+		//skapar tempcontainer
+		std::shared_ptr<SkeletonContainer> tempSkeletonContainer(new SkeletonContainer(tempSkeletonHeader->jointCount, tempSkeletonHeader->animationCount));
+
+		tempSkeletonContainer->skeletonData = tempSkeletonHeader;
+		tempSkeletonHeader.reset();
+
+		//jointdata
+		inFile->read((char*)tempSkeletonContainer->jointData.get(), sizeof(JointHeader) * tempSkeletonContainer->skeletonData->jointCount);
+
+		//animationData
+		inFile->read((char*)tempSkeletonContainer->animationData.get(), sizeof(AnimationHeader) * tempSkeletonContainer->skeletonData->animationCount);
+
+		for (unsigned int j = 0; j < tempSkeletonContainer->skeletonData->animationCount; j++)
+		{
+			for (unsigned int k = 0; k < tempSkeletonContainer->skeletonData->jointCount; k++)
+			{
+				inFile->read((char*)tempSkeletonContainer->frameDataContainer.get()->animationJointData.get(), sizeof(JointCountHeader));
+
+				for (unsigned int l = 0; l < tempSkeletonContainer->frameDataContainer.get()->animationJointData.get()->frameCount; l++)
+				{
+					std::shared_ptr<FrameHeader> tempFrameArray(new FrameHeader);
+					inFile->read((char*)tempFrameArray.get(), sizeof(FrameHeader));
+
+					tempSkeletonContainer->frameDataContainer.get()->frameData.push_back(tempFrameArray);
+				}
+			}
+
+		}
+		tempSkeletonData->setData(tempSkeletonContainer);
+
+		tempSkeletonVector.push_back(tempSkeletonData);
+	}
+
+	return tempSkeletonVector;
 }
 
 //start

@@ -48,7 +48,30 @@ MaterialContainer* Fetch::Material(unsigned int materialID)
 	}
 }
 
-
+SkeletonData* Fetch::Skeleton(unsigned int skeletonID, unsigned int animationID)
+{
+	if (skeletonID > this->FetchDataContainer->getMain()->skeletonAmount)
+	{
+		return nullptr;
+	}
+	else
+	{
+		for (unsigned int i = 0; i < (this->FetchDataContainer->getMain()->skeletonAmount); i++)
+		{
+			if (skeletonID == this->FetchDataContainer->GetSkeleton(i)->GetSkeletonID)
+			{
+				for (unsigned int i = 0; i < (this->FetchDataContainer->GetSkeleton(i)->GetAnimationAmmount); i++)
+				{
+					if (animationID == this->FetchDataContainer->GetSkeleton(i)->GetAnimationID)
+					{
+						return this->FetchDataContainer->GetSkeleton(i)->GetAnimationID;
+					}
+				}
+			}
+		}
+		return nullptr;
+	}
+}
 
 //light
 
@@ -122,12 +145,16 @@ MaterialContainer* FetchContainer::GetMaterial(unsigned int materialID)
 {
 	return this->materialData->GetMaterialData(materialID);
 }
-FetchContainer::FetchContainer(std::shared_ptr<MainHeader> tempMain, std::vector<std::shared_ptr<MeshData>> meshVector, std::shared_ptr<MaterialData> materialData)
+SkeletonData* FetchContainer::GetSkeleton(unsigned int skeletonID)
+{
+	return this->skeletons[skeletonID].get();
+}
+FetchContainer::FetchContainer(std::shared_ptr<MainHeader> tempMain, std::vector<std::shared_ptr<MeshData>> meshVector, std::shared_ptr<MaterialData> materialData, std::vector<std::shared_ptr<SkeletonData>> skeletonVector)
 {
 	this->mainData = tempMain;
 	this->meshes = meshVector;
 	this->materialData = materialData;
-	
+	this->skeletons = skeletonVector;
 }
 FetchContainer::~FetchContainer()
 {
