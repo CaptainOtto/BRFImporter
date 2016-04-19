@@ -36,8 +36,9 @@ namespace BRFImporterLib
 
 	public:
 		void setData(std::shared_ptr<SkeletonContainer> srcSkeletonData);
-		FrameHeader GetAnimationID(unsigned int id);
-		SkeletonHeader GetSkeletonID(unsigned int id);
+		AnimationHeader* GetAnimation(unsigned int id);
+		unsigned int GetAnimationID(unsigned int id);
+		SkeletonHeader* GetSkeletonData();
 		SkeletonData();
 		~SkeletonData();
 	};

@@ -48,7 +48,7 @@ MaterialContainer* Fetch::Material(unsigned int materialID)
 	}
 }
 
-SkeletonData* Fetch::Skeleton(unsigned int skeletonID, unsigned int animationID)
+SkeletonData* Fetch::Skeleton(unsigned int skeletonID)
 {
 	if (skeletonID > this->FetchDataContainer->getMain()->skeletonAmount)
 	{
@@ -58,13 +58,31 @@ SkeletonData* Fetch::Skeleton(unsigned int skeletonID, unsigned int animationID)
 	{
 		for (unsigned int i = 0; i < (this->FetchDataContainer->getMain()->skeletonAmount); i++)
 		{
-			if (skeletonID == this->FetchDataContainer->GetSkeleton(i)->GetSkeletonID)
+			if (skeletonID == this->FetchDataContainer->GetSkeleton(i)->GetSkeletonData()->skeletonID)
 			{
-				for (unsigned int i = 0; i < (this->FetchDataContainer->GetSkeleton(i)->GetAnimationAmmount); i++)
+				return this->FetchDataContainer->GetSkeleton(i);
+			}
+		}
+		return nullptr;
+	}
+}
+AnimationHeader* Fetch::Animation(unsigned int skeletonID, unsigned int animationID)
+{
+	if (skeletonID > this->FetchDataContainer->getMain()->skeletonAmount)
+	{
+		return nullptr;
+	}
+	else
+	{
+		for (unsigned int i = 0; i < (this->FetchDataContainer->getMain()->skeletonAmount); i++)
+		{
+			if (skeletonID == this->FetchDataContainer->GetSkeleton(i)->GetSkeletonData()->skeletonID)
+			{
+				for (unsigned int j = 0; j < (this->FetchDataContainer->GetSkeleton(i)->GetSkeletonData()->animationCount); j++)
 				{
-					if (animationID == this->FetchDataContainer->GetSkeleton(i)->GetAnimationID)
+					if (animationID == (this->FetchDataContainer->GetSkeleton(i)->GetAnimationID(j)))
 					{
-						return this->FetchDataContainer->GetSkeleton(i)->GetAnimationID;
+						return this->FetchDataContainer->GetSkeleton(i)->GetAnimation(j);
 					}
 				}
 			}

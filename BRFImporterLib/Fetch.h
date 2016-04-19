@@ -39,7 +39,8 @@ namespace BRFImporterLib
 		MainHeader* Main();
 		MeshData* Mesh(unsigned int meshID);
 		MaterialContainer* Material(unsigned int materialID);
-		SkeletonData* Skeleton(unsigned int skeletonID, unsigned int animationID);
+		SkeletonData* Skeleton(unsigned int skeletonID);
+		AnimationHeader* Animation(unsigned int skeletonID, unsigned int animationID);
 		//LightData* Light(unsigned int lightID);
 
 		//CON DECON

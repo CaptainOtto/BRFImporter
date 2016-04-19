@@ -13,13 +13,17 @@ SkeletonData::SkeletonData()
 SkeletonData::~SkeletonData()
 {
 }
-FrameHeader SkeletonData::GetAnimationID(unsigned int id)
+AnimationHeader* SkeletonData::GetAnimation(unsigned int id)
 {
-	return this->skeletonDataContainer->frameDataContainer.get()->frameData[id];
+	return &this->skeletonDataContainer->animationData[id];
 }
-SkeletonHeader SkeletonData::GetSkeletonID(unsigned int id)
+unsigned int SkeletonData::GetAnimationID(unsigned int id)
 {
-	return this->skeletonDataContainer->skeletonData.get()->Id[];
+	return this->skeletonDataContainer->animationData[id].animationID;
+}
+SkeletonHeader* SkeletonData::GetSkeletonData()
+{
+	return this->skeletonDataContainer->skeletonData.get();
 }
 //CON DECON
 
