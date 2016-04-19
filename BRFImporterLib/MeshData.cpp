@@ -16,21 +16,21 @@ MeshHeader* MeshData::GetMeshData()
 }
 
 // returns the meshes vertices without skeleton data
-VertexHeaderNoSkeleton* MeshData::GetVertexNoSkeletonData()
+VertexHeaderNoSkeleton MeshData::GetVertexNoSkeletonData(unsigned int vert)
 {
-	return this->meshDataContainer->vertexNoSkeletonData.get();
+	return this->meshDataContainer->vertexNoSkeletonData.get()[vert];
 }
 
 // returns the meshes vertices without skeleton data
-VertexHeader* MeshData::GetVertexData()
+VertexHeader MeshData::GetVertexData(unsigned int vert)
 {
-	return this->meshDataContainer->vertexData.get();
+	return this->meshDataContainer->vertexData.get()[vert];
 }
 
 //returns the meshes indices.
-IndexHeader* MeshData::GetIndexData()
+IndexHeader MeshData::GetIndexData(unsigned int ind)
 {
-	return this->meshDataContainer->indexData.get();
+	return this->meshDataContainer->indexData.get()[ind];
 }
 
 //CON DECON

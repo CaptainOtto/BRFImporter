@@ -101,7 +101,7 @@ std::vector<std::shared_ptr<MeshData>> FileData::LoadMesh(std::shared_ptr<MainHe
 }
 
 //adds the materialheader and subsequents to the sent in fetch
-std::shared_ptr<MaterialData> LoadMaterial(std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile)
+std::shared_ptr<MaterialData> BRFImporterLib::FileData::LoadMaterial(std::shared_ptr<MainHeader> tempMain, std::ifstream * inFile)
 {
 	std::shared_ptr<MaterialData> tempMaterialData(new MaterialData);
 

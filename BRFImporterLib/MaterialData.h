@@ -22,6 +22,7 @@ namespace BRFImporterLib
 		std::string reflectMap; //Was Gloss
 		std::string glowMap;
 	};
+
 	class MaterialData
 	{
 	protected:
