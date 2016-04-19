@@ -31,6 +31,9 @@
     <Filter Include="Resource Files\BRFImporterLib\LightData">
       <UniqueIdentifier>{2f7b8f6e-7906-41db-b253-abcb122576c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\BRFImporterLib\MaterialData">
+      <UniqueIdentifier>{8f98571c-520b-4b5e-8f81-980549eeb393}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -51,6 +54,9 @@
     <ClInclude Include="LightData.h">
       <Filter>Resource Files\BRFImporterLib\LightData</Filter>
     </ClInclude>
+    <ClInclude Include="MaterialData.h">
+      <Filter>Resource Files\BRFImporterLib\MaterialData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fetch.cpp">
@@ -64,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="LightData.cpp">
       <Filter>Resource Files\BRFImporterLib\LightData</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialData.cpp">
+      <Filter>Resource Files\BRFImporterLib\MaterialData</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
