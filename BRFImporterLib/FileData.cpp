@@ -143,10 +143,6 @@ std::shared_ptr<MaterialData> BRFImporterLib::FileData::LoadMaterial(std::shared
 
 		for (int j = 0; j < 3; j++)
 		{
-			tempMaterialContainer->ambientVal[j] = tempMaterialHeader->ambientVal[j];
-		}
-		for (int j = 0; j < 3; j++)
-		{
 			tempMaterialContainer->diffuseVal[j] = tempMaterialHeader->diffuseVal[j];
 		}
 		for (int j = 0; j < 3; j++)

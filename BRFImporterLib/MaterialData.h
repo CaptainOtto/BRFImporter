@@ -12,7 +12,6 @@ namespace BRFImporterLib
 
 		std::string matName;
 
-		double ambientVal[3];
 		double diffuseVal[3];
 		double specularVal[3];
 
