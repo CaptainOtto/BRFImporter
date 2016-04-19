@@ -28,6 +28,27 @@ MeshData* Fetch::Mesh(unsigned int meshID)
 		return nullptr;
 	}
 }
+//returns a material from tech using the materials ID.
+MaterialContainer* Fetch::Material(unsigned int materialID)
+{
+	if (materialID > this->FetchDataContainer->getMain()->materialAmount)
+	{
+		return nullptr;
+	}
+	else
+	{
+		for (unsigned int i = 0; i < (this->FetchDataContainer->getMain()->materialAmount); i++)
+		{
+			if (materialID == this->FetchDataContainer->GetMaterial(i)->Id)
+			{
+				return this->FetchDataContainer->GetMaterial(i);
+			}
+		}
+		return nullptr;
+	}
+}
+
+
 
 //light
 
@@ -97,11 +118,15 @@ MeshData* FetchContainer::GetMesh(unsigned int meshID)
 {
 	return this->meshes[meshID].get();
 }
-FetchContainer::FetchContainer(std::shared_ptr<MainHeader> tempMain, std::vector<std::shared_ptr<MeshData>> meshVector)
+MaterialContainer* FetchContainer::GetMaterial(unsigned int materialID)
+{
+	return this->materialData->GetMaterialData(materialID);
+}
+FetchContainer::FetchContainer(std::shared_ptr<MainHeader> tempMain, std::vector<std::shared_ptr<MeshData>> meshVector, std::shared_ptr<MaterialData> materialData)
 {
 	this->mainData = tempMain;
 	this->meshes = meshVector;
-
+	this->materialData = materialData;
 	
 }
 FetchContainer::~FetchContainer()

@@ -1,13 +1,20 @@
 #include "MaterialData.h"
+using namespace BRFImporterLib;
 
-namespace BRFImporterLib
+void MaterialData::SetData(std::shared_ptr<MaterialContainer> SrcMaterialData)
 {
-	class MaterialContainer
-	{
+	materialContainer.push_back(SrcMaterialData);
+}
+MaterialContainer* MaterialData::GetMaterialData(unsigned int materialID)
+{
+	return this->materialContainer[materialID].get();
+}
 
-	};
-	class MaterialData
-	{
+//CON DECON
+MaterialData::MaterialData()
+{
+}
 
-	};
+MaterialData::~MaterialData()
+{
 }

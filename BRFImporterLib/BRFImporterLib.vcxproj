@@ -152,6 +152,7 @@ copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\MeshData.h"  "C
     <ClInclude Include="LightData.h" />
     <ClInclude Include="MaterialData.h" />
     <ClInclude Include="MeshData.h" />
+    <ClInclude Include="SkeletonData.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fetch.cpp" />
@@ -159,6 +160,7 @@ copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\MeshData.h"  "C
     <ClCompile Include="LightData.cpp" />
     <ClCompile Include="MeshData.cpp" />
     <ClCompile Include="MaterialData.cpp" />
+    <ClCompile Include="SkeletonData.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

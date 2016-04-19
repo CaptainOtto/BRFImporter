@@ -4,11 +4,11 @@
 using namespace BRFImporterLib;
 //FUNCTION DEFINITIONS FOR FILEDATA
 
-void FileData::LoadFile(std::string fileName, bool mesh)
+void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool material)
 {
-
-	std::vector<std::shared_ptr<MeshData>> meshVector;
 	std::shared_ptr<MainHeader> tempMain(new MainHeader);
+	std::vector<std::shared_ptr<MeshData>> meshVector;
+	std::shared_ptr<MaterialData> tempMaterialData(new MaterialData);
 
 	std::ifstream inFile(fileName, std::ifstream::binary);
 	if (!inFile.is_open())
@@ -34,11 +34,21 @@ void FileData::LoadFile(std::string fileName, bool mesh)
 			{
 				meshVector = LoadMesh(tempMain, &inFile);
 			}
+			if (skeleton == true)
+			{
+				//meshVector = LoadSkeleton(tempMain, &inFile);
+			}
+			if (material == true)
+			{
+				tempMaterialData = LoadMaterial(tempMain, &inFile);
+			}
 		}
 	}
 
 	inFile.close();
-	std::shared_ptr<FetchContainer> tempFetchData(new FetchContainer(tempMain, meshVector));
+	
+	
+	std::shared_ptr<FetchContainer> tempFetchData(new FetchContainer(tempMain, meshVector, tempMaterialData));
 	std::shared_ptr<Fetch> tempFetch(new Fetch(tempFetchData));
 	tempFetchData.reset();
 	this->fetch = tempFetch;
@@ -89,6 +99,81 @@ std::vector<std::shared_ptr<MeshData>> FileData::LoadMesh(std::shared_ptr<MainHe
 	}
 	return meshVector;
 }
+
+//adds the materialheader and subsequents to the sent in fetch
+std::shared_ptr<MaterialData> LoadMaterial(std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile)
+{
+	std::shared_ptr<MaterialData> tempMaterialData(new MaterialData);
+
+	for (unsigned int i = 0; i < tempMain->materialAmount; i++)
+	{
+		std::shared_ptr<MaterialContainer> tempMaterialContainer(new MaterialContainer);
+
+		std::shared_ptr<MaterialHeader> tempMaterialHeader(new MaterialHeader);
+		inFile->read((char*)tempMaterialHeader.get(), sizeof(MaterialHeader));
+
+		unsigned int tempID = tempMaterialHeader.get()->Id;
+
+
+		std::string tempName;
+		tempName = std::string(tempMaterialHeader.get()->matName);
+		tempMaterialContainer.get()->matName = tempName;
+
+		std::string tempDiff;
+		tempDiff = std::string(tempMaterialHeader.get()->diffMap);
+		tempMaterialContainer.get()->diffMap = tempDiff;
+
+		std::string tempSpec;
+		tempSpec = std::string(tempMaterialHeader.get()->specMap);
+		tempMaterialContainer.get()->specMap = tempSpec;
+
+		std::string tempNorm;
+		tempNorm = std::string(tempMaterialHeader.get()->normalMap);
+		tempMaterialContainer.get()->normalMap = tempNorm;
+
+		std::string tempRef;
+		tempRef = std::string(tempMaterialHeader.get()->reflectMap);
+		tempMaterialContainer.get()->reflectMap = tempRef;
+
+		std::string tempGlow;
+		tempGlow = std::string(tempMaterialHeader.get()->glowMap);
+		tempMaterialContainer.get()->glowMap = tempGlow;
+
+		tempMaterialContainer.get()->Id = tempMaterialHeader.get()->Id;
+
+		for (int j = 0; j < 3; j++)
+		{
+			tempMaterialContainer->ambientVal[j] = tempMaterialHeader->ambientVal[j];
+		}
+		for (int j = 0; j < 3; j++)
+		{
+			tempMaterialContainer->diffuseVal[j] = tempMaterialHeader->diffuseVal[j];
+		}
+		for (int j = 0; j < 3; j++)
+		{
+			tempMaterialContainer->specularVal[j] = tempMaterialHeader->specularVal[j];
+		}
+
+		tempMaterialData->SetData(tempMaterialContainer);
+	}
+
+	return tempMaterialData;
+}
+
+//start
+
+//skeletonheader (baserat på hur mnga sklätt körs rästen per sklätt)
+	//jointheader (baseras på joint amt)
+
+	//animationheader (baserat på ani mat)
+		// ^ säger hur många jointcountheaders ska läsas, som säger hur mnga frames
+			// en frameheader inläsning loop
+	//spottar kombinerade resultatet in i skeletoncontainer
+
+//returna sen alla skletts animationer
+//end
+
+
 
 //CON DECON
 FileData::FileData()
