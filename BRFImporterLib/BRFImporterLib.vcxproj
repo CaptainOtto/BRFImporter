@@ -101,11 +101,13 @@ copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\Fetch
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\FileData.obj"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\LightData.obj"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\MeshData.obj"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
+copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\MaterialData.obj"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\Fetch.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\BRFImporterStructs.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\FileData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\LightData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
-copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\MeshData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"</Command>
+copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\MeshData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
+copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\MaterialData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
