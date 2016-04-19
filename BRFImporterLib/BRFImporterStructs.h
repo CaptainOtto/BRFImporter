@@ -275,24 +275,5 @@ namespace BRFImporterLib
 
 
 	#pragma endregion
-
-
-
-	struct MaterialContainer
-	{
-		unsigned int Id;
-
-		std::string matName;
-
-		double ambientVal[3];
-		double diffuseVal[3];
-		double specularVal[3];
-
-		std::string diffMap;
-		std::string specMap;
-		std::string normalMap;
-		std::string reflectMap; //Was Gloss
-		std::string glowMap;
-	};
 }
 
