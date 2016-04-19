@@ -184,6 +184,9 @@ std::vector<std::shared_ptr<SkeletonData>> BRFImporterLib::FileData::LoadSkeleto
 		//animationData
 		inFile->read((char*)tempSkeletonContainer->animationData.get(), sizeof(AnimationHeader) * tempSkeletonContainer->skeletonData->animationCount);
 
+		SkeletonContainer* doubleSkeletonContainer = tempSkeletonContainer->GetSkeletonContainer();
+		doubleSkeletonContainer->SetFrameDataContainer(tempSkeletonContainer->animationData.get()->jointCount);
+
 		for (unsigned int j = 0; j < tempSkeletonContainer->skeletonData->animationCount; j++)
 		{
 			for (unsigned int k = 0; k < tempSkeletonContainer->skeletonData->jointCount; k++)

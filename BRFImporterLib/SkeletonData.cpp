@@ -33,18 +33,25 @@ SkeletonContainer::SkeletonContainer(unsigned int jointCount, unsigned int anima
 	this->jointData = std::unique_ptr<JointHeader[]>(new JointHeader[jointCount]);
 	this->animationData = std::unique_ptr<AnimationHeader[]>(new AnimationHeader[animationCount]);
 
-	this->frameDataContainer = std::unique_ptr<FrameDataContainer[]>(new FrameDataContainer(this->animationData.get()->jointCount));
 }
-
+void SkeletonContainer::SetFrameDataContainer(unsigned int animationJointCount)
+{
+	this->frameDataContainer = std::unique_ptr<FrameDataContainer[]>(new FrameDataContainer(animationJointCount));
+}
 FrameDataContainer::FrameDataContainer(unsigned int jointCount)
 {
 	this->animationJointData = std::shared_ptr<JointCountHeader>(new JointCountHeader[jointCount]);
 }
+
 SkeletonContainer::~SkeletonContainer()
 {
 
 }
 FrameDataContainer::~FrameDataContainer()
+{
+
+}
+SkeletonContainer::SkeletonContainer()
 {
 
 }

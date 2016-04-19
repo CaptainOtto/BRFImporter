@@ -26,6 +26,10 @@ namespace BRFImporterLib
 
 		//CON DECON
 		SkeletonContainer(unsigned int jointCount, unsigned int animationCount);
+
+		SkeletonContainer* GetSkeletonContainer() { return this; }
+		void SetFrameDataContainer(unsigned int animationJointCount);
+		SkeletonContainer();
 		~SkeletonContainer();
 
 	};
