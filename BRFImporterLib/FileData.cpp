@@ -166,7 +166,7 @@ std::vector<std::shared_ptr<SkeletonData>> BRFImporterLib::FileData::LoadSkeleto
 
 	for (unsigned int i = 0; i < tempMain->skeletonAmount; i++)
 	{
-		std::shared_ptr<SkeletonData> tempSkeletonData;
+		std::shared_ptr<SkeletonData> tempSkeletonData(new SkeletonData);
 
 		//skeletondata
 		std::shared_ptr<SkeletonHeader> tempSkeletonHeader(new SkeletonHeader);
@@ -189,7 +189,7 @@ std::vector<std::shared_ptr<SkeletonData>> BRFImporterLib::FileData::LoadSkeleto
 
 		for (unsigned int j = 0; j < tempSkeletonContainer->skeletonData->animationCount; j++)
 		{
-			for (unsigned int k = 0; k < tempSkeletonContainer->skeletonData->jointCount; k++)
+			for (unsigned int k = 0; k < tempSkeletonContainer->animationData.get()->jointCount; k++)
 			{
 				inFile->read((char*)tempSkeletonContainer->frameDataContainer.get()->animationJointData.get(), sizeof(JointCountHeader));
 

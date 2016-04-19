@@ -121,7 +121,6 @@ namespace BRFImporterLib
 	struct FrameHeader
 	{
 		unsigned int frameID;
-		double time;
 		double frameMatrix[4][4];
 	};
 #pragma endregion
