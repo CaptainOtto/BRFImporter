@@ -12,6 +12,7 @@ namespace BRFImporterLib
 		std::shared_ptr<JointCountHeader> animationJointData;
 		std::vector<std::shared_ptr<FrameHeader>> frameData;
 
+		//CON DECON
 		FrameDataContainer(unsigned int animatedJointCount); //new på ptrs
 		~FrameDataContainer();
 	};
@@ -26,7 +27,6 @@ namespace BRFImporterLib
 
 		//CON DECON
 		SkeletonContainer(unsigned int jointCount, unsigned int animationCount);
-
 		SkeletonContainer* GetSkeletonContainer() { return this; }
 		void SetFrameDataContainer(unsigned int animationJointCount);
 		SkeletonContainer();
@@ -37,12 +37,13 @@ namespace BRFImporterLib
 	{
 	protected:
 		std::shared_ptr<SkeletonContainer> skeletonDataContainer;
-
 	public:
 		void setData(std::shared_ptr<SkeletonContainer> srcSkeletonData);
 		AnimationHeader* GetAnimation(unsigned int id);
 		unsigned int GetAnimationID(unsigned int id);
 		SkeletonHeader* GetSkeletonData();
+		
+		//CON DECON
 		SkeletonData();
 		~SkeletonData();
 	};
