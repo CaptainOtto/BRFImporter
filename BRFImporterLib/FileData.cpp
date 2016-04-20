@@ -4,6 +4,7 @@
 using namespace BRFImporterLib;
 //FUNCTION DEFINITIONS FOR FILEDATA
 
+//oh chucklesticks! this loads a file!
 void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool material)
 {
 	std::shared_ptr<MainHeader> tempMain(new MainHeader);
@@ -159,8 +160,6 @@ std::shared_ptr<MaterialData> BRFImporterLib::FileData::LoadMaterial(std::shared
 
 std::vector<std::shared_ptr<SkeletonData>> BRFImporterLib::FileData::LoadSkeleton(std::shared_ptr<MainHeader> tempMain, std::ifstream * inFile)
 {
-	//THIS IS CLUSTERFUCK SHUCKLESTICKS
-
 	std::vector<std::shared_ptr<SkeletonData>> tempSkeletonVector;
 
 
@@ -191,14 +190,15 @@ std::vector<std::shared_ptr<SkeletonData>> BRFImporterLib::FileData::LoadSkeleto
 		{
 			for (unsigned int k = 0; k < tempSkeletonContainer->animationData.get()->jointCount; k++)
 			{
-				inFile->read((char*)tempSkeletonContainer->frameDataContainer.get()->animationJointData.get(), sizeof(JointCountHeader));
+				inFile->read((char*)tempSkeletonContainer->frameDataContainer[k].get()->animationJointData.get(), sizeof(JointCountHeader));
 
-				for (unsigned int l = 0; l < tempSkeletonContainer->frameDataContainer.get()->animationJointData.get()->frameCount; l++)
+				for (unsigned int l = 0; l < tempSkeletonContainer->frameDataContainer[k].get()->animationJointData.get()->frameCount; l++)
 				{
 					std::shared_ptr<FrameHeader> tempFrameArray(new FrameHeader);
 					inFile->read((char*)tempFrameArray.get(), sizeof(FrameHeader));
 
-					tempSkeletonContainer->frameDataContainer.get()->frameData.push_back(tempFrameArray);
+					//tempSkeletonContainer->frameDataContainer.get()->frameData.push_back(tempFrameArray);
+					tempSkeletonContainer->frameDataContainer[k].get()->frameData.push_back(tempFrameArray);
 				}
 			}
 
@@ -210,21 +210,6 @@ std::vector<std::shared_ptr<SkeletonData>> BRFImporterLib::FileData::LoadSkeleto
 
 	return tempSkeletonVector;
 }
-
-//start
-
-//skeletonheader (baserat på hur mnga sklätt körs rästen per sklätt)
-	//jointheader (baseras på joint amt)
-
-	//animationheader (baserat på ani mat)
-		// ^ säger hur många jointcountheaders ska läsas, som säger hur mnga frames
-			// en frameheader inläsning loop
-	//spottar kombinerade resultatet in i skeletoncontainer
-
-//returna sen alla skletts animationer
-//end
-
-
 
 //CON DECON
 FileData::FileData()

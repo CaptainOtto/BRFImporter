@@ -22,7 +22,7 @@ namespace BRFImporterLib
 		std::shared_ptr<SkeletonHeader> skeletonData;
 		std::unique_ptr<JointHeader[]> jointData;
 		std::unique_ptr<AnimationHeader[]> animationData;
-		std::unique_ptr<FrameDataContainer[]> frameDataContainer;
+		std::vector<std::shared_ptr<FrameDataContainer>> frameDataContainer;
 
 		//CON DECON
 		SkeletonContainer(unsigned int jointCount, unsigned int animationCount);
