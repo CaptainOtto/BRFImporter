@@ -20,7 +20,7 @@ MeshData* Fetch::Mesh(unsigned int meshID)
 	{
 		for (unsigned int i = 0; i < (this->FetchDataContainer->getMain()->meshAmount); i++)
 		{
-			if (meshID ==this->FetchDataContainer->GetMeshHeader(i)->objectID)
+			if (meshID == this->FetchDataContainer->GetMeshHeader(i)->objectID)
 			{
 				return this->FetchDataContainer->GetMesh(i);
 			}
