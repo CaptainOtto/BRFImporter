@@ -84,7 +84,7 @@ std::vector<std::shared_ptr<MeshData>> FileData::LoadMesh(std::shared_ptr<MainHe
 		if (SrcMeshData->meshData.get()->hasSkeleton == true)
 		{
 			inFile->read((char*)SrcMeshData->vertexData.get() , sizeof(VertexHeader) * SrcMeshData->meshData.get()->vertexCount);
-			inFile->read((char*)SrcMeshData->weightData.get(), sizeof(WeightsHeader) * (SrcMeshData->meshData.get()->vertexCount * 4));
+			inFile->read((char*)SrcMeshData->weightData.get(), sizeof(WeightsHeader) * SrcMeshData->meshData.get()->vertexCount * 4);
 		}
 		else 
 		{

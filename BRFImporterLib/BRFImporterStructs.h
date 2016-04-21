@@ -64,7 +64,6 @@ namespace BRFImporterLib
 		double uv[2];
 		double tangent[2];
 		double biTangent[2];
-		unsigned int weightAmmount;
 	};
 	struct WeightsHeader
 	{
