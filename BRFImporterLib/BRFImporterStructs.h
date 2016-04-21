@@ -66,7 +66,7 @@ namespace BRFImporterLib
 		double biTangent[2];
 		unsigned int weightAmmount;
 	};
-	struct WeigthsHeader
+	struct WeightsHeader
 	{
 		double influence;
 		unsigned int jointID;
