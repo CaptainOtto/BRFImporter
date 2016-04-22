@@ -88,7 +88,7 @@ std::vector<std::shared_ptr<MeshData>> FileData::LoadMesh(std::shared_ptr<MainHe
 		}
 		else 
 		{
-			inFile->read((char*)SrcMeshData->vertexNoSkeletonData.get(), sizeof(VertexHeaderNoSkeleton) * SrcMeshData->meshData.get()->vertexCount);
+			inFile->read((char*)SrcMeshData->vertexData.get(), sizeof(VertexHeaderNoSkeleton) * SrcMeshData->meshData.get()->vertexCount);
 		}
 
 		//read indices
