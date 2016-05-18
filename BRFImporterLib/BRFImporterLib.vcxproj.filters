@@ -37,6 +37,9 @@
     <Filter Include="Resource Files\BRFImporterLib\SkeletonData">
       <UniqueIdentifier>{08cd8af9-3437-4de3-a624-25377cf5cb43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\BRFImporterLib\MorphData">
+      <UniqueIdentifier>{775a9a97-83ef-461a-be9e-e1fec9179ec7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -63,6 +66,9 @@
     <ClInclude Include="SkeletonData.h">
       <Filter>Resource Files\BRFImporterLib\SkeletonData</Filter>
     </ClInclude>
+    <ClInclude Include="MorphData.h">
+      <Filter>Resource Files\BRFImporterLib\MorphData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fetch.cpp">
@@ -82,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="SkeletonData.cpp">
       <Filter>Resource Files\BRFImporterLib\SkeletonData</Filter>
+    </ClCompile>
+    <ClCompile Include="MorphData.cpp">
+      <Filter>Resource Files\BRFImporterLib\MorphData</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

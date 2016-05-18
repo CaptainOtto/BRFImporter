@@ -5,12 +5,13 @@ using namespace BRFImporterLib;
 //FUNCTION DEFINITIONS FOR FILEDATA
 
 //oh chucklesticks! this loads a file!
-void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool material)
+void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool material, bool morph)
 {
 	std::shared_ptr<MainHeader> tempMain(new MainHeader);
 	std::vector<std::shared_ptr<MeshData>> meshVector;
 	std::shared_ptr<MaterialData> tempMaterialData(new MaterialData);
 	std::vector<std::shared_ptr<SkeletonData>> skeletonVector;
+	std::vector<std::shared_ptr<MorphData>> morphVector;
 
 	std::ifstream inFile(fileName, std::ifstream::binary);
 	if (!inFile.is_open())
@@ -44,13 +45,18 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 			{
 				skeletonVector = LoadSkeleton(tempMain, &inFile);
 			}
+			if (morph == true)
+			{
+				//ta emot morphDatan!!!!
+				morphVector = LoadMorph(tempMain, &inFile);
+			}
 		}
 	}
 
 	inFile.close();
 	
 	
-	std::shared_ptr<FetchContainer> tempFetchData(new FetchContainer(tempMain, meshVector, tempMaterialData, skeletonVector));
+	std::shared_ptr<FetchContainer> tempFetchData(new FetchContainer(tempMain, meshVector, tempMaterialData, skeletonVector, morphVector));
 	std::shared_ptr<Fetch> tempFetch(new Fetch(tempFetchData));
 	tempFetchData.reset();
 	this->fetch = tempFetch;
@@ -84,7 +90,7 @@ std::vector<std::shared_ptr<MeshData>> FileData::LoadMesh(std::shared_ptr<MainHe
 		if (SrcMeshData->meshData.get()->hasSkeleton == true)
 		{
 			inFile->read((char*)SrcMeshData->vertexData.get() , sizeof(VertexHeader) * SrcMeshData->meshData.get()->vertexCount);
-			inFile->read((char*)SrcMeshData->weightData.get(), sizeof(WeightsHeader) * SrcMeshData->meshData.get()->vertexCount * 4);
+			inFile->read((char*)SrcMeshData->weightData.get(), sizeof(WeigthsHeader) * SrcMeshData->meshData.get()->vertexCount * 4);
 		}
 		else 
 		{
@@ -210,6 +216,39 @@ std::vector<std::shared_ptr<SkeletonData>> BRFImporterLib::FileData::LoadSkeleto
 	}
 
 	return tempSkeletonVector;
+}
+
+std::vector<std::shared_ptr<MorphData>> BRFImporterLib::FileData::LoadMorph(std::shared_ptr<MainHeader> tempMain, std::ifstream * inFile)
+{
+	std::vector<std::shared_ptr<MorphData>> DestMorphData;
+
+	for (size_t i = 0; i < tempMain->morphAnimAmount; i++)
+	{
+		std::shared_ptr<MorphData> tempMorphData(new MorphData);
+
+		std::shared_ptr<MorphAnimHeader> tempAnimHeader(new MorphAnimHeader);
+		inFile->read((char*)tempAnimHeader.get(), sizeof(MorphAnimHeader));
+
+		std::shared_ptr<MorphDataContainer> SrcMorphData(new MorphDataContainer(tempAnimHeader->numberOfKeyFrames, tempAnimHeader->vertsPerShape));
+
+		SrcMorphData->morphData = tempAnimHeader;
+
+		for (size_t i = 0; i < SrcMorphData->morphData->numberOfKeyFrames; i++)
+		{
+			inFile->read((char*)&SrcMorphData->morphKeyFrameData[i], sizeof(MorphAnimKeyFrameHeader));
+			for (size_t j = 0; j < SrcMorphData->morphData->vertsPerShape; j++)
+			{
+				MorphVertexHeader temp;
+				inFile->read((char*)&temp, sizeof(MorphVertexHeader));
+				SrcMorphData->morphVertexData[i].push_back(temp);
+			}
+		}
+		tempMorphData->setData(SrcMorphData);
+		DestMorphData.push_back(tempMorphData);
+	}
+
+
+	return DestMorphData;
 }
 
 //CON DECON

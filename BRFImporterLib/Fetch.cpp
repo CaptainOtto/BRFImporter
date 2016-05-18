@@ -91,6 +91,18 @@ AnimationHeader* Fetch::Animation(unsigned int skeletonID, unsigned int animatio
 	}
 }
 
+MorphData * BRFImporterLib::Fetch::MorphAnimation(unsigned int morphAnimationID)
+{
+	if (morphAnimationID > this->FetchDataContainer->getMain()->morphAnimAmount)
+	{
+		return nullptr;
+	}
+	else
+	{
+			return this->FetchDataContainer->GetMorphAnimation(morphAnimationID);
+	}
+}
+
 //light
 
 //returns a light from an array using its ID
@@ -167,12 +179,17 @@ SkeletonData* FetchContainer::GetSkeleton(unsigned int skeletonID)
 {
 	return this->skeletons[skeletonID].get();
 }
-FetchContainer::FetchContainer(std::shared_ptr<MainHeader> tempMain, std::vector<std::shared_ptr<MeshData>> meshVector, std::shared_ptr<MaterialData> materialData, std::vector<std::shared_ptr<SkeletonData>> skeletonVector)
+MorphData * BRFImporterLib::FetchContainer::GetMorphAnimation(unsigned int morphAnimationID)
+{
+	return this->morphAnimations[morphAnimationID].get();
+}
+FetchContainer::FetchContainer(std::shared_ptr<MainHeader> tempMain, std::vector<std::shared_ptr<MeshData>> meshVector, std::shared_ptr<MaterialData> materialData, std::vector<std::shared_ptr<SkeletonData>> skeletonVector, std::vector<std::shared_ptr<MorphData>> morphVector)
 {
 	this->mainData = tempMain;
 	this->meshes = meshVector;
 	this->materialData = materialData;
 	this->skeletons = skeletonVector;
+	this->morphAnimations = morphVector;
 }
 FetchContainer::~FetchContainer()
 {

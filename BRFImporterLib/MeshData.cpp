@@ -33,7 +33,7 @@ IndexHeader MeshData::GetIndexData(unsigned int ind)
 	return this->meshDataContainer->indexData.get()[ind];
 }
 //returns the meshes weights.
-WeightsHeader MeshData::GetWeightData(unsigned int vert)
+WeigthsHeader MeshData::GetWeightData(unsigned int vert)
 {
 	return this->meshDataContainer->weightData.get()[vert];
 }
@@ -55,7 +55,7 @@ MeshContainer::MeshContainer(unsigned int vertexCount, unsigned int indexCount)
 	this->vertexNoSkeletonData = std::unique_ptr<VertexHeaderNoSkeleton[]>(new VertexHeaderNoSkeleton[vertexCount]);
 	this->vertexData = std::unique_ptr<VertexHeader[]>(new VertexHeader[vertexCount]);
 	this->indexData = std::unique_ptr<IndexHeader[]>(new IndexHeader[indexCount]);
-	this->weightData = std::unique_ptr<WeightsHeader[]>(new WeightsHeader[vertexCount * 4]);
+	this->weightData = std::unique_ptr<WeigthsHeader[]>(new WeigthsHeader[vertexCount * 4]);
 }
 MeshContainer::~MeshContainer()
 {

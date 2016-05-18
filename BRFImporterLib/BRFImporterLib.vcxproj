@@ -103,13 +103,15 @@ copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\Light
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\MeshData.obj"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\MaterialData.obj"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\SkeletonData.obj"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
+copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\MorphData.obj"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\Fetch.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\BRFImporterStructs.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\FileData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\LightData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\MeshData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\MaterialData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
-copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\SkeletonData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"</Command>
+copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\SkeletonData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
+copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\MorphData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -156,6 +158,7 @@ copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\SkeletonData.h"
     <ClInclude Include="LightData.h" />
     <ClInclude Include="MaterialData.h" />
     <ClInclude Include="MeshData.h" />
+    <ClInclude Include="MorphData.h" />
     <ClInclude Include="SkeletonData.h" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +167,7 @@ copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\SkeletonData.h"
     <ClCompile Include="LightData.cpp" />
     <ClCompile Include="MeshData.cpp" />
     <ClCompile Include="MaterialData.cpp" />
+    <ClCompile Include="MorphData.cpp" />
     <ClCompile Include="SkeletonData.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
