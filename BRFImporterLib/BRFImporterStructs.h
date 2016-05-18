@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 namespace BRFImporterLib
 {
 	//STRUCTS WITH #PRAGMA REGION IN ORDER: 1. STATIC 2. DYNAMICS OF THAT STATIC, REPEAT
@@ -63,9 +64,8 @@ namespace BRFImporterLib
 		double uv[2];
 		double tangent[2];
 		double biTangent[2];
-		unsigned int weightAmmount;
 	};
-	struct WeigthsHeader
+	struct WeightsHeader
 	{
 		double influence;
 		unsigned int jointID;
@@ -78,7 +78,6 @@ namespace BRFImporterLib
 
 		char matName[256];
 
-		double ambientVal[3];
 		double diffuseVal[3];
 		double specularVal[3];
 
@@ -92,6 +91,7 @@ namespace BRFImporterLib
 #pragma region SkeletonHeader
 	struct SkeletonHeader
 	{
+		unsigned int skeletonID;
 		unsigned int jointCount;
 		unsigned int animationCount;
 	};
@@ -110,6 +110,7 @@ namespace BRFImporterLib
 	{
 		char animationName[256];
 		unsigned int jointCount;
+		unsigned int animationID;
 	};
 	struct JointCountHeader
 	{
@@ -119,7 +120,6 @@ namespace BRFImporterLib
 	struct FrameHeader
 	{
 		unsigned int frameID;
-		double time;
 		double frameMatrix[4][4];
 	};
 #pragma endregion

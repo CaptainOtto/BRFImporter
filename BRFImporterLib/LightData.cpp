@@ -1,23 +1,25 @@
 #include "LightData.h"
+#include <crtdbg.h>
 using namespace BRFImporterLib;
+#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
 
-LightHeader LightData::getLightData()
+LightHeader LightData::GetLightData()
 {
 	return this->lightData;
 }
-SpotLightHeader* LightData::getSpotLightData()
+SpotLightHeader* LightData::GetSpotLightData()
 {
 	return this->spotLightData;
 }
-AreaLightHeader* LightData::getAreaLightData()
+AreaLightHeader* LightData::GetAreaLightData()
 {
 	return this->areaLightData;
 }
-PointLightHeader* LightData::getPointLightData()
+PointLightHeader* LightData::GetPointLightData()
 {
 	return this->pointLightData;
 }
-DirLightHeader* LightData::getDirLightData()
+DirLightHeader* LightData::GetDirLightData()
 {
 	return this->dirLightData;
 }

@@ -1,71 +1,42 @@
 #include "MeshData.h"
+#include <crtdbg.h>
+#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
 using namespace BRFImporterLib;
 
-//SETS
-void MeshData::setMeshData(MeshHeader* a)
+//SETDATA
+void MeshData::SetData(std::shared_ptr<MeshContainer> SrcMeshData)
 {
-	this->meshData = a;
+	this->meshDataContainer = SrcMeshData;
 }
-void MeshData::setOOBBData(OOBBHeader b)
-{
-	this->oobbData = b;
-}
-void MeshData::setIndexData(IndexHeader* c)
-{
-	this->indexData = c;
-}
-void MeshData::setVertexNoSkeletonData(VertexHeaderNoSkeleton* d)
-{
-	this->VertexNoSkeletonData = d;
-}
-void MeshData::setVertexData(VertexHeader* e)
-{
-	this->vertexData = e;
-}
-
-void MeshData::setWeightData(WeigthsHeader* g)
-{
-	this->weightData = g;
-}
-//ENDSETS
-
 
 //returns the meshes data.
-MeshHeader* MeshData::getMeshData()
+MeshHeader* MeshData::GetMeshData()
 {
-	return this->meshData;
-}
-
-//returns the meshes boundingbox.
-OOBBHeader MeshData::getOOBBData()
-{
-	return this->oobbData;
-}
-
-//returns the meshes indices.
-IndexHeader* MeshData::getIndexData()
-{
-	return this->indexData;
+	return this->meshDataContainer->meshData.get();
 }
 
 // returns the meshes vertices without skeleton data
-VertexHeaderNoSkeleton* MeshData::getVertexNoSkeletonData()
+VertexHeaderNoSkeleton MeshData::GetVertexNoSkeletonData(unsigned int vert)
 {
-	return this->VertexNoSkeletonData;
+	return this->meshDataContainer->vertexNoSkeletonData.get()[vert];
 }
 
-//returns the meshes vertices.
-VertexHeader* MeshData::getVertexData()
+// returns the meshes vertices without skeleton data
+VertexHeader MeshData::GetVertexData(unsigned int vert)
 {
-	return this->vertexData;
+	return this->meshDataContainer->vertexData.get()[vert];
 }
 
-WeigthsHeader* MeshData::getWeightData()
+//returns the meshes indices.
+IndexHeader MeshData::GetIndexData(unsigned int ind)
 {
-	return this->weightData;
+	return this->meshDataContainer->indexData.get()[ind];
 }
-
-
+//returns the meshes weights.
+WeightsHeader MeshData::GetWeightData(unsigned int vert)
+{
+	return this->meshDataContainer->weightData.get()[vert];
+}
 
 //CON DECON
 MeshData::MeshData()
@@ -74,5 +45,23 @@ MeshData::MeshData()
 }
 MeshData::~MeshData()
 {
+	//meshDataContainer.reset();
+}
 
+MeshContainer::MeshContainer(unsigned int vertexCount, unsigned int indexCount)
+{
+	this->meshData = std::shared_ptr<MeshHeader>(new MeshHeader);
+
+	this->vertexNoSkeletonData = std::unique_ptr<VertexHeaderNoSkeleton[]>(new VertexHeaderNoSkeleton[vertexCount]);
+	this->vertexData = std::unique_ptr<VertexHeader[]>(new VertexHeader[vertexCount]);
+	this->indexData = std::unique_ptr<IndexHeader[]>(new IndexHeader[indexCount]);
+	this->weightData = std::unique_ptr<WeightsHeader[]>(new WeightsHeader[vertexCount * 4]);
+}
+MeshContainer::~MeshContainer()
+{
+	this->meshData.reset();
+	this->vertexNoSkeletonData.reset();
+	this->vertexData.reset();
+	this->indexData.reset();
+	this->weightData.reset();
 }

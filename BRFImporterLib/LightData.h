@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include "BRFImporterStructs.h"
 
 namespace BRFImporterLib
@@ -12,11 +13,11 @@ namespace BRFImporterLib
 		PointLightHeader* pointLightData;
 		DirLightHeader* dirLightData;
 	public:
-		LightHeader getLightData();
-		SpotLightHeader* getSpotLightData();
-		AreaLightHeader* getAreaLightData();
-		PointLightHeader* getPointLightData();
-		DirLightHeader* getDirLightData();
+		LightHeader GetLightData();
+		SpotLightHeader* GetSpotLightData();
+		AreaLightHeader* GetAreaLightData();
+		PointLightHeader* GetPointLightData();
+		DirLightHeader* GetDirLightData();
 
 		//CON DECON
 		LightData();

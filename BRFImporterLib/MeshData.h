@@ -1,32 +1,34 @@
 #pragma once
+#include <memory>
 #include "BRFImporterStructs.h"
 
 namespace BRFImporterLib
-{
+{	
+	class MeshContainer
+	{
+	public:
+		std::shared_ptr<MeshHeader> meshData;
+		std::unique_ptr<VertexHeaderNoSkeleton[]> vertexNoSkeletonData;
+		std::unique_ptr<VertexHeader[]> vertexData;
+		std::unique_ptr<IndexHeader[]> indexData;
+		std::unique_ptr<WeightsHeader[]> weightData;
+		MeshContainer(unsigned int vertexCount, unsigned int indexCount);
+		~MeshContainer();
+
+	};
 	class MeshData
 	{
 	protected:
-		MeshHeader* meshData;
-		OOBBHeader oobbData;
-		IndexHeader* indexData;
-		VertexHeaderNoSkeleton* VertexNoSkeletonData;
-		VertexHeader* vertexData;
-		WeigthsHeader* weightData;
+		std::shared_ptr<MeshContainer> meshDataContainer;
 	public:
-		void setMeshData(MeshHeader* a);
-		void setOOBBData(OOBBHeader b);
-		void setIndexData(IndexHeader* c);
-		void setVertexNoSkeletonData(VertexHeaderNoSkeleton* d);
-		void setVertexData(VertexHeader* e);
-		void setWeightData(WeigthsHeader* g);
+		void SetData(std::shared_ptr<MeshContainer> SrcMeshData);
 
-		MeshHeader* getMeshData();
-		OOBBHeader getOOBBData();
-		IndexHeader* getIndexData();
-		VertexHeaderNoSkeleton* getVertexNoSkeletonData();
-		VertexHeader* getVertexData();
-		WeigthsHeader* getWeightData();
 
+		MeshHeader* GetMeshData();
+		VertexHeaderNoSkeleton GetVertexNoSkeletonData(unsigned int vert);
+		VertexHeader GetVertexData(unsigned int vert);
+		IndexHeader GetIndexData(unsigned int ind);
+		WeightsHeader GetWeightData(unsigned int vert);
 		//CON DECON
 		MeshData();
 		~MeshData();
