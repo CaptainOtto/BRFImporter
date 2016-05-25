@@ -155,6 +155,7 @@ copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\MorphData.h"  "
     <ClInclude Include="BRFImporterStructs.h" />
     <ClInclude Include="Fetch.h" />
     <ClInclude Include="FileData.h" />
+    <ClInclude Include="GroupData.h" />
     <ClInclude Include="LightData.h" />
     <ClInclude Include="MaterialData.h" />
     <ClInclude Include="MeshData.h" />
@@ -164,6 +165,7 @@ copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\MorphData.h"  "
   <ItemGroup>
     <ClCompile Include="Fetch.cpp" />
     <ClCompile Include="FileData.cpp" />
+    <ClCompile Include="GroupData.cpp" />
     <ClCompile Include="LightData.cpp" />
     <ClCompile Include="MeshData.cpp" />
     <ClCompile Include="MaterialData.cpp" />

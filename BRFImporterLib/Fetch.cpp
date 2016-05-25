@@ -103,6 +103,20 @@ MorphData * BRFImporterLib::Fetch::MorphAnimation(unsigned int morphAnimationID)
 	}
 }
 
+GroupData * BRFImporterLib::Fetch::group(unsigned int groups)
+{
+
+	if (groups > this->FetchDataContainer->getMain()->groupAmount)
+	{
+		return nullptr;
+	}
+	else
+	{
+		return this->FetchDataContainer->GetGroup(groups);
+	}
+
+}
+
 //light
 
 //returns a light from an array using its ID
@@ -183,13 +197,18 @@ MorphData * BRFImporterLib::FetchContainer::GetMorphAnimation(unsigned int morph
 {
 	return this->morphAnimations[morphAnimationID].get();
 }
-FetchContainer::FetchContainer(std::shared_ptr<MainHeader> tempMain, std::vector<std::shared_ptr<MeshData>> meshVector, std::shared_ptr<MaterialData> materialData, std::vector<std::shared_ptr<SkeletonData>> skeletonVector, std::vector<std::shared_ptr<MorphData>> morphVector)
+GroupData * BRFImporterLib::FetchContainer::GetGroup(unsigned int groupID)
+{
+	return this->groups.at(groupID).get();
+}
+FetchContainer::FetchContainer(std::shared_ptr<MainHeader> tempMain, std::vector<std::shared_ptr<MeshData>> meshVector, std::shared_ptr<MaterialData> materialData, std::vector<std::shared_ptr<SkeletonData>> skeletonVector, std::vector<std::shared_ptr<MorphData>> morphVector,std::vector<std::shared_ptr<GroupData>> groupVector)
 {
 	this->mainData = tempMain;
 	this->meshes = meshVector;
 	this->materialData = materialData;
 	this->skeletons = skeletonVector;
 	this->morphAnimations = morphVector;
+	this->groups = groupVector;
 }
 FetchContainer::~FetchContainer()
 {

@@ -40,6 +40,9 @@
     <Filter Include="Resource Files\BRFImporterLib\MorphData">
       <UniqueIdentifier>{775a9a97-83ef-461a-be9e-e1fec9179ec7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\BRFImporterLib\GroupData">
+      <UniqueIdentifier>{30eac082-cff9-49bc-92f5-6a32b0ae24d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -69,6 +72,9 @@
     <ClInclude Include="MorphData.h">
       <Filter>Resource Files\BRFImporterLib\MorphData</Filter>
     </ClInclude>
+    <ClInclude Include="GroupData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fetch.cpp">
@@ -91,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="MorphData.cpp">
       <Filter>Resource Files\BRFImporterLib\MorphData</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupData.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
