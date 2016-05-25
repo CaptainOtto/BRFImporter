@@ -196,12 +196,19 @@ namespace BRFImporterLib
 	struct GroupHeader
 	{
 		char groupName[256];
+		char dataType[256];
+
+		unsigned int attrCount;
 		unsigned int objectID;		// 0 = Default	
 		unsigned int parentID;		// 0 = Default
 
 		double translation[3];
 		double rotation[3];
 		double scale[3];
+	};
+	struct GroupAttributeHeader
+	{
+		unsigned int attrNr;
 	};
 #pragma endregion
 #pragma region MorphAnimHeader
