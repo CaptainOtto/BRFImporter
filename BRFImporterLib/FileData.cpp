@@ -5,7 +5,11 @@ using namespace BRFImporterLib;
 //FUNCTION DEFINITIONS FOR FILEDATA
 
 //oh chucklesticks! this loads a file!
+<<<<<<< HEAD
+void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool material, bool morph,bool groups)
+=======
 void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool material,bool light, bool morph)
+>>>>>>> refs/remotes/origin/master
 {
 	std::shared_ptr<MainHeader> tempMain(new MainHeader);
 	std::vector<std::shared_ptr<MeshData>> meshVector;
@@ -13,6 +17,7 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 	std::vector<std::shared_ptr<SkeletonData>> skeletonVector;
 	std::shared_ptr<LightData> tempLightData(new LightData);
 	std::vector<std::shared_ptr<MorphData>> morphVector;
+	std::vector<std::shared_ptr<GroupData>> groupVector;
 
 	std::ifstream inFile(fileName, std::ifstream::binary);
 	if (!inFile.is_open())
@@ -55,13 +60,17 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 				//ta emot morphDatan!!!!
 				morphVector = LoadMorph(tempMain, &inFile);
 			}
+			if (groups == true)
+			{
+				groupVector = LoadGroups(tempMain, &inFile);
+			}
 		}
 	}
 
 	inFile.close();
 	
 	
-	std::shared_ptr<FetchContainer> tempFetchData(new FetchContainer(tempMain, meshVector, tempMaterialData, skeletonVector, tempLightData, morphVector));
+	std::shared_ptr<FetchContainer> tempFetchData(new FetchContainer(tempMain, meshVector, tempMaterialData, skeletonVector,tempLightData,  morphVector,groupVector));
 	std::shared_ptr<Fetch> tempFetch(new Fetch(tempFetchData));
 	tempFetchData.reset();
 	this->fetch = tempFetch;
@@ -301,6 +310,25 @@ std::vector<std::shared_ptr<MorphData>> BRFImporterLib::FileData::LoadMorph(std:
 
 
 	return DestMorphData;
+}
+
+std::vector<std::shared_ptr<GroupData>> BRFImporterLib::FileData::LoadGroups(std::shared_ptr<MainHeader> tempMain, std::ifstream * inFile)
+{
+
+	std::vector<std::shared_ptr<GroupData>> tmpGroupVector;
+
+	for (int i = 0; i < tempMain->groupAmount; i++)
+	{
+		std::shared_ptr<GroupData> tempGroup;
+
+		inFile->read((char*)tempGroup.get(), sizeof(GroupData));
+
+		tmpGroupVector.push_back(tempGroup);
+		tempGroup.reset();
+	}
+
+
+	return tmpGroupVector;
 }
 
 
