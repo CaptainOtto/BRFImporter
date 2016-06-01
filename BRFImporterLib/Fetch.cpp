@@ -5,6 +5,7 @@
 using namespace BRFImporterLib;
 
 //returns the mainheader info
+#pragma region Fetch functions
 MainHeader*  BRFImporterLib::Fetch::Main()
 {
 	return this->FetchDataContainer->getMain();
@@ -47,7 +48,6 @@ MaterialContainer* Fetch::Material(unsigned int materialID)
 		return nullptr;
 	}
 }
-
 SkeletonData* Fetch::Skeleton(unsigned int skeletonID)
 {
 	if (skeletonID > this->FetchDataContainer->getMain()->skeletonAmount)
@@ -90,13 +90,30 @@ AnimationHeader* Fetch::Animation(unsigned int skeletonID, unsigned int animatio
 		return nullptr;
 	}
 }
-
-LightData * BRFImporterLib::Fetch::Light()
+LightData * Fetch::Light(unsigned int lightType, unsigned int lightID)
 {
-	return this->FetchDataContainer->getLight();
+	if (lightType == 0)
+	{
+		return this->FetchDataContainer->GetLight(lightType, lightID);
+	}
+	else if (lightType == 1)
+	{
+		return this->FetchDataContainer->GetLight(lightType, lightID);
+	}
+	else if (lightType == 2)
+	{
+		return this->FetchDataContainer->GetLight(lightType, lightID);
+	}
+	else if (lightType == 3)
+	{
+		return this->FetchDataContainer->GetLight(lightType, lightID);
+	}
+	else
+	{
+		return nullptr;
+	}
 }
-
-MorphData * BRFImporterLib::Fetch::MorphAnimation(unsigned int morphAnimationID)
+MorphData * Fetch::MorphAnimation(unsigned int morphAnimationID)
 {
 	if (morphAnimationID > this->FetchDataContainer->getMain()->morphAnimAmount)
 	{
@@ -107,7 +124,7 @@ MorphData * BRFImporterLib::Fetch::MorphAnimation(unsigned int morphAnimationID)
 			return this->FetchDataContainer->GetMorphAnimation(morphAnimationID);
 	}
 }
-GroupData * BRFImporterLib::Fetch::group(unsigned int groups)
+GroupData * Fetch::group(unsigned int groups)
 {
 
 	if (groups > this->FetchDataContainer->getMain()->groupAmount)
@@ -120,6 +137,18 @@ GroupData * BRFImporterLib::Fetch::group(unsigned int groups)
 	}
 
 }
+CameraData* Fetch::camera(unsigned int cameras)
+{
+	if (cameras > this->FetchDataContainer->getMain()->cameraAmount)
+	{
+		return nullptr;
+	}
+	else
+	{
+		return this->FetchDataContainer->GetCamera(cameras);
+	}
+}
+#pragma endregion 
 //CON DECON
 Fetch::Fetch(std::shared_ptr<FetchContainer> SrcFetchData)
 {
@@ -135,6 +164,8 @@ Fetch::~Fetch()
 }
 
 //fetchcontainerstuff
+#pragma region Fetchcontainers
+
 MainHeader* FetchContainer::getMain()
 {
 	return this->mainData.get();
@@ -155,9 +186,40 @@ SkeletonData* FetchContainer::GetSkeleton(unsigned int skeletonID)
 {
 	return this->skeletons[skeletonID].get();
 }
-LightData * BRFImporterLib::FetchContainer::getLight()
+LightData * BRFImporterLib::FetchContainer::GetLight(unsigned int lightType, unsigned int lightID)
 {
-	return this->lights.get();
+	if (lightType == 0)
+	{
+		if (lightID > this->lights->GetLightData()->spotCount)
+		{
+			return this->lights->GetSpotLightData[lightID].get();
+		}
+	}
+	else if (lightType == 1)
+	{
+		if (lightID > this->lights->GetLightData()->areaCount)
+		{
+			return this->lights->GetAreaLightData[lightID].get();
+		}
+	}
+	else if (lightType == 2)
+	{
+		if (lightID > this->lights->GetLightData()->pointCount)
+		{
+			return this->lights->GetPointLightData[lightID].get();
+		}
+	}
+	else if (lightType == 3)
+	{
+		if (lightID > this->lights->GetLightData()->directionalCount)
+		{
+			return this->lights->GetDirLightData[lightID].get();
+		}
+	}
+	else
+	{
+		return nullptr;
+	}
 }
 MorphData * BRFImporterLib::FetchContainer::GetMorphAnimation(unsigned int morphAnimationID)
 {
@@ -167,8 +229,21 @@ GroupData * BRFImporterLib::FetchContainer::GetGroup(unsigned int groupID)
 {
 	return this->groups.at(groupID).get();
 }
+CameraData * BRFImporterLib::FetchContainer::GetCamera(unsigned int cameraID)
+{
+	return this->cameras.at(cameraID).get();
+}
+#pragma endregion
 
-FetchContainer::FetchContainer(std::shared_ptr<MainHeader> tempMain, std::vector<std::shared_ptr<MeshData>> meshVector, std::shared_ptr<MaterialData> materialData, std::vector<std::shared_ptr<SkeletonData>> skeletonVector,std::shared_ptr<LightData> tempLightData, std::vector<std::shared_ptr<MorphData>> morphVector,std::vector<std::shared_ptr<GroupData>> groupVector)
+FetchContainer::FetchContainer(
+	std::shared_ptr<MainHeader> tempMain,
+	std::vector<std::shared_ptr<MeshData>> meshVector,
+	std::shared_ptr<MaterialData> materialData,
+	std::vector<std::shared_ptr<SkeletonData>> skeletonVector,
+	std::shared_ptr<LightData> tempLightData,
+	std::vector<std::shared_ptr<MorphData>> morphVector,
+	std::vector<std::shared_ptr<GroupData>> groupVector,
+	std::vector<std::shared_ptr<CameraData>> cameraVector)
 
 {
 	this->mainData = tempMain;
@@ -178,6 +253,7 @@ FetchContainer::FetchContainer(std::shared_ptr<MainHeader> tempMain, std::vector
 	this->lights = tempLightData;
 	this->morphAnimations = morphVector;
 	this->groups = groupVector;
+	this->cameras = cameraVector; // RIGHT?
 }
 FetchContainer::~FetchContainer()
 {

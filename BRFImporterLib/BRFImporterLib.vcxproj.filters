@@ -43,6 +43,9 @@
     <Filter Include="Resource Files\BRFImporterLib\GroupData">
       <UniqueIdentifier>{30eac082-cff9-49bc-92f5-6a32b0ae24d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\BRFImporterLib\Camera">
+      <UniqueIdentifier>{e84f676b-bb4a-458e-98c5-3d22523079d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -75,6 +78,9 @@
     <ClInclude Include="GroupData.h">
       <Filter>Resource Files\BRFImporterLib\GroupData</Filter>
     </ClInclude>
+    <ClInclude Include="CameraData.h">
+      <Filter>Resource Files\BRFImporterLib\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fetch.cpp">
@@ -100,6 +106,9 @@
     </ClCompile>
     <ClCompile Include="GroupData.cpp">
       <Filter>Resource Files\BRFImporterLib\GroupData</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraData.cpp">
+      <Filter>Resource Files\BRFImporterLib\Camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

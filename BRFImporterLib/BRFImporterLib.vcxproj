@@ -155,6 +155,7 @@ copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\GroupData.h"  "
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BRFImporterStructs.h" />
+    <ClInclude Include="CameraData.h" />
     <ClInclude Include="Fetch.h" />
     <ClInclude Include="FileData.h" />
     <ClInclude Include="GroupData.h" />
@@ -165,6 +166,7 @@ copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\GroupData.h"  "
     <ClInclude Include="SkeletonData.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CameraData.cpp" />
     <ClCompile Include="Fetch.cpp" />
     <ClCompile Include="FileData.cpp" />
     <ClCompile Include="GroupData.cpp" />
