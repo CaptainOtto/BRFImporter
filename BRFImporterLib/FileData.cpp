@@ -5,12 +5,17 @@ using namespace BRFImporterLib;
 //FUNCTION DEFINITIONS FOR FILEDATA
 
 //oh chucklesticks! this loads a file!
+<<<<<<< HEAD
 void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool material, bool morph,bool groups)
+=======
+void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool material,bool light, bool morph)
+>>>>>>> refs/remotes/origin/master
 {
 	std::shared_ptr<MainHeader> tempMain(new MainHeader);
 	std::vector<std::shared_ptr<MeshData>> meshVector;
 	std::shared_ptr<MaterialData> tempMaterialData(new MaterialData);
 	std::vector<std::shared_ptr<SkeletonData>> skeletonVector;
+	std::shared_ptr<LightData> tempLightData(new LightData);
 	std::vector<std::shared_ptr<MorphData>> morphVector;
 	std::vector<std::shared_ptr<GroupData>> groupVector;
 
@@ -46,6 +51,10 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 			{
 				skeletonVector = LoadSkeleton(tempMain, &inFile);
 			}
+			if (light == true)
+			{
+				tempLightData = LoadLight(tempMain, &inFile);
+			}
 			if (morph == true)
 			{
 				//ta emot morphDatan!!!!
@@ -61,7 +70,7 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 	inFile.close();
 	
 	
-	std::shared_ptr<FetchContainer> tempFetchData(new FetchContainer(tempMain, meshVector, tempMaterialData, skeletonVector, morphVector,groupVector));
+	std::shared_ptr<FetchContainer> tempFetchData(new FetchContainer(tempMain, meshVector, tempMaterialData, skeletonVector,tempLightData,  morphVector,groupVector));
 	std::shared_ptr<Fetch> tempFetch(new Fetch(tempFetchData));
 	tempFetchData.reset();
 	this->fetch = tempFetch;
@@ -72,7 +81,7 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 }
 
 
-//adds the meshheader and subsequents to the sent in fetch.
+//Adds the meshheader and subsequents to be sent to fetch.
 std::vector<std::shared_ptr<MeshData>> FileData::LoadMesh(std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile)
 {
 	std::vector<std::shared_ptr<MeshData>> meshVector;
@@ -114,7 +123,7 @@ std::vector<std::shared_ptr<MeshData>> FileData::LoadMesh(std::shared_ptr<MainHe
 	return meshVector;
 }
 
-//adds the materialheader and subsequents to the sent in fetch
+//Adds the materialheader and subsequents to be sent to fetch.
 std::shared_ptr<MaterialData> BRFImporterLib::FileData::LoadMaterial(std::shared_ptr<MainHeader> tempMain, std::ifstream * inFile)
 {
 	std::shared_ptr<MaterialData> tempMaterialData(new MaterialData);
@@ -170,6 +179,7 @@ std::shared_ptr<MaterialData> BRFImporterLib::FileData::LoadMaterial(std::shared
 	return tempMaterialData;
 }
 
+//Adds the skeletonHeader and subsequents to be sent to fetch.
 std::vector<std::shared_ptr<SkeletonData>> BRFImporterLib::FileData::LoadSkeleton(std::shared_ptr<MainHeader> tempMain, std::ifstream * inFile)
 {
 	std::vector<std::shared_ptr<SkeletonData>> tempSkeletonVector;
@@ -223,6 +233,52 @@ std::vector<std::shared_ptr<SkeletonData>> BRFImporterLib::FileData::LoadSkeleto
 	return tempSkeletonVector;
 }
 
+//Adds the lightHeader and subsequents to be sent to fetch.
+std::shared_ptr<LightData> BRFImporterLib::FileData::LoadLight(std::shared_ptr<MainHeader> tempMain, std::ifstream * inFile)
+{
+	if (tempMain->lights == false)
+	{
+		return nullptr;
+	}
+	else if (tempMain->lights == true)
+	{
+		std::shared_ptr<LightData> SrcLightData;
+
+		std::shared_ptr<LightHeader> tempLightHeader;
+		inFile->read((char*)tempLightHeader.get(), sizeof(LightHeader));
+
+		std::shared_ptr<LightContainer> tempLightContainer(new LightContainer(tempLightHeader->spotCount, tempLightHeader->areaCount, tempLightHeader->pointCount, tempLightHeader->directionalCount));
+		tempLightContainer->lightData = tempLightHeader;
+		tempLightHeader.reset();
+
+		if (tempLightContainer->lightData->spotCount != 0)
+		{
+			inFile->read((char*)tempLightContainer->spotLightData.get(), sizeof(SpotLightHeader) * tempLightContainer->lightData->spotCount);
+		}
+		if (tempLightContainer->lightData->areaCount != 0)
+		{
+			inFile->read((char*)tempLightContainer->areaLightData.get(), sizeof(AreaLightHeader) * tempLightContainer->lightData->areaCount);
+		}
+		if (tempLightContainer->lightData->pointCount != 0)
+		{
+			inFile->read((char*)tempLightContainer->pointLightData.get(), sizeof(PointLightHeader) * tempLightContainer->lightData->pointCount);
+		}
+		if (tempLightContainer->lightData->directionalCount != 0)
+		{
+			inFile->read((char*)tempLightContainer->dirLightData.get(), sizeof(DirLightHeader) * tempLightContainer->lightData->directionalCount);
+		}
+
+		SrcLightData->SetData(tempLightContainer);
+		tempLightContainer.reset();
+		return SrcLightData;
+	}
+	else
+	{
+		return nullptr;
+	}
+}
+
+//Adds the morphdata and subsequents to be sent to fetch.
 std::vector<std::shared_ptr<MorphData>> BRFImporterLib::FileData::LoadMorph(std::shared_ptr<MainHeader> tempMain, std::ifstream * inFile)
 {
 	std::vector<std::shared_ptr<MorphData>> DestMorphData;
@@ -274,6 +330,7 @@ std::vector<std::shared_ptr<GroupData>> BRFImporterLib::FileData::LoadGroups(std
 
 	return tmpGroupVector;
 }
+
 
 //CON DECON
 FileData::FileData()
