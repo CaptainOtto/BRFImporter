@@ -5,7 +5,7 @@ using namespace BRFImporterLib;
 //FUNCTION DEFINITIONS FOR FILEDATA
 
 //oh chucklesticks! this loads a file!
-void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool material, bool light, bool morph,bool groups)
+void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool material,bool light, bool morph,bool groups)
 {
 	std::shared_ptr<MainHeader> tempMain(new MainHeader);
 	std::vector<std::shared_ptr<MeshData>> meshVector;
