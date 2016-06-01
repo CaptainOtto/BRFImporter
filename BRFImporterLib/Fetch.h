@@ -4,6 +4,7 @@
 #include "LightData.h"
 #include "SkeletonData.h"
 #include "MorphData.h"
+#include "GroupData.h"
 
 namespace BRFImporterLib
 {
@@ -16,6 +17,7 @@ namespace BRFImporterLib
 		std::vector<std::shared_ptr<SkeletonData>> skeletons;
 		std::shared_ptr<LightData> lights;
 		std::vector<std::shared_ptr<MorphData>> morphAnimations;
+		std::vector<std::shared_ptr<GroupData>> groups;
 	public:
 		MainHeader* getMain();
 		MeshHeader* GetMeshHeader(unsigned int meshID);
@@ -24,6 +26,7 @@ namespace BRFImporterLib
 		SkeletonData* GetSkeleton(unsigned int skeletonID);
 		LightData* getLight(unsigned int lightType, unsigned int lightID);
 		MorphData* GetMorphAnimation(unsigned int morphAnimationID);
+		GroupData* GetGroup(unsigned int groupID);
 		//CONDECON
 		FetchContainer(
 			std::shared_ptr<MainHeader> mainData,
@@ -31,7 +34,8 @@ namespace BRFImporterLib
 			std::shared_ptr<MaterialData> materialData,
 			std::vector<std::shared_ptr<SkeletonData>> skeletonVector,
 			std::shared_ptr<LightData> lights,
-			std::vector<std::shared_ptr<MorphData>> morphVector
+			std::vector<std::shared_ptr<MorphData>> morphVector,
+			std::vector<std::shared_ptr<GroupData>> groupVector
 			);
 		~FetchContainer();
 	};
@@ -49,6 +53,7 @@ namespace BRFImporterLib
 		AnimationHeader* Animation(unsigned int skeletonID, unsigned int animationID);
 		LightData* Light(unsigned int lightType, unsigned int lightID);
 		MorphData* MorphAnimation(unsigned int morphAnimationID);
+		GroupData* group(unsigned int groups);
 
 		//CON DECON
 		Fetch(std::shared_ptr<FetchContainer> fileFetch);
