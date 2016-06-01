@@ -26,7 +26,7 @@ namespace BRFImporterLib
 		MeshData* GetMesh(unsigned int meshID);
 		MaterialContainer* GetMaterial(unsigned int materialID);
 		SkeletonData* GetSkeleton(unsigned int skeletonID);
-		LightData* GetLight(unsigned int lightType, unsigned int lightID);
+		LightData* GetLight();
 		MorphData* GetMorphAnimation(unsigned int morphAnimationID);
 		GroupData* GetGroup(unsigned int groupID);
 		CameraData* GetCamera(unsigned int cameraID);
@@ -55,7 +55,7 @@ namespace BRFImporterLib
 		MaterialContainer* Material(unsigned int materialID);
 		SkeletonData* Skeleton(unsigned int skeletonID);
 		AnimationHeader* Animation(unsigned int skeletonID, unsigned int animationID);
-		LightData* Light(unsigned int lightType, unsigned int lightID);
+		LightData* Light();
 		MorphData* MorphAnimation(unsigned int morphAnimationID);
 		GroupData* group(unsigned int groups);
 		CameraData* camera(unsigned int groups);

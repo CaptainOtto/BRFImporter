@@ -4,7 +4,7 @@
 
 namespace BRFImporterLib
 {
-	
+
 	class GroupContainer
 	{
 
@@ -16,11 +16,11 @@ namespace BRFImporterLib
 		std::unique_ptr <FloatAttrHeader[]>		 floatAttributes;	//Attribute type
 		std::unique_ptr <BoolAttrHeader[]>		 boolAttributes;	//Attribute type
 		std::unique_ptr <IntAttrHeader[]>		 intAttributes;		//Attribute type
-	
-	
+
+
 		GroupHeader* getGroupData();
 		GroupContainer(unsigned int attributeCount);
-		
+
 		~GroupContainer();
 	};
 
@@ -28,7 +28,7 @@ namespace BRFImporterLib
 	{
 	protected:
 		std::shared_ptr<GroupContainer> groupDataContainer;
-		
+
 	public:
 		GroupContainer* getGroupData();
 
@@ -37,5 +37,3 @@ namespace BRFImporterLib
 		~GroupData();
 	};
 }
-
-
