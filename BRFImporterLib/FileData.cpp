@@ -76,8 +76,6 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 	this->fetch = tempFetch;
 	tempFetch.reset();
 	tempFetchData.reset();
-
-	fetch->Light()->GetLightData()->areaCount;
 }
 
 
@@ -324,8 +322,8 @@ std::vector<std::shared_ptr<GroupData>> BRFImporterLib::FileData::LoadGroups(std
 	for (unsigned int i = 0; i < tempMain->groupAmount; i++) //for every group
 	{
 
-		std::shared_ptr<GroupData> tempGroup;
-		std::shared_ptr<GroupHeader> tempGrpHeader;
+		std::shared_ptr<GroupData> tempGroup(new GroupData);
+		std::shared_ptr<GroupHeader> tempGrpHeader(new GroupHeader);
 
 		inFile->read((char*)tempGrpHeader.get(), sizeof(GroupHeader)); // Read the group header data
 
@@ -336,26 +334,19 @@ std::vector<std::shared_ptr<GroupData>> BRFImporterLib::FileData::LoadGroups(std
 
 		inFile->read((char*)grpContainer->attributeType.get(), sizeof(GroupAttributeHeader) * grpContainer->groupData->attrCount);
 
-		tempGroup->SetData(grpContainer);
-		tmpGroupVector.push_back(tempGroup);
-		tempGroup.reset();
-	}
-
-
-	for (unsigned int i = 0; i < tempMain->groupAmount; i++)
-	{
-
 		unsigned int n_vecAttributes = 0;
 		unsigned int n_stringAttributes = 0;
 		unsigned int n_floatAttributes = 0;
 		unsigned int n_boolAttributes = 0;
 		unsigned int n_intAttributes = 0;
 
-		for (unsigned int attr = 0; attr < tmpGroupVector.at(i)->getGroupData()->groupData->attrCount; attr++) //for every attribute on the group
+		//pasted in
+		
+		for (unsigned int attr = 0; attr < grpContainer->groupData->attrCount; attr++) //for every attribute on the group
 		{
 
 
-			unsigned int attrType = tmpGroupVector.at(i)->getGroupData()->attributeType[attr].attrNr;
+			unsigned int attrType = grpContainer->attributeType[attr].attrNr;
 			switch (attrType)
 			{
 			case 0:			// Bool
@@ -380,36 +371,42 @@ std::vector<std::shared_ptr<GroupData>> BRFImporterLib::FileData::LoadGroups(std
 			}
 			}
 		}
+
+
 		if (n_boolAttributes > 0)		// Read in the Bool attributes
 		{
-			tmpGroupVector.at(i)->getGroupData()->boolAttributes = std::unique_ptr <BoolAttrHeader[]>(new BoolAttrHeader[n_boolAttributes]);
-			inFile->read((char*)tmpGroupVector.at(i)->getGroupData()->boolAttributes.get(), sizeof(BoolAttrHeader)* n_boolAttributes);
+			grpContainer->boolAttributes = std::unique_ptr <BoolAttrHeader[]>(new BoolAttrHeader[n_boolAttributes]);
+			inFile->read((char*)grpContainer->boolAttributes.get(), sizeof(BoolAttrHeader)* n_boolAttributes);
 		}
 		if (n_floatAttributes > 0)		//Read in the Float attributes
 		{
-			tmpGroupVector.at(i)->getGroupData()->floatAttributes = std::unique_ptr <FloatAttrHeader[]>(new FloatAttrHeader[n_floatAttributes]);
-			inFile->read((char*)tmpGroupVector.at(i)->getGroupData()->floatAttributes.get(), sizeof(FloatAttrHeader) * n_floatAttributes);
+			grpContainer->floatAttributes = std::unique_ptr <FloatAttrHeader[]>(new FloatAttrHeader[n_floatAttributes]);
+			inFile->read((char*)grpContainer->floatAttributes.get(), sizeof(FloatAttrHeader) * n_floatAttributes);
 		}
 		if (n_intAttributes > 0)		//Read in the Int attributes
 		{
 
-			tmpGroupVector.at(i)->getGroupData()->intAttributes = std::unique_ptr <IntAttrHeader[]>(new IntAttrHeader[n_intAttributes]);
-			inFile->read((char*)tmpGroupVector.at(i)->getGroupData()->intAttributes.get(), sizeof(IntAttrHeader)* n_intAttributes);
+			grpContainer->intAttributes = std::unique_ptr <IntAttrHeader[]>(new IntAttrHeader[n_intAttributes]);
+			inFile->read((char*)grpContainer->intAttributes.get(), sizeof(IntAttrHeader)* n_intAttributes);
 		}
 		if (n_stringAttributes > 0)		// Read in the String attributes
 		{
 
-			tmpGroupVector.at(i)->getGroupData()->stringAttributes = std::unique_ptr <StringAttrHeader[]>(new StringAttrHeader[n_stringAttributes]);
-			inFile->read((char*)tmpGroupVector.at(i)->getGroupData()->stringAttributes.get(), sizeof(StringAttrHeader)* n_stringAttributes);
+			grpContainer->stringAttributes = std::unique_ptr <StringAttrHeader[]>(new StringAttrHeader[n_stringAttributes]);
+			inFile->read((char*)grpContainer->stringAttributes.get(), sizeof(StringAttrHeader)* n_stringAttributes);
 		}
 		if (n_vecAttributes > 0)	// Read in the vector attributes
 		{
-			tmpGroupVector.at(i)->getGroupData()->vecAttributes = std::unique_ptr <VectorAttrHeader[]>(new VectorAttrHeader[n_vecAttributes]);
-			inFile->read((char*)tmpGroupVector.at(i)->getGroupData()->vecAttributes.get(), sizeof(VectorAttrHeader)* n_vecAttributes);
+			grpContainer->vecAttributes = std::unique_ptr <VectorAttrHeader[]>(new VectorAttrHeader[n_vecAttributes]);
+			inFile->read((char*)grpContainer->vecAttributes.get(), sizeof(VectorAttrHeader)* n_vecAttributes);
 		}
 
-	}
+		//end of pasted in
 
+		tempGroup->SetData(grpContainer);
+		tmpGroupVector.push_back(tempGroup);
+		tempGroup.reset();
+	}
 
 	return tmpGroupVector;
 }

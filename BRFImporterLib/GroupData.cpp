@@ -34,8 +34,7 @@ GroupData::~GroupData()
 
 GroupContainer::GroupContainer(unsigned int attributeCount)
 {
-	attributeType = std::unique_ptr<GroupAttributeHeader[]>(new GroupAttributeHeader[attributeCount]);
-
+	this->attributeType = std::unique_ptr<GroupAttributeHeader[]>(new GroupAttributeHeader[attributeCount]);
 }
 
 GroupContainer::~GroupContainer()

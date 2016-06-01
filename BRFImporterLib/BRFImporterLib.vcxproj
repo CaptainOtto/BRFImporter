@@ -105,6 +105,7 @@ copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\Mater
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\SkeletonData.obj"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\MorphData.obj"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\GroupData.obj"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
+copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\CameraData.obj"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\Fetch.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\BRFImporterStructs.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\FileData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
@@ -113,7 +114,8 @@ copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\MeshData.h"  "C
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\MaterialData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\SkeletonData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\MorphData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
-copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\GroupData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"</Command>
+copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\GroupData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
+copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\CameraData.h"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
