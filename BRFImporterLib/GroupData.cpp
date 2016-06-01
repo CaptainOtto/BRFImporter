@@ -6,9 +6,9 @@ using namespace BRFImporterLib;
 
 
 
-GroupContainer * GroupData::getGroupData()
+GroupHeader * GroupData::getGroupData()
 {
-	return this->groupDataContainer.get();
+	return this->groupDataContainer->getGroupData();
 }
 
 void BRFImporterLib::GroupData::SetData(std::shared_ptr<GroupContainer> source)
@@ -21,20 +21,17 @@ void BRFImporterLib::GroupData::SetData(std::shared_ptr<GroupContainer> source)
 //CON DECON
 GroupData::GroupData()
 {
-}
 
+}
 
 GroupData::~GroupData()
 {
+
 }
 
-
-
 //GroupContainer CLASS
-
-GroupContainer::GroupContainer(unsigned int attributeCount)
+GroupContainer::GroupContainer()
 {
-	attributeType = std::unique_ptr<GroupAttributeHeader[]>(new GroupAttributeHeader[attributeCount]);
 
 }
 

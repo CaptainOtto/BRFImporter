@@ -5,7 +5,7 @@ using namespace BRFImporterLib;
 //FUNCTION DEFINITIONS FOR FILEDATA
 
 //oh chucklesticks! this loads a file!
-void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool material,bool light, bool morph,bool groups)
+void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool material,bool light, bool morph,bool groups, bool cameras)
 {
 	std::shared_ptr<MainHeader> tempMain(new MainHeader);
 	std::vector<std::shared_ptr<MeshData>> meshVector;
@@ -14,6 +14,7 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 	std::shared_ptr<LightData> tempLightData(new LightData);
 	std::vector<std::shared_ptr<MorphData>> morphVector;
 	std::vector<std::shared_ptr<GroupData>> groupVector;
+	std::vector<std::shared_ptr<CameraData>> cameraVector;
 
 	std::ifstream inFile(fileName, std::ifstream::binary);
 	if (!inFile.is_open())
@@ -60,18 +61,24 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 			{
 				groupVector = LoadGroups(tempMain, &inFile);
 			}
+			if (cameras == true)
+			{
+				cameraVector = LoadCameras(tempMain, &inFile);
+			}
 		}
 	}
 
 	inFile.close();
 	
 	
-	std::shared_ptr<FetchContainer> tempFetchData(new FetchContainer(tempMain, meshVector, tempMaterialData, skeletonVector,tempLightData,  morphVector,groupVector));
+	std::shared_ptr<FetchContainer> tempFetchData(new FetchContainer(tempMain, meshVector, tempMaterialData, skeletonVector,tempLightData,  morphVector,groupVector, cameraVector));
 	std::shared_ptr<Fetch> tempFetch(new Fetch(tempFetchData));
 	tempFetchData.reset();
 	this->fetch = tempFetch;
 	tempFetch.reset();
 	tempFetchData.reset();
+	
+
 }
 
 
@@ -290,11 +297,13 @@ std::vector<std::shared_ptr<MorphData>> BRFImporterLib::FileData::LoadMorph(std:
 
 		for (size_t i = 0; i < SrcMorphData->morphData->numberOfKeyFrames; i++)
 		{
-
-
 			inFile->read((char*)&SrcMorphData->morphKeyFrameData[i], sizeof(MorphAnimKeyFrameHeader));
-			inFile->read((char*)SrcMorphData->morphVertexData[i].data(), sizeof(MorphVertexHeader) * SrcMorphData->morphData->vertsPerShape);
-		
+			for (size_t j = 0; j < SrcMorphData->morphData->vertsPerShape; j++)
+			{
+				MorphVertexHeader temp;
+				inFile->read((char*)&temp, sizeof(MorphVertexHeader));
+				SrcMorphData->morphVertexData[i].push_back(temp);
+			}
 		}
 		tempMorphData->setData(SrcMorphData);
 		DestMorphData.push_back(tempMorphData);
@@ -308,101 +317,36 @@ std::vector<std::shared_ptr<GroupData>> BRFImporterLib::FileData::LoadGroups(std
 {
 
 	std::vector<std::shared_ptr<GroupData>> tmpGroupVector;
-	tmpGroupVector.reserve(tempMain->groupAmount);
 
-	for (unsigned int i = 0; i < tempMain->groupAmount; i++) //for every group
+	for (int i = 0; i < tempMain->groupAmount; i++)
 	{
+		std::shared_ptr<GroupData> tempGroup;
 
-		std::shared_ptr<GroupData> tempGroup;	 
-		std::shared_ptr<GroupHeader> tempGrpHeader;
+		inFile->read((char*)tempGroup.get(), sizeof(GroupData));
 
-		inFile->read((char*)tempGrpHeader.get(), sizeof(GroupHeader)); // Read the group header data
-
-		std::shared_ptr<GroupContainer> grpContainer(new GroupContainer(tempGrpHeader->attrCount));
-
-		grpContainer->groupData = tempGrpHeader;
-		tempGrpHeader.reset();
-
-		inFile->read((char*)grpContainer->attributeType.get(), sizeof(GroupAttributeHeader) * grpContainer->groupData->attrCount);
-
-		tempGroup->SetData(grpContainer);
 		tmpGroupVector.push_back(tempGroup);
 		tempGroup.reset();
-	}
-
-
-	for (unsigned int i = 0; i < tempMain->groupAmount; i++)
-	{																										    
-																											    
-		unsigned int n_vecAttributes	= 0;																    
-		unsigned int n_stringAttributes = 0;																    
-		unsigned int n_floatAttributes  = 0;																    
-		unsigned int n_boolAttributes   = 0;																    
-		unsigned int n_intAttributes    = 0;																    
-
-		for (unsigned int attr = 0; attr < tmpGroupVector.at(i)->getGroupData()->groupData->attrCount; attr++) //for every attribute on the group
-		{
-			
-			
-			unsigned int attrType = tmpGroupVector.at(i)->getGroupData()->attributeType[attr].attrNr;
-			switch (attrType)
-			{
-				case 0:			// Bool
-				{n_boolAttributes += 1;													  
-					break;																  
-				}																//This loop is because we don't know how much we have of everything. (a miss in the exporter)		  
-				case 1:			// float										//This loop is because we don't know how much we have of everything. (a miss in the exporter)
-				{n_floatAttributes += 1;										//This loop is because we don't know how much we have of everything. (a miss in the exporter)
-					break;														//This loop is because we don't know how much we have of everything. (a miss in the exporter)		  
-				}																//This loop is because we don't know how much we have of everything. (a miss in the exporter)
-				case 2:			// int											//This loop is because we don't know how much we have of everything. (a miss in the exporter)
-				{n_intAttributes += 1;											//This loop is because we don't know how much we have of everything. (a miss in the exporter)
-					break;																  
-				}
-				case 3:			// String
-				{n_stringAttributes += 1;
-					break;
-				}
-				case 4:			// vector
-				{n_vecAttributes +=1 ;
-					break;		
-				}
-			}
-		}
-		if (n_boolAttributes > 0)		// Read in the Bool attributes
-		{
-			tmpGroupVector.at(i)->getGroupData()->boolAttributes = std::unique_ptr <BoolAttrHeader[]>(new BoolAttrHeader[n_boolAttributes]);
-			inFile->read((char*)tmpGroupVector.at(i)->getGroupData()->boolAttributes.get(), sizeof(BoolAttrHeader)* n_boolAttributes);
-		}
-		if( n_floatAttributes > 0)		//Read in the Float attributes
-		{
-			tmpGroupVector.at(i)->getGroupData()->floatAttributes = std::unique_ptr <FloatAttrHeader[]>(new FloatAttrHeader[n_floatAttributes]);
-			inFile->read((char*)tmpGroupVector.at(i)->getGroupData()->floatAttributes.get(), sizeof(FloatAttrHeader) * n_floatAttributes);
-		}
-		if (n_intAttributes > 0)		//Read in the Int attributes
-		{
-
-			tmpGroupVector.at(i)->getGroupData()->intAttributes = std::unique_ptr <IntAttrHeader[]>(new IntAttrHeader[n_intAttributes]);
-			inFile->read((char*)tmpGroupVector.at(i)->getGroupData()->intAttributes.get(), sizeof(IntAttrHeader)* n_intAttributes);
-		}
-		if (n_stringAttributes > 0)		// Read in the String attributes
-		{
-
-			tmpGroupVector.at(i)->getGroupData()->stringAttributes = std::unique_ptr <StringAttrHeader[]>(new StringAttrHeader[n_stringAttributes]);
-			inFile->read((char*)tmpGroupVector.at(i)->getGroupData()->stringAttributes.get(), sizeof(StringAttrHeader)* n_stringAttributes);
-		}
-		if (n_vecAttributes > 0)	// Read in the vector attributes
-		{
-			tmpGroupVector.at(i)->getGroupData()->vecAttributes = std::unique_ptr <VectorAttrHeader[]>(new VectorAttrHeader[n_vecAttributes]);
-			inFile->read((char*)tmpGroupVector.at(i)->getGroupData()->vecAttributes.get(), sizeof(VectorAttrHeader)* n_vecAttributes);
-		}
-
 	}
 
 
 	return tmpGroupVector;
 }
 
+std::vector<std::shared_ptr<CameraData>> BRFImporterLib::FileData::LoadCameras(std::shared_ptr<MainHeader> tempMain, std::ifstream * infile)
+{
+	std::vector<std::shared_ptr<CameraData>> tmpCameraVector;
+
+	for (int i = 0; i < tempMain->cameraAmount; i++)
+	{
+		std::shared_ptr<CameraData> tempCamera;
+
+		infile->read((char*)tempCamera.get(), sizeof(CameraData));
+
+		tmpCameraVector.push_back(tempCamera);
+		tempCamera.reset();
+	}
+	return tmpCameraVector;
+}
 
 //CON DECON
 FileData::FileData()
