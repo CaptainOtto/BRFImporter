@@ -278,7 +278,7 @@ std::shared_ptr<LightData> BRFImporterLib::FileData::LoadLight(std::shared_ptr<M
 	}
 }
 
-//Adds the morphdata and subsequents to be sent to fetch.
+//Adds the morphHeader and subsequents to be sent to fetch.
 std::vector<std::shared_ptr<MorphData>> BRFImporterLib::FileData::LoadMorph(std::shared_ptr<MainHeader> tempMain, std::ifstream * inFile)
 {
 	std::vector<std::shared_ptr<MorphData>> DestMorphData;
@@ -316,6 +316,7 @@ std::vector<std::shared_ptr<MorphData>> BRFImporterLib::FileData::LoadMorph(std:
 	return DestMorphData;
 }
 
+//Adds the groupHeader and subsequents to be sent to fetch, including attributes.
 std::vector<std::shared_ptr<GroupData>> BRFImporterLib::FileData::LoadGroups(std::shared_ptr<MainHeader> tempMain, std::ifstream * inFile)
 {
 
@@ -335,7 +336,8 @@ std::vector<std::shared_ptr<GroupData>> BRFImporterLib::FileData::LoadGroups(std
 	return tmpGroupVector;
 }
 
-std::vector<std::shared_ptr<CameraData>> BRFImporterLib::FileData::LoadCameras(std::shared_ptr<MainHeader> tempMain, std::ifstream * infile)
+//Adds the cameraHeader and subsequents to be sent to fetch.
+std::vector<std::shared_ptr<CameraData>> BRFImporterLib::FileData::LoadCameras(std::shared_ptr<MainHeader> tempMain, std::ifstream * inFile)
 {
 	std::vector<std::shared_ptr<CameraData>> tmpCameraVector;
 
@@ -343,7 +345,7 @@ std::vector<std::shared_ptr<CameraData>> BRFImporterLib::FileData::LoadCameras(s
 	{
 		std::shared_ptr<CameraData> tempCamera;
 
-		infile->read((char*)tempCamera.get(), sizeof(CameraData));
+		inFile->read((char*)tempCamera.get(), sizeof(CameraData));
 
 		tmpCameraVector.push_back(tempCamera);
 		tempCamera.reset();
