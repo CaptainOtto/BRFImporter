@@ -91,28 +91,9 @@ AnimationHeader* Fetch::Animation(unsigned int skeletonID, unsigned int animatio
 	}
 }
 
-LightData * BRFImporterLib::Fetch::Light(unsigned int lightType, unsigned int lightID)
+LightData * BRFImporterLib::Fetch::Light()
 {
-	if (lightType == 0)
-	{
-		return this->FetchDataContainer->getLight(lightType, lightID);
-	}
-	else if (lightType == 1)
-	{
-		return this->FetchDataContainer->getLight(lightType, lightID);
-	}
-	else if (lightType == 2)
-	{
-		return this->FetchDataContainer->getLight(lightType, lightID);
-	}
-	else if (lightType == 3)
-	{
-		return this->FetchDataContainer->getLight(lightType, lightID);
-	}
-	else
-	{
-		return nullptr;
-	}
+	return this->FetchDataContainer->getLight();
 }
 
 MorphData * BRFImporterLib::Fetch::MorphAnimation(unsigned int morphAnimationID)
@@ -174,40 +155,9 @@ SkeletonData* FetchContainer::GetSkeleton(unsigned int skeletonID)
 {
 	return this->skeletons[skeletonID].get();
 }
-LightData * BRFImporterLib::FetchContainer::getLight(unsigned int lightType, unsigned int lightID)
+LightData * BRFImporterLib::FetchContainer::getLight()
 {
-	if (lightType == 0)
-	{
-		if (lightID > this->lights->GetLightData()->spotCount)
-		{
-			return this->lights->GetSpotLightData[lightID].get();
-		}
-	}
-	else if (lightType == 1)
-	{
-		if (lightID > this->lights->GetLightData()->areaCount)
-		{
-			return this->lights->GetAreaLightData[lightID].get();
-		}
-	}
-	else if (lightType == 2)
-	{
-		if (lightID > this->lights->GetLightData()->pointCount)
-		{
-			return this->lights->GetPointLightData[lightID].get();
-		}
-	}
-	else if (lightType == 3)
-	{
-		if (lightID > this->lights->GetLightData()->directionalCount)
-		{
-			return this->lights->GetDirLightData[lightID].get();
-		}
-	}
-	else
-	{
-		return nullptr;
-	}
+	return this->lights.get();
 }
 MorphData * BRFImporterLib::FetchContainer::GetMorphAnimation(unsigned int morphAnimationID)
 {

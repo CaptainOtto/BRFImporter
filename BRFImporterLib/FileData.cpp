@@ -72,9 +72,6 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 	this->fetch = tempFetch;
 	tempFetch.reset();
 	tempFetchData.reset();
-
-	
-
 }
 
 
