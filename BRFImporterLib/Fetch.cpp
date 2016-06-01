@@ -91,6 +91,30 @@ AnimationHeader* Fetch::Animation(unsigned int skeletonID, unsigned int animatio
 	}
 }
 
+LightData * BRFImporterLib::Fetch::Light(unsigned int lightType, unsigned int lightID)
+{
+	if (lightType == 0)
+	{
+		return this->FetchDataContainer->getLight(lightType, lightID);
+	}
+	else if (lightType == 1)
+	{
+		return this->FetchDataContainer->getLight(lightType, lightID);
+	}
+	else if (lightType == 2)
+	{
+		return this->FetchDataContainer->getLight(lightType, lightID);
+	}
+	else if (lightType == 3)
+	{
+		return this->FetchDataContainer->getLight(lightType, lightID);
+	}
+	else
+	{
+		return nullptr;
+	}
+}
+
 MorphData * BRFImporterLib::Fetch::MorphAnimation(unsigned int morphAnimationID)
 {
 	if (morphAnimationID > this->FetchDataContainer->getMain()->morphAnimAmount)
@@ -102,47 +126,6 @@ MorphData * BRFImporterLib::Fetch::MorphAnimation(unsigned int morphAnimationID)
 			return this->FetchDataContainer->GetMorphAnimation(morphAnimationID);
 	}
 }
-
-//light
-
-//returns a light from an array using its ID
-//LightData* Fetch::Light(unsigned int lightID)
-//{
-//
-//	unsigned int lightAmt = 0;
-//	lightAmt += lights->GetLightData().areaCount;
-//	lightAmt += lights->GetLightData().directionalCount;
-//	lightAmt += lights->GetLightData().pointCount;
-//	lightAmt += lights->GetLightData().spotCount;
-//
-//	if (lightID > lightAmt)
-//	{
-//		return nullptr;
-//	}
-//	else
-//	{
-//		for (unsigned int i = 0; i <= lightAmt; i++)
-//		{
-//			if (lightID == lights->GetAreaLightData()->objectID)
-//			{
-//				return &lights[i];
-//			}
-//			if (lightID == lights->GetDirLightData()->objectID)
-//			{
-//				return &lights[i];
-//			}
-//			if (lightID == lights->GetPointLightData()->objectID)
-//			{
-//				return &lights[i];
-//			}
-//			if (lightID == lights->GetSpotLightData()->objectID)
-//			{
-//				return &lights[i];
-//			}
-//		}
-//		return nullptr;
-//	}
-//}
 
 //CON DECON
 Fetch::Fetch(std::shared_ptr<FetchContainer> SrcFetchData)
@@ -179,16 +162,52 @@ SkeletonData* FetchContainer::GetSkeleton(unsigned int skeletonID)
 {
 	return this->skeletons[skeletonID].get();
 }
+LightData * BRFImporterLib::FetchContainer::getLight(unsigned int lightType, unsigned int lightID)
+{
+	if (lightType == 0)
+	{
+		if (lightID > this->lights->GetLightData()->spotCount)
+		{
+			return this->lights->GetSpotLightData[lightID].get();
+		}
+	}
+	else if (lightType == 1)
+	{
+		if (lightID > this->lights->GetLightData()->areaCount)
+		{
+			return this->lights->GetAreaLightData[lightID].get();
+		}
+	}
+	else if (lightType == 2)
+	{
+		if (lightID > this->lights->GetLightData()->pointCount)
+		{
+			return this->lights->GetPointLightData[lightID].get();
+		}
+	}
+	else if (lightType == 3)
+	{
+		if (lightID > this->lights->GetLightData()->directionalCount)
+		{
+			return this->lights->GetDirLightData[lightID].get();
+		}
+	}
+	else
+	{
+		return nullptr;
+	}
+}
 MorphData * BRFImporterLib::FetchContainer::GetMorphAnimation(unsigned int morphAnimationID)
 {
 	return this->morphAnimations[morphAnimationID].get();
 }
-FetchContainer::FetchContainer(std::shared_ptr<MainHeader> tempMain, std::vector<std::shared_ptr<MeshData>> meshVector, std::shared_ptr<MaterialData> materialData, std::vector<std::shared_ptr<SkeletonData>> skeletonVector, std::vector<std::shared_ptr<MorphData>> morphVector)
+FetchContainer::FetchContainer(std::shared_ptr<MainHeader> tempMain, std::vector<std::shared_ptr<MeshData>> meshVector, std::shared_ptr<MaterialData> materialData, std::vector<std::shared_ptr<SkeletonData>> skeletonVector,std::shared_ptr<LightData> tempLightData, std::vector<std::shared_ptr<MorphData>> morphVector)
 {
 	this->mainData = tempMain;
 	this->meshes = meshVector;
 	this->materialData = materialData;
 	this->skeletons = skeletonVector;
+	this->lights = tempLightData;
 	this->morphAnimations = morphVector;
 }
 FetchContainer::~FetchContainer()
