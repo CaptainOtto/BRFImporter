@@ -24,7 +24,7 @@ namespace BRFImporterLib
 		MeshData* GetMesh(unsigned int meshID);
 		MaterialContainer* GetMaterial(unsigned int materialID);
 		SkeletonData* GetSkeleton(unsigned int skeletonID);
-		LightData* getLight(unsigned int lightType, unsigned int lightID);
+		LightData* getLight();
 		MorphData* GetMorphAnimation(unsigned int morphAnimationID);
 		GroupData* GetGroup(unsigned int groupID);
 		//CONDECON
@@ -51,7 +51,7 @@ namespace BRFImporterLib
 		MaterialContainer* Material(unsigned int materialID);
 		SkeletonData* Skeleton(unsigned int skeletonID);
 		AnimationHeader* Animation(unsigned int skeletonID, unsigned int animationID);
-		LightData* Light(unsigned int lightType, unsigned int lightID);
+		LightData* Light();
 		MorphData* MorphAnimation(unsigned int morphAnimationID);
 		GroupData* group(unsigned int groups);
 
