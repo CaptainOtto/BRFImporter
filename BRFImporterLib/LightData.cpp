@@ -52,7 +52,7 @@ LightContainer::LightContainer(
 	unsigned int dirCount
 )
 {
-	this->lightData = std::shared_ptr<LightData>(new LightData);
+	this->lightData = std::shared_ptr<LightHeader>(new LightHeader);
 
 	this->spotLightData = std::unique_ptr<SpotLightHeader[]>(new SpotLightHeader[spotCount]);
 	this->areaLightData = std::unique_ptr<AreaLightHeader[]>(new AreaLightHeader[areaCount]);
