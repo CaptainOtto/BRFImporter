@@ -418,10 +418,12 @@ std::vector<std::shared_ptr<CameraData>> BRFImporterLib::FileData::LoadCameras(s
 
 	for (unsigned int i = 0; i < tempMain->cameraAmount; i++)
 	{
-		std::shared_ptr<CameraData> tempCamera;
-
-		inFile->read((char*)tempCamera.get(), sizeof(CameraData));
-
+		std::shared_ptr<CameraData> tempCamera(new CameraData);
+		std::shared_ptr<CameraHeader> tempHeader(new CameraHeader);
+		inFile->read((char*)tempHeader.get(), sizeof(CameraHeader));
+		std::shared_ptr<CameraContainer> tmpCameraContainer(new CameraContainer);
+		tmpCameraContainer->cameraData = tempHeader;
+		tempCamera->SetData(tmpCameraContainer);
 		tmpCameraVector.push_back(tempCamera);
 		tempCamera.reset();
 	}

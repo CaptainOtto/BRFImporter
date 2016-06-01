@@ -7,9 +7,8 @@ namespace BRFImporterLib
 	
 	class CameraContainer
 	{
-	private:
-		std::shared_ptr <CameraHeader> cameraData;		    //Group information
 	public:
+		std::shared_ptr <CameraHeader> cameraData;		    //Group information
 		CameraHeader * getCameraData();
 		CameraContainer();
 		~CameraContainer();
