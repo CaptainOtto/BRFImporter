@@ -16,5 +16,7 @@ void BRFImporterLib::MorphData::setData(std::shared_ptr<MorphDataContainer> srcM
 BRFImporterLib::MorphDataContainer::MorphDataContainer(unsigned int numberOfKeyFrames, unsigned int vertPerShape)
 {
 	this->morphKeyFrameData = std::unique_ptr<MorphAnimKeyFrameHeader[]>(new MorphAnimKeyFrameHeader[numberOfKeyFrames]);
-	this->morphVertexData = std::unique_ptr<std::vector<MorphVertexHeader>[]>(new std::vector<MorphVertexHeader>[numberOfKeyFrames]);
+	this->morphVertexData   = std::unique_ptr<std::vector<MorphVertexHeader>[]>(new std::vector<MorphVertexHeader>[numberOfKeyFrames]);
+
+
 }

@@ -5,7 +5,7 @@ using namespace BRFImporterLib;
 //FUNCTION DEFINITIONS FOR FILEDATA
 
 //oh chucklesticks! this loads a file!
-void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool material,bool light, bool morph,bool groups)
+void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool material, bool light, bool morph,bool groups)
 {
 	std::shared_ptr<MainHeader> tempMain(new MainHeader);
 	std::vector<std::shared_ptr<MeshData>> meshVector;
@@ -72,6 +72,11 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 	this->fetch = tempFetch;
 	tempFetch.reset();
 	tempFetchData.reset();
+
+
+	
+	
+
 }
 
 
@@ -277,6 +282,7 @@ std::vector<std::shared_ptr<MorphData>> BRFImporterLib::FileData::LoadMorph(std:
 {
 	std::vector<std::shared_ptr<MorphData>> DestMorphData;
 
+	DestMorphData.reserve(tempMain->morphAnimAmount);
 	for (size_t i = 0; i < tempMain->morphAnimAmount; i++)
 	{
 		std::shared_ptr<MorphData> tempMorphData(new MorphData);
@@ -290,11 +296,14 @@ std::vector<std::shared_ptr<MorphData>> BRFImporterLib::FileData::LoadMorph(std:
 
 		for (size_t i = 0; i < SrcMorphData->morphData->numberOfKeyFrames; i++)
 		{
-
-
 			inFile->read((char*)&SrcMorphData->morphKeyFrameData[i], sizeof(MorphAnimKeyFrameHeader));
-			inFile->read((char*)SrcMorphData->morphVertexData[i].data(), sizeof(MorphVertexHeader) * SrcMorphData->morphData->vertsPerShape);
-		
+			SrcMorphData->morphVertexData[i].reserve(SrcMorphData->morphData->vertsPerShape);
+			for (size_t j = 0; j < SrcMorphData->morphData->vertsPerShape; j++)
+			{
+				MorphVertexHeader temp;
+				inFile->read((char*)&temp, sizeof(MorphVertexHeader));
+				SrcMorphData->morphVertexData[i].push_back(temp);
+			}
 		}
 		tempMorphData->setData(SrcMorphData);
 		DestMorphData.push_back(tempMorphData);
