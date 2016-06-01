@@ -94,19 +94,19 @@ LightData * Fetch::Light(unsigned int lightType, unsigned int lightID)
 {
 	if (lightType == 0)
 	{
-		return this->FetchDataContainer->getLight(lightType, lightID);
+		return this->FetchDataContainer->GetLight(lightType, lightID);
 	}
 	else if (lightType == 1)
 	{
-		return this->FetchDataContainer->getLight(lightType, lightID);
+		return this->FetchDataContainer->GetLight(lightType, lightID);
 	}
 	else if (lightType == 2)
 	{
-		return this->FetchDataContainer->getLight(lightType, lightID);
+		return this->FetchDataContainer->GetLight(lightType, lightID);
 	}
 	else if (lightType == 3)
 	{
-		return this->FetchDataContainer->getLight(lightType, lightID);
+		return this->FetchDataContainer->GetLight(lightType, lightID);
 	}
 	else
 	{
