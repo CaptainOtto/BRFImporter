@@ -15,11 +15,12 @@ namespace BRFImporterLib
 		std::shared_ptr<LightData> LoadLight(std::shared_ptr<MainHeader> tempMain, std::ifstream *inFile);
 		std::vector<std::shared_ptr<MorphData>> LoadMorph(std::shared_ptr<MainHeader> tempMain, std::ifstream * inFile);
 		std::vector<std::shared_ptr<GroupData>> LoadGroups(std::shared_ptr<MainHeader>tempMain, std::ifstream*inFile);
+		std::vector<std::shared_ptr<CameraData>> LoadCameras(std::shared_ptr<MainHeader>tempMain, std::ifstream*inFile);
 	public:
 		std::shared_ptr<Fetch> fetch;
 
 		//takes a string filename and what specific parts of the file to read.
-		void LoadFile(std::string fileName, bool mesh, bool skeleton, bool material,bool light, bool morph,bool groups);
+		void LoadFile(std::string fileName, bool mesh, bool skeleton, bool material,bool light, bool morph,bool groups, bool cameras);
 
 		//CON DECON
 		FileData();
