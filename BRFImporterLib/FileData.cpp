@@ -54,7 +54,6 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 			}
 			if (morph == true)
 			{
-				//ta emot morphDatan!!!!
 				morphVector = LoadMorph(tempMain, &inFile);
 			}
 			if (groups == true)
