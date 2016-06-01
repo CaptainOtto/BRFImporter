@@ -6,9 +6,16 @@ using namespace BRFImporterLib;
 
 
 
-GroupHeader * BRFImporterLib::GroupData::getGroupData()
+GroupHeader * GroupData::getGroupData()
 {
-	return this->groupData.get();
+	return this->groupDataContainer->getGroupData();
+}
+
+void BRFImporterLib::GroupData::SetData(std::shared_ptr<GroupContainer> source)
+{
+
+	this->groupDataContainer = source;
+
 }
 
 //CON DECON
@@ -21,3 +28,21 @@ GroupData::~GroupData()
 {
 }
 
+
+
+//GroupContainer CLASS
+
+GroupContainer::GroupContainer()
+{
+
+}
+
+GroupContainer::~GroupContainer()
+{
+
+
+}
+GroupHeader* GroupContainer::getGroupData()
+{
+	return this->groupData.get();
+}

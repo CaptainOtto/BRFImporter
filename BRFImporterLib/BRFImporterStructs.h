@@ -240,17 +240,17 @@ namespace BRFImporterLib
 		unsigned int vertIndex;*/
 	};
 #pragma endregion
-#pragma region AttributeHeader
-	struct AttributesHeader
-	{
-
-		unsigned int floatAmount;
-		unsigned int intAmount;
-		unsigned int boolAmount;
-		unsigned int stringAmount;
-		unsigned int vectorAmount;
-	};
-#pragma endregion
+//#pragma region AttributeHeader
+//	struct AttributesHeader
+//	{									 Never used
+//										 Never used
+//		unsigned int floatAmount;		 Never used
+//		unsigned int intAmount;			 Never used
+//		unsigned int boolAmount;		 Never used
+//		unsigned int stringAmount;		 Never used
+//		unsigned int vectorAmount;		 Never used
+//	};									 Never used
+//#pragma endregion
 #pragma region AttributeHeader Dynamics
 	struct VectorAttrHeader
 	{

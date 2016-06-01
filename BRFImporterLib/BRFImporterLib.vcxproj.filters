@@ -73,7 +73,7 @@
       <Filter>Resource Files\BRFImporterLib\MorphData</Filter>
     </ClInclude>
     <ClInclude Include="GroupData.h">
-      <Filter>Header Files</Filter>
+      <Filter>Resource Files\BRFImporterLib\GroupData</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -99,7 +99,7 @@
       <Filter>Resource Files\BRFImporterLib\MorphData</Filter>
     </ClCompile>
     <ClCompile Include="GroupData.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files\BRFImporterLib\GroupData</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
