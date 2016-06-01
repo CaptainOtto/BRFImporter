@@ -293,13 +293,11 @@ std::vector<std::shared_ptr<MorphData>> BRFImporterLib::FileData::LoadMorph(std:
 
 		for (size_t i = 0; i < SrcMorphData->morphData->numberOfKeyFrames; i++)
 		{
+
+
 			inFile->read((char*)&SrcMorphData->morphKeyFrameData[i], sizeof(MorphAnimKeyFrameHeader));
-			for (size_t j = 0; j < SrcMorphData->morphData->vertsPerShape; j++)
-			{
-				MorphVertexHeader temp;
-				inFile->read((char*)&temp, sizeof(MorphVertexHeader));
-				SrcMorphData->morphVertexData[i].push_back(temp);
-			}
+			inFile->read((char*)SrcMorphData->morphVertexData[i].data(), sizeof(MorphVertexHeader) * SrcMorphData->morphData->vertsPerShape);
+		
 		}
 		tempMorphData->setData(SrcMorphData);
 		DestMorphData.push_back(tempMorphData);
