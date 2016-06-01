@@ -96,7 +96,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\BRFImporterLib.lib"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
+      <Command>copy "$(SolutionDir)x64\Debug\BRFImporterLib.lib"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\Fetch.obj"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\FileData.obj"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
 copy "C:\Users\Johan\Documents\GitHub\BRFImporter\BRFImporterLib\x64\Debug\LightData.obj"  "C:\Users\Johan\Documents\GitHub\TestapplicationImporter\ImportertestApplication\BRFImporterLibrary"
