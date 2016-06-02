@@ -38,7 +38,7 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 			//dynamic loads here, expand bools as neccesary
 			if (mesh == true)
 			{
-				meshVector = LoadMesh(tempMain, &inFile);
+				meshVector		= LoadMesh(tempMain, &inFile);
 			}
 			if (material == true)
 			{
@@ -46,27 +46,26 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 			}
 			if (skeleton == true)
 			{
-				skeletonVector = LoadSkeleton(tempMain, &inFile);
+				skeletonVector   = LoadSkeleton(tempMain, &inFile);
 			}
 			if (light == true)
 			{
-				tempLightData = LoadLight(tempMain, &inFile);
+				tempLightData    = LoadLight(tempMain, &inFile);
 			}
 			if (morph == true)
 			{
-				morphVector = LoadMorph(tempMain, &inFile);
+				morphVector	     = LoadMorph(tempMain, &inFile);
 			}
 			if (groups == true)
 			{
-				groupVector = LoadGroups(tempMain, &inFile);
+				groupVector		 = LoadGroups(tempMain, &inFile);
 			}
 			if (cameras == true)
 			{
-				cameraVector = LoadCameras(tempMain, &inFile);
+				cameraVector	 = LoadCameras(tempMain, &inFile);
 			}
 		}
 	}
-
 	inFile.close();
 	
 	
@@ -76,6 +75,7 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 	this->fetch = tempFetch;
 	tempFetch.reset();
 	tempFetchData.reset();
+
 }
 
 
