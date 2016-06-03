@@ -30,10 +30,7 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 		if (goldenNumber[0] == 7 && goldenNumber[1] == 6)
 		{
 			//adds the mainheader info to the sent in fetch.
-			std::shared_ptr<MainHeader> temp(new MainHeader);
-			inFile.read((char*)temp.get(), sizeof(MainHeader));
-			tempMain = temp;
-			temp.reset();
+			inFile.read((char*)tempMain.get(), sizeof(MainHeader));
 
 			//dynamic loads here, expand bools as neccesary
 			if (mesh == true)
@@ -75,7 +72,6 @@ void FileData::LoadFile(std::string fileName, bool mesh, bool skeleton, bool mat
 	tempFetchData.reset();
 	this->fetch = tempFetch;
 	tempFetch.reset();
-	tempFetchData.reset();
 }
 
 
@@ -203,8 +199,10 @@ std::vector<std::shared_ptr<SkeletonData>> BRFImporterLib::FileData::LoadSkeleto
 		//animationData
 		inFile->read((char*)tempSkeletonContainer->animationData.get(), sizeof(AnimationHeader) * tempSkeletonContainer->skeletonData->animationCount);
 
-		SkeletonContainer* doubleSkeletonContainer = tempSkeletonContainer->GetSkeletonContainer();
-		doubleSkeletonContainer->SetFrameDataContainer(tempSkeletonContainer->animationData.get()->jointCount);
+
+		tempSkeletonContainer->SetFrameDataContainer(tempSkeletonContainer->animationData.get()->jointCount);
+		//SkeletonContainer* doubleSkeletonContainer = tempSkeletonContainer->GetSkeletonContainer();
+		//doubleSkeletonContainer->SetFrameDataContainer(tempSkeletonContainer->animationData.get()->jointCount);
 
 		for (unsigned int j = 0; j < tempSkeletonContainer->skeletonData->animationCount; j++)
 		{
@@ -240,9 +238,9 @@ std::shared_ptr<LightData> BRFImporterLib::FileData::LoadLight(std::shared_ptr<M
 	}
 	else if (tempMain->lights == true)
 	{
-		std::shared_ptr<LightData> SrcLightData;
+		std::shared_ptr<LightData> SrcLightData(new LightData);
 
-		std::shared_ptr<LightHeader> tempLightHeader;
+		std::shared_ptr<LightHeader> tempLightHeader(new LightHeader);
 		inFile->read((char*)tempLightHeader.get(), sizeof(LightHeader));
 
 		std::shared_ptr<LightContainer> tempLightContainer(new LightContainer(tempLightHeader->spotCount, tempLightHeader->areaCount, tempLightHeader->pointCount, tempLightHeader->directionalCount));
@@ -298,12 +296,7 @@ std::vector<std::shared_ptr<MorphData>> BRFImporterLib::FileData::LoadMorph(std:
 			inFile->read((char*)&SrcMorphData->morphKeyFrameData[i], sizeof(MorphAnimKeyFrameHeader));
 
 			SrcMorphData->morphVertexData[i].reserve(SrcMorphData->morphData->vertsPerShape);
-			for (size_t j = 0; j < SrcMorphData->morphData->vertsPerShape; j++)
-			{
-				MorphVertexHeader temp;
-				inFile->read((char*)&temp, sizeof(MorphVertexHeader));
-				SrcMorphData->morphVertexData[i].push_back(temp);
-			}
+			inFile->read((char*)SrcMorphData->morphVertexData[i].data(), sizeof(MorphVertexHeader) * SrcMorphData->morphData->vertsPerShape);
 		}
 		tempMorphData->setData(SrcMorphData);
 		DestMorphData.push_back(tempMorphData);
@@ -425,7 +418,6 @@ std::vector<std::shared_ptr<CameraData>> BRFImporterLib::FileData::LoadCameras(s
 		tmpCameraContainer->cameraData = tempHeader;
 		tempCamera->SetData(tmpCameraContainer);
 		tmpCameraVector.push_back(tempCamera);
-		tempCamera.reset();
 	}
 	return tmpCameraVector;
 }
